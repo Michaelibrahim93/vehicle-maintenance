@@ -1,10 +1,11 @@
 package com.basemodule.model
 
+import androidx.annotation.VisibleForTesting
 import java.util.*
 
 class LoadingState {
-    private val loadingObjects =
-        ArrayList<LoadingObject>()
+    @VisibleForTesting
+    val loadingObjects = ArrayList<LoadingObject>()
 
     fun getLoadingModes(): Set<Int> {
         val loadingModes: MutableSet<Int> = HashSet()
@@ -16,15 +17,24 @@ class LoadingState {
     //return true if any change has happened
     fun addLoadingObject(loadingMode: Int, tag: Any) {
         synchronized(loadingObjects) {
+            val loadingObject = loadingObjects.firstOrNull { it.tag == tag  }
+            if (loadingObject != null)
+                loadingObjects.remove(loadingObject)
+
             loadingObjects.add(LoadingObject(loadingMode, tag))
         }
     }
 
     fun removeLoadingObject(tag: Any?) {
         synchronized(loadingObjects) {
-            loadingObjects.remove(loadingObjects.first { it.tag == tag  })
+            val loadingObject = loadingObjects.firstOrNull { it.tag == tag  }
+            if (loadingObject != null)
+                loadingObjects.remove(loadingObject)
         }
     }
-
-    private data class LoadingObject(val loadingMode: Int, var tag: Any)
 }
+
+data class LoadingObject(
+    val loadingMode: Int,
+    val tag: Any
+)

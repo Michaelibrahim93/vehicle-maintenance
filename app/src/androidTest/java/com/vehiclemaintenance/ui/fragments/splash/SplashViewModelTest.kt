@@ -32,7 +32,7 @@ class SplashViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun startTimer_checkAddActionCaptured()  = runOnUiThread {
+    fun startTimer_checkAddActionCaptured() = runOnUiThread {
         runBlockingTest {
             sut.startTimer()
             advanceTimeBy(SplashViewModel.SPLASH_TIME)

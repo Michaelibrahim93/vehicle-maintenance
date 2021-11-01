@@ -26,20 +26,18 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         ldLoadingState.value = LoadingState()
     }
 
-    protected fun addLoadingObject(loadingMode: Int, tag: Any) {
-        addLoadingObject(loadingMode, tag, true)
-    }
-
-    protected fun addLoadingObject(
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    fun addLoadingObject(
         loadingMode: Int,
         tag: Any,
-        threadSafe: Boolean
+        threadSafe: Boolean = false
     ) {
         ldLoadingState.value!!.addLoadingObject(loadingMode, tag)
         if (threadSafe) ldLoadingState.postValue() else ldLoadingState.setValue()
     }
 
-    protected fun removeLoadingObject(tag: Any?, threadSafe: Boolean = true) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    fun removeLoadingObject(tag: Any?, threadSafe: Boolean = false) {
         ldLoadingState.value!!.removeLoadingObject(tag)
         if (threadSafe)
             ldLoadingState.postValue()
@@ -48,7 +46,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    fun addAction(action: String?, tag: Any? = null, threadSafe: Boolean = true) {
+    fun addAction(action: String?, tag: Any? = null, threadSafe: Boolean = false) {
         ldActions.value!!.add(VMNotification(action!!, tag))
 
         if (threadSafe) ldActions.postValue()

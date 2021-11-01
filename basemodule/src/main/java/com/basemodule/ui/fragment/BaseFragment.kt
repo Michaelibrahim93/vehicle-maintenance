@@ -56,13 +56,14 @@ abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment(), LoadingView
 
     private fun onLoadingStateUpdated(loadingState: LoadingState) {
         val newLoadingModes: Set<Int> = loadingState.getLoadingModes()
-        for (loadingMode in newLoadingModes) showLoading(loadingMode)
+
+        for (loadingMode in newLoadingModes)
+            showLoading(loadingMode)
 
         if (loadingModes != null) {
-
-            for (loadingMode in loadingModes!!) if (!newLoadingModes.contains(loadingMode)) hideLoading(
-                loadingMode
-            )
+            for (loadingMode in loadingModes!!)
+                if (!newLoadingModes.contains(loadingMode))
+                    hideLoading(loadingMode)
         }
 
         loadingModes = newLoadingModes
