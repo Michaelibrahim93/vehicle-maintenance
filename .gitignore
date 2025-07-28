@@ -1,0 +1,67 @@
+# === Android Specific ===
+*.iml
+.gradle/
+local.properties
+.idea/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+cmake-build-*/
+
+# === Keystore files ===
+*.jks
+*.keystore
+
+# === NDK / CMake / Native artifacts ===
+obj/
+
+# === Logs and crash reports ===
+*.log
+
+# === Android Studio Navigation Editor temp files ===
+.navigation/
+
+# === Jetpack Compose compiler outputs ===
+.kotlinc/
+
+# === Gradle cache ===
+.gradle/
+gradle-app.setting
+gradle.properties.local
+
+# === Generated files ===
+**/build/
+**/generated/
+**/out/
+
+# === IntelliJ IDEA / Android Studio ===
+.idea/
+*.iws
+*.ipr
+*.iml
+.idea/*
+
+# === Mac OS ===
+.DS_Store
+
+# === Windows ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Linux ===
+*~
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+firebase/*.json
+
+local.properties
+
+.ksp/
+
+**/hilt_aggregated_deps/
+
+!local.properties.example
