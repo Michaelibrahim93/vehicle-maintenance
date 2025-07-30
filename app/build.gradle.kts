@@ -43,6 +43,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8" // Make sure this matches your Kotlin and Compose BOM versions
     }
+
+    ksp {
+        //room schemaLocation
+        arg("room.schemaLocation", "${projectDir}/schemas")
+    }
 }
 
 dependencies {

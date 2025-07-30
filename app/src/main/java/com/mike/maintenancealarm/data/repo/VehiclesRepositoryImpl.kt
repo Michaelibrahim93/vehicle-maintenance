@@ -1,0 +1,25 @@
+package com.mike.maintenancealarm.data.repo
+
+import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
+import com.mike.maintenancealarm.data.vo.Vehicle
+import com.mike.maintenancealarm.data.vo.Vehicles
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+
+interface VehiclesRepository {
+    fun listenToAllVehicles(): Flow<Vehicles>
+    suspend fun insertVehicle(vehicle: Vehicle)
+}
+
+class VehiclesRepositoryImpl @Inject constructor(
+    private val vehicleDao: VehicleDao
+): VehiclesRepository {
+    override fun listenToAllVehicles(): Flow<Vehicles> {
+        return vehicleDao.listenToAllVehicles().map { list -> list.map { it.toVehicle() } }
+    }
+
+    override suspend fun insertVehicle(vehicle: Vehicle) {
+        vehicleDao.insertVehicle(vehicle.toEntity())
+    }
+}
