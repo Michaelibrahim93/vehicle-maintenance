@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +26,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
 import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.mike.maintenancealarm.presentaion.vehicleslist.DestinationVehicleListScreen
+import timber.log.Timber
 
 @Serializable
 data object DestinationSplashScreen
@@ -36,7 +38,20 @@ data class SplashScreenState(
 )
 
 sealed class SplashUiAction {
-    object NavigateToVehiclesList : SplashUiAction()
+    data object NavigateToVehiclesList : SplashUiAction()
+}
+
+@Composable
+fun SplashComposable(
+    navController: NavController,
+    viewModel: SplashViewModel = hiltViewModel()
+) {
+    SplashScreen(
+        navController = navController,
+        modifier = Modifier,
+        stateFlow = viewModel.state,
+        actionsFlow = viewModel.actionFlow
+    )
 }
 
 @Composable
@@ -80,7 +95,8 @@ suspend fun handleViewModelActions(
     actionsFlow.collect { action ->
         when (action) {
             is SplashUiAction.NavigateToVehiclesList -> {
-                Log.d("SplashScreen", "Navigating to Vehicles List")
+                Timber.tag("SplashScreen").d("Navigating to Vehicles List")
+                navController.navigate(DestinationVehicleListScreen)
             }
         }
     }

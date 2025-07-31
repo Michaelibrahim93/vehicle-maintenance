@@ -5,11 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.VehicleStatus
+import com.mike.maintenancealarm.data.vo.Vehicles
 import com.mike.maintenancealarm.utils.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,17 +26,22 @@ class VehicleListViewModel @Inject constructor(
     @IoDispatcher
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    val vehicles: StateFlow<List<Vehicle>> = vehiclesRepository.listenToAllVehicles()
+    private val sfVehicles: StateFlow<Vehicles> = vehiclesRepository.listenToAllVehicles()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
 
+    val state: Flow<VehicleListState> = sfVehicles.map { vehicles ->
+        VehicleListState(vehicles = vehicles)
+    }
+
     fun insertVehicle() = viewModelScope.launch {
         val vehicle = Vehicle(
             id = null,
-            vehicleName = "Vehicle ${vehicles.value.size + 1}",
+            vehicleImage = null,
+            vehicleName = "Vehicle ${sfVehicles.value.size + 1}",
             currentKM = Random.nextInt(1000, 100000).toDouble(),
             lastKmUpdate = Date(),
             vehicleStatus = VehicleStatus.OK

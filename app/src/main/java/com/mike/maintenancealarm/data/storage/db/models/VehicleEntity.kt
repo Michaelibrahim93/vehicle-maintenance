@@ -10,7 +10,7 @@ import java.util.Date
 data class VehicleEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = -1,
-    val vehicleImage: String,
+    val vehicleImage: String?,
     val vehicleName: String,
     val currentKM: Double,
     val lastKmUpdate: Date,

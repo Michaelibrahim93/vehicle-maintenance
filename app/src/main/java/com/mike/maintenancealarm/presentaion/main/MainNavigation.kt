@@ -6,8 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mike.maintenancealarm.presentaion.splash.DestinationSplashScreen
+import com.mike.maintenancealarm.presentaion.splash.SplashComposable
 import com.mike.maintenancealarm.presentaion.splash.SplashScreen
 import com.mike.maintenancealarm.presentaion.splash.SplashViewModel
+import com.mike.maintenancealarm.presentaion.vehicleslist.DestinationVehicleListScreen
+import com.mike.maintenancealarm.presentaion.vehicleslist.VehicleListComposable
 
 @Composable
 fun MainNavigation() {
@@ -17,13 +20,11 @@ fun MainNavigation() {
         startDestination = DestinationSplashScreen
     ) {
         composable<DestinationSplashScreen> {
-            val viewModel = hiltViewModel<SplashViewModel>()
-            SplashScreen(
-                navController = navController,
-                modifier = androidx.compose.ui.Modifier,
-                stateFlow = viewModel.state,
-                actionsFlow = viewModel.actionFlow
-            )
+            SplashComposable(navController = navController)
+        }
+
+        composable<DestinationVehicleListScreen> {
+            VehicleListComposable(navController = navController)
         }
     }
 }

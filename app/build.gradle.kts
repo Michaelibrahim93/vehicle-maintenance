@@ -79,6 +79,12 @@ dependencies {
     implementation(libs.room.ktx)
     ksp(libs.room.compiler) // Use KSP for Room's annotation processor
 
+    // Timber Logs
+    implementation(libs.timber)
+
+    //Compose Image Loader
+    implementation(libs.coil.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -6,6 +6,7 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 room_version = "2.7.2"
+timber = "5.0.1"
 
 # AndroidX
 lifecycleRuntimeKtx = "2.0.21"
@@ -26,6 +27,8 @@ hilt-navigation-compose = "1.2.0"
 hilt = "2.51.1" # Or the latest stable version
 hilt-compiler = "1.2.0" # Make sure this matches your hilt version requirements if needed
 
+#Compose Image Loader
+coil = "2.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +66,12 @@ lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
+
+#Timber Logs
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+
+# Compose Image Loader
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
