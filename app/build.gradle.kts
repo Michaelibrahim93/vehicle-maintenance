@@ -43,6 +43,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8" // Make sure this matches your Kotlin and Compose BOM versions
     }
+
+    ksp {
+        //room schemaLocation
+        arg("room.schemaLocation", "${projectDir}/schemas")
+    }
 }
 
 dependencies {
@@ -73,6 +78,12 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler) // Use KSP for Room's annotation processor
+
+    // Timber Logs
+    implementation(libs.timber)
+
+    //Compose Image Loader
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -3,14 +3,14 @@ package com.mike.maintenancealarm.presentaion.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,11 +26,11 @@ class SplashViewModel @Inject constructor() : ViewModel() {
         initialValue = SplashScreenState(isLoading = false)
     )
 
-    private val _actionFlow = MutableSharedFlow<SplashUiAction>()
-    val actionFlow: SharedFlow<SplashUiAction> = _actionFlow
+    private val _actionChannel = Channel<SplashUiAction>()
+    val actionFlow: Flow<SplashUiAction> = _actionChannel.receiveAsFlow()
 
     private fun waitAndNavigate() = viewModelScope.launch {
         delay(3000)
-        _actionFlow.emit(SplashUiAction.NavigateToVehiclesList)
+        _actionChannel.send(SplashUiAction.NavigateToVehiclesList)
     }
 }

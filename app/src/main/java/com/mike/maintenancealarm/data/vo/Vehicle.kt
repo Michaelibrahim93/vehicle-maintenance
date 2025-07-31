@@ -3,16 +3,20 @@ package com.mike.maintenancealarm.data.vo
 import com.mike.maintenancealarm.data.storage.db.models.VehicleEntity
 import java.util.Date
 
+typealias Vehicles = List<Vehicle>
+
 data class Vehicle(
     val id: Long?,
+    val vehicleImage: String?,
     val vehicleName: String,
     val currentKM: Double,
     val lastKmUpdate: Date,
     val vehicleStatus: VehicleStatus
 ) {
     fun toEntity() = VehicleEntity(
-            id = id ?: -1,
+            id = id ?: 0,
             vehicleName = vehicleName,
+            vehicleImage = vehicleImage,
             currentKM = currentKM,
             lastKmUpdate = lastKmUpdate,
             vehicleStatus = vehicleStatus
