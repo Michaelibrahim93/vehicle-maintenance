@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MaintenanceAlarm</string>
     <string name="my_vehicles">My Vehicle</string>
+    <string name="vehicle_km">KM: %s</string>
+    <string name="vehicle_status_ok">All parts are in good condition</string>
+    <string name="vehicle_status_near_expiration">Some parts are nearing replacement</string>
+    <string name="vehicle_status_expired">Some parts need immediate replacement</string>
+    <string name="vehicle_last_km_update">Last update\n%s</string>
 </resources>

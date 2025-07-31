@@ -28,6 +28,8 @@ import kotlinx.serialization.Serializable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mike.maintenancealarm.presentaion.vehicleslist.DestinationVehicleListScreen
+import com.mike.maintenancealarm.utils.ObserveEvent
+import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 @Serializable
@@ -59,13 +61,13 @@ fun SplashScreen(
     navController: NavController,
     modifier: Modifier,
     stateFlow: StateFlow<SplashScreenState>,
-    actionsFlow: SharedFlow<SplashUiAction>
+    actionsFlow: Flow<SplashUiAction>
 ) {
     val state: SplashScreenState by stateFlow.collectAsStateWithLifecycle()
 
-    LaunchedEffect(actionsFlow) {
+    ObserveEvent(actionsFlow) {
         handleViewModelActions(
-            actionsFlow = actionsFlow,
+            action = it,
             navController = navController
         )
     }
@@ -88,16 +90,14 @@ fun SplashScreen(
     }
 }
 
-suspend fun handleViewModelActions(
-    actionsFlow: SharedFlow<SplashUiAction>,
+fun handleViewModelActions(
+    action: SplashUiAction,
     navController: NavController
 ) {
-    actionsFlow.collect { action ->
-        when (action) {
-            is SplashUiAction.NavigateToVehiclesList -> {
-                Timber.tag("SplashScreen").d("Navigating to Vehicles List")
-                navController.navigate(DestinationVehicleListScreen)
-            }
+    when (action) {
+        is SplashUiAction.NavigateToVehiclesList -> {
+            Timber.tag("SplashScreen").d("Navigating to Vehicles List")
+            navController.navigate(DestinationVehicleListScreen)
         }
     }
 }

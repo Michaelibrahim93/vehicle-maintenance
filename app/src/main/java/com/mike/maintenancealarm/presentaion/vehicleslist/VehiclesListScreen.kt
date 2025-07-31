@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -26,9 +27,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.data.vo.VehicleStatus
+import com.mike.maintenancealarm.presentaion.core.DateFormats
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.flow.MutableStateFlow
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 @Serializable
 data object DestinationVehicleListScreen
@@ -42,9 +46,13 @@ fun VehicleListComposable(
     navController: NavController,
     viewModel: VehicleListViewModel = hiltViewModel()
 ) {
+    val dateFormat = remember {
+        SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault())
+    }
     VehicleListScreen(
         navController = navController,
         fState = viewModel.state,
+        dateFormat = dateFormat,
         onEvent = { vehicleListEvent ->
             when (vehicleListEvent) {
                 is VehicleListEvent.NavigateToVehicleDetails -> {
@@ -63,6 +71,7 @@ fun VehicleListComposable(
 fun VehicleListScreen(
     navController: NavController,
     fState: Flow<VehicleListState>,
+    dateFormat: SimpleDateFormat,
     onEvent: (VehicleListEvent) -> Unit
 ) {
     val state: VehicleListState by fState.collectAsStateWithLifecycle(initialValue = VehicleListState())
@@ -87,6 +96,7 @@ fun VehicleListScreen(
                 VehicleCard(
                     vehicle = vehicle,
                     isFirsItem = index == 0,
+                    dateFormat = dateFormat,
                     onItemClick = {
                         onEvent(VehicleListEvent.NavigateToVehicleDetails(vehicle))
                     }
@@ -118,6 +128,7 @@ fun VehicleListScreenPreview() {
                 ),
             )
         )),
+        dateFormat = SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault()),
         onEvent = {}
     )
 }
