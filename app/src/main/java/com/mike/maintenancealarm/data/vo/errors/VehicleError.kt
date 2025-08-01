@@ -1,5 +1,7 @@
 package com.mike.maintenancealarm.data.vo.errors
 
+import androidx.annotation.StringRes
+
 sealed class VehicleError : Throwable() {
     data class LocalDbError(
         val throwable: Throwable,
