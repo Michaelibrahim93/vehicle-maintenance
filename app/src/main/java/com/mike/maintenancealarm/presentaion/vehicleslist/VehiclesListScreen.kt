@@ -1,5 +1,6 @@
 package com.mike.maintenancealarm.presentaion.vehicleslist
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +26,7 @@ import timber.log.Timber
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.presentaion.core.DateFormats
@@ -111,7 +113,12 @@ sealed class VehicleListEvent {
     data object AddNewVehicle : VehicleListEvent()
 }
 
-@Preview
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 fun VehicleListScreenPreview() {
     VehicleListScreen(

@@ -9,7 +9,7 @@ import com.mike.maintenancealarm.data.storage.db.typeconverters.VehicleConverter
 
 @Database(
     entities = [VehicleEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(VehicleConverters::class)

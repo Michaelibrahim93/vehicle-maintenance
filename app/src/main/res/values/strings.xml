@@ -6,4 +6,7 @@
     <string name="vehicle_status_near_expiration">Some parts are nearing replacement</string>
     <string name="vehicle_status_expired">Some parts need immediate replacement</string>
     <string name="vehicle_last_km_update">Last update\n%s</string>
+    <string name="vehicle_name_exists_error_message">Oops! That vehicle name is already taken. Please try a different one.</string>
+    <string name="error">Error</string>
+    <string name="generic_error_message">Something went wrong.\\nPlease, Try again later.</string>
 </resources>
