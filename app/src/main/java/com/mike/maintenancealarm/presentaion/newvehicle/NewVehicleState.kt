@@ -11,6 +11,22 @@ data class NewVehicleState(
     val currentKM: ValidationInput<String> = ValidationInput<String>(""),
     val isLoading: Boolean = false,
 ) {
+    fun setLoading(isLoading: Boolean): NewVehicleState {
+        return copy(isLoading = isLoading)
+    }
+
+    fun setVehicleName(name: String): NewVehicleState {
+        return copy(vehicleName = vehicleName.copy(input = name))
+    }
+
+    fun setVehicleImage(image: String?): NewVehicleState {
+        return copy(vehicleImage = image)
+    }
+
+    fun setCurrentKM(km: String): NewVehicleState {
+        return copy(currentKM = currentKM.copy(input = km))
+    }
+
     fun toVehicle() = Vehicle(
         id = null,
         vehicleName = vehicleName.input,
@@ -27,10 +43,10 @@ data class NewVehicleState(
         )
     }
 
-    fun setValidationErrors(validationResult: Map<String, String>): NewVehicleState {
+    fun setValidationErrors(validationResult: Map<String, Int>): NewVehicleState {
         return copy(
-            vehicleName = vehicleName.copy(errorMessage = validationResult[KEY_VEHICLE_NAME]),
-            currentKM = currentKM.copy(errorMessage = validationResult[KEY_CURRENT_KM])
+            vehicleName = vehicleName.copy(errorStringRes = validationResult[KEY_VEHICLE_NAME]),
+            currentKM = currentKM.copy(errorStringRes = validationResult[KEY_CURRENT_KM])
         )
     }
 

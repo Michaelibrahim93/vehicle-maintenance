@@ -9,4 +9,6 @@
     <string name="vehicle_name_exists_error_message">Oops! That vehicle name is already taken. Please try a different one.</string>
     <string name="error">Error</string>
     <string name="generic_error_message">Something went wrong.\\nPlease, Try again later.</string>
+    <string name="required_field">Required field</string>
+    <string name="invalid_input">Invalid input</string>
 </resources>
