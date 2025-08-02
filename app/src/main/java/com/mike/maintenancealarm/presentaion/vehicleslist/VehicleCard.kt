@@ -1,5 +1,7 @@
 package com.mike.maintenancealarm.presentaion.vehicleslist
 
+import android.content.res.Configuration
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -16,6 +19,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -82,7 +87,9 @@ fun CardContent(
             error = painterResource(R.drawable.ic_car_placeholder),
             modifier = Modifier.width(50.dp)
                 .height(50.dp)
-                .padding(4.dp)
+                .clip(CircleShape)
+                .border(2.dp, colorResource(R.color.image_foreground), CircleShape)
+                .padding(6.dp)
         )
 
         Column (
@@ -126,7 +133,12 @@ fun CardContent(
     }
 }
 
-@Preview
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 fun VehicleCardPreview() {
     MaintenanceAlarmTheme {

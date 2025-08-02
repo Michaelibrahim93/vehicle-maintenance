@@ -1,5 +1,7 @@
 package com.mike.maintenancealarm.presentaion.vehicleslist
 
+import android.R.anim
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,11 +25,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.Serializable
 import timber.log.Timber
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.navOptions
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.presentaion.core.DateFormats
+import com.mike.maintenancealarm.presentaion.newvehicle.DestinationNewVehicleScreen
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.text.SimpleDateFormat
@@ -36,10 +39,6 @@ import java.util.Locale
 
 @Serializable
 data object DestinationVehicleListScreen
-
-data class VehicleListState(
-    val vehicles: List<Vehicle> = emptyList()
-)
 
 @Composable
 fun VehicleListComposable(
@@ -50,16 +49,17 @@ fun VehicleListComposable(
         SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault())
     }
     VehicleListScreen(
-        navController = navController,
         fState = viewModel.state,
         dateFormat = dateFormat,
         onEvent = { vehicleListEvent ->
             when (vehicleListEvent) {
                 is VehicleListEvent.NavigateToVehicleDetails -> {
-                    Timber.d("Navigate to vehicle details")
+                    Timber.d("Navigate to Vehicle Details: ${vehicleListEvent.vehicle}")
                 }
                 is VehicleListEvent.AddNewVehicle -> {
-                    viewModel.insertVehicle()
+                    navController.navigate(
+                        route = DestinationNewVehicleScreen
+                    )
                 }
             }
         }
@@ -69,7 +69,6 @@ fun VehicleListComposable(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VehicleListScreen(
-    navController: NavController,
     fState: Flow<VehicleListState>,
     dateFormat: SimpleDateFormat,
     onEvent: (VehicleListEvent) -> Unit
@@ -106,16 +105,15 @@ fun VehicleListScreen(
     }
 }
 
-sealed class VehicleListEvent {
-    data class NavigateToVehicleDetails(val vehicle: Vehicle) : VehicleListEvent()
-    data object AddNewVehicle : VehicleListEvent()
-}
-
-@Preview
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 fun VehicleListScreenPreview() {
     VehicleListScreen(
-        navController = NavController(LocalContext.current),
         fState = MutableStateFlow(VehicleListState(
             vehicles = listOf(
                 Vehicle(

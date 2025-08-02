@@ -5,12 +5,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mike.maintenancealarm.presentaion.newvehicle.DestinationNewVehicleScreen
+import com.mike.maintenancealarm.presentaion.newvehicle.NewVehicleComposable
 import com.mike.maintenancealarm.presentaion.splash.DestinationSplashScreen
 import com.mike.maintenancealarm.presentaion.splash.SplashComposable
 import com.mike.maintenancealarm.presentaion.splash.SplashScreen
 import com.mike.maintenancealarm.presentaion.splash.SplashViewModel
 import com.mike.maintenancealarm.presentaion.vehicleslist.DestinationVehicleListScreen
 import com.mike.maintenancealarm.presentaion.vehicleslist.VehicleListComposable
+import com.mike.maintenancealarm.utils.compose.NavAnimationType
+import com.mike.maintenancealarm.utils.compose.animatedComposable
 
 @Composable
 fun MainNavigation() {
@@ -23,8 +27,16 @@ fun MainNavigation() {
             SplashComposable(navController = navController)
         }
 
-        composable<DestinationVehicleListScreen> {
+        animatedComposable<DestinationVehicleListScreen>(
+            navAnimationType = NavAnimationType.SLIDE_IN_FROM_RIGHT
+        ) {
             VehicleListComposable(navController = navController)
+        }
+
+        animatedComposable<DestinationNewVehicleScreen>(
+            navAnimationType = NavAnimationType.SLIDE_IN_FROM_BOTTOM
+        ) {
+            NewVehicleComposable(navController)
         }
     }
 }

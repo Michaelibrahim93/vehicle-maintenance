@@ -1,6 +1,5 @@
 package com.mike.maintenancealarm.presentaion.splash
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,13 +20,12 @@ import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.presentaion.theme.MaintenanceAlarmTheme
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mike.maintenancealarm.presentaion.vehicleslist.DestinationVehicleListScreen
-import com.mike.maintenancealarm.utils.ObserveEvent
+import com.mike.maintenancealarm.utils.compose.ObserveEvent
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
@@ -97,7 +94,11 @@ fun handleViewModelActions(
     when (action) {
         is SplashUiAction.NavigateToVehiclesList -> {
             Timber.tag("SplashScreen").d("Navigating to Vehicles List")
-            navController.navigate(DestinationVehicleListScreen)
+            navController.navigate(DestinationVehicleListScreen) {
+                popUpTo(DestinationSplashScreen) {
+                    inclusive = true
+                }
+            }
         }
     }
 }

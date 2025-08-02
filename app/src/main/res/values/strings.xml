@@ -6,4 +6,16 @@
     <string name="vehicle_status_near_expiration">Some parts are nearing replacement</string>
     <string name="vehicle_status_expired">Some parts need immediate replacement</string>
     <string name="vehicle_last_km_update">Last update\n%s</string>
+    <string name="vehicle_name_exists_error_message">Oops! That vehicle name is already taken. Please try a different one.</string>
+    <string name="error">Error</string>
+    <string name="generic_error_message">Something went wrong.\\nPlease, Try again later.</string>
+    <string name="required_field">Required field</string>
+    <string name="invalid_input">Invalid input</string>
+    <string name="back">Back</string>
+    <string name="new_vehicle_title">New Vehicle</string>
+    <string name="vehicle_name_hint">Vehicle Name</string>
+    <string name="save">Save</string>
+    <string name="vehicle_total_km">Total Kilometers/Miles Driven</string>
+    <string name="vehicle_added_successfully">Vehicle has been added successfully.</string>
+    <string name="saving">Saving...</string>
 </resources>
