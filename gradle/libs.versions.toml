@@ -2,11 +2,16 @@
 agp = "8.9.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 room_version = "2.7.2"
 timber = "5.0.1"
+
+#Test
+junit = "4.13.2"
+coroutines_test= "1.7.3"
+mockito_version= "5.4.0"
+junitVersion = "1.2.1"
+
 
 # AndroidX
 lifecycleRuntimeKtx = "2.0.21"
@@ -72,6 +77,12 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 
 # Compose Image Loader
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+# Coroutines Test
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines_test" }
+# Mockito Kotlin
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito_version" }
+kotlin-test= { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
