@@ -2,7 +2,6 @@ package com.mike.maintenancealarm.utils.validator
 
 import androidx.annotation.StringRes
 import com.mike.maintenancealarm.utils.validator.rules.ValidationRule
-import com.mike.maintenancealarm.utils.validator.rules.ValidationRuleError
 
 class Validator {
     private val rulesMap: Map<String, List<ValidationRuleError>>

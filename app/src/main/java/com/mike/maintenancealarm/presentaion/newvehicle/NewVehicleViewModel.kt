@@ -7,7 +7,9 @@ import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
 import com.mike.maintenancealarm.utils.validator.Validator
 import com.mike.maintenancealarm.utils.validator.rules.NotBlankRule
 import com.mike.maintenancealarm.utils.validator.rules.ValidKmInputRule
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +17,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class NewVehicleViewModel @Inject constructor(
     private val addVehicleUseCase: AddVehicleUseCase
 ) : ViewModel() {
@@ -47,6 +50,7 @@ class NewVehicleViewModel @Inject constructor(
         if (validationResult.isEmpty()) {
             _state.value = state.setLoading(true)
             try {
+                delay(3000)
                 addVehicleUseCase.execute(state.toVehicle())
                 _actionChannel.send(NewVehicleUiAction.ShowSuccess)
             } catch (t: Throwable) {

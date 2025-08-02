@@ -4,6 +4,7 @@ sealed class NewVehicleEvent {
     data class OnVehicleImageChange(val image: String) : NewVehicleEvent()
     data class OnVehicleNameChange(val name: String) : NewVehicleEvent()
     data class OnVehicleKmChange(val km: String) : NewVehicleEvent()
+    object OnImageClick : NewVehicleEvent()
     object OnSaveClick : NewVehicleEvent()
     object OnBackClick : NewVehicleEvent()
 }
