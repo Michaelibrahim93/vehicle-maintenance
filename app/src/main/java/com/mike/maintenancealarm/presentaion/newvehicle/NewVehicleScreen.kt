@@ -54,6 +54,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Serializable
+import timber.log.Timber
 
 @Serializable
 data object DestinationNewVehicleScreen
@@ -68,6 +69,7 @@ fun NewVehicleComposable(
         actionFlow = viewModel.actionFlow,
         fState = viewModel.state,
         onEvent = { event ->
+            Timber.tag("NewVehicleScreen").d("event: ${event.javaClass.simpleName}")
             when(event) {
                 is NewVehicleEvent.OnBackClick -> {
                     navController.popBackStack()
@@ -98,7 +100,10 @@ fun NewVehicleScreen(
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = { NewVehicleTopBar(
-            onBackClick = { onEvent(NewVehicleEvent.OnBackClick) }
+            onBackClick = {
+                Timber.tag("NewVehicleTopBar").d("Back button clicked")
+                onEvent(NewVehicleEvent.OnBackClick)
+            }
         ) }
     ) { contentPadding ->
         NewVehicleContent(
@@ -115,7 +120,9 @@ fun NewVehicleTopBar(onBackClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(id = R.string.new_vehicle_title)) },
         navigationIcon = {
-            IconButton(onClick = { onBackClick }) {
+            IconButton(onClick = {
+                onBackClick()
+            }) {
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = stringResource(id = R.string.back)

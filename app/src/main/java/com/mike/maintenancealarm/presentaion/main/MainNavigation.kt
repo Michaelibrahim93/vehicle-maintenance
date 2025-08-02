@@ -27,17 +27,15 @@ fun MainNavigation() {
             SplashComposable(navController = navController)
         }
 
-//        animatedComposable<DestinationVehicleListScreen>(
-//            navAnimationType = NavAnimationType.SLIDE_IN_FROM_RIGHT
-//        ) {
-        composable<DestinationVehicleListScreen>{
+        animatedComposable<DestinationVehicleListScreen>(
+            navAnimationType = NavAnimationType.SLIDE_IN_FROM_RIGHT
+        ) {
             VehicleListComposable(navController = navController)
         }
 
-//        animatedComposable<DestinationNewVehicleScreen>(
-//            navAnimationType = NavAnimationType.SLIDE_IN_FROM_BOTTOM
-//        ) {
-        composable<DestinationNewVehicleScreen> {
+        animatedComposable<DestinationNewVehicleScreen>(
+            navAnimationType = NavAnimationType.SLIDE_IN_FROM_BOTTOM
+        ) {
             NewVehicleComposable(navController)
         }
     }

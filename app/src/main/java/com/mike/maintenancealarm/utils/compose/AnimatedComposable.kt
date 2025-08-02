@@ -26,11 +26,11 @@ inline fun <reified T : Any> NavGraphBuilder.animatedComposable(
 ) {
     composable<T>(
         enterTransition = { enterTransition(navAnimationType) },
-        exitTransition = { exitTransition(navAnimationType) },
+        exitTransition = { ExitTransition.None },
         popEnterTransition = { popEnterTransition(navAnimationType) },
         popExitTransition = { popExitTransition(navAnimationType) },
     ) {
-        content
+        content(it)
     }
 }
 
@@ -39,7 +39,7 @@ fun enterTransition(
 ): EnterTransition {
     return when (navAnimationType) {
         NavAnimationType.SLIDE_IN_FROM_RIGHT -> slideInHorizontally()
-        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideInVertically(initialOffsetY = { it }) + fadeIn()
+        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideInVertically(initialOffsetY = { it })
         NavAnimationType.NONE -> EnterTransition.None
     }
 }
@@ -49,7 +49,7 @@ fun exitTransition(
 ): ExitTransition {
     return when (navAnimationType) {
         NavAnimationType.SLIDE_IN_FROM_RIGHT -> slideOutHorizontally()
-        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideOutVertically(targetOffsetY = { -it }) + fadeOut()
+        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideOutVertically(targetOffsetY = { -it })
         NavAnimationType.NONE -> ExitTransition.None
     }
 }
@@ -59,7 +59,7 @@ fun popEnterTransition(
 ): EnterTransition {
     return when (navAnimationType) {
         NavAnimationType.SLIDE_IN_FROM_RIGHT -> slideInHorizontally { it }
-        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideInVertically(initialOffsetY = { -it }) + fadeIn()
+        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideInVertically(initialOffsetY = { -it })
         NavAnimationType.NONE -> EnterTransition.None
     }
 }
@@ -69,7 +69,7 @@ fun popExitTransition(
 ): ExitTransition {
     return when (navAnimationType) {
         NavAnimationType.SLIDE_IN_FROM_RIGHT -> slideOutHorizontally { it }
-        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideOutVertically(targetOffsetY = { it }) + fadeOut()
+        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideOutVertically(targetOffsetY = { it })
         NavAnimationType.NONE -> ExitTransition.None
     }
 }

@@ -94,7 +94,11 @@ fun handleViewModelActions(
     when (action) {
         is SplashUiAction.NavigateToVehiclesList -> {
             Timber.tag("SplashScreen").d("Navigating to Vehicles List")
-            navController.navigate(DestinationVehicleListScreen)
+            navController.navigate(DestinationVehicleListScreen) {
+                popUpTo(DestinationSplashScreen) {
+                    inclusive = true
+                }
+            }
         }
     }
 }
