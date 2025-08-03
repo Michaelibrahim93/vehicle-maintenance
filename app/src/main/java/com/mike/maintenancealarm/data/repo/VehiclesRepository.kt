@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 interface VehiclesRepository {
     fun listenToAllVehicles(): Flow<Vehicles>
+    fun listenToVehicleById(id: Long): Flow<Vehicle?>
     suspend fun insertVehicle(vehicle: Vehicle)
 }
 
@@ -17,6 +18,10 @@ class VehiclesRepositoryImpl @Inject constructor(
 ): VehiclesRepository {
     override fun listenToAllVehicles(): Flow<Vehicles> {
         return vehicleDao.listenToAllVehicles().map { list -> list.map { it.toVehicle() } }
+    }
+
+    override fun listenToVehicleById(id: Long): Flow<Vehicle?> {
+        return vehicleDao.listenToVehicleById(id).map { it?.toVehicle() }
     }
 
     override suspend fun insertVehicle(vehicle: Vehicle) {

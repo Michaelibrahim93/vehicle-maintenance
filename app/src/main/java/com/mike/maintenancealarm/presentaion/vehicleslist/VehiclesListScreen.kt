@@ -1,6 +1,5 @@
 package com.mike.maintenancealarm.presentaion.vehicleslist
 
-import android.R.anim
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,23 +21,18 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mike.maintenancealarm.data.vo.Vehicle
 import kotlinx.coroutines.flow.Flow
-import kotlinx.serialization.Serializable
 import timber.log.Timber
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.navOptions
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.presentaion.core.DateFormats
-import com.mike.maintenancealarm.presentaion.newvehicle.DestinationNewVehicleScreen
+import com.mike.maintenancealarm.presentaion.main.Route
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-@Serializable
-data object DestinationVehicleListScreen
 
 @Composable
 fun VehicleListComposable(
@@ -54,11 +48,13 @@ fun VehicleListComposable(
         onEvent = { vehicleListEvent ->
             when (vehicleListEvent) {
                 is VehicleListEvent.NavigateToVehicleDetails -> {
-                    Timber.d("Navigate to Vehicle Details: ${vehicleListEvent.vehicle}")
+                    navController.navigate(Route.VehicleDetails(
+                        vehicleId = vehicleListEvent.vehicle.id ?: 0
+                    ))
                 }
                 is VehicleListEvent.AddNewVehicle -> {
                     navController.navigate(
-                        route = DestinationNewVehicleScreen
+                        route = Route.NewVehicle
                     )
                 }
             }

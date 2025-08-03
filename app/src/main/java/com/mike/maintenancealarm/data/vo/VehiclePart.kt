@@ -1,12 +1,10 @@
 package com.mike.maintenancealarm.data.vo
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.mike.maintenancealarm.data.storage.db.models.VehiclePartEntity
 
-@Entity(tableName = "vehicle_parts")
+typealias VehicleParts = List<VehiclePart>
+
 data class VehiclePart(
-    @PrimaryKey(autoGenerate = true)
     val id: Long = -1,
     val vehicleId: Long = -1,
     val partName: String,

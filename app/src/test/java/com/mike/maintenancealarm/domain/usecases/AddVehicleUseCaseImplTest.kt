@@ -18,6 +18,7 @@ import kotlin.test.assertFailsWith
 class AddVehicleUseCaseImplTest {
     private lateinit var useCase: AddVehicleUseCaseImpl
     private lateinit var repository: VehiclesRepository
+
     @Before
     fun setUp() {
         repository = mock()

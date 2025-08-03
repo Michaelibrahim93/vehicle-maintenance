@@ -12,6 +12,9 @@ interface VehicleDao {
     @Query("SELECT * FROM vehicles")
     fun listenToAllVehicles(): Flow<List<VehicleEntity>>
 
+    @Query("SELECT * FROM vehicles WHERE id = :id")
+    fun listenToVehicleById(id: Long): Flow<VehicleEntity?>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertVehicle(vehicle: VehicleEntity)
 }

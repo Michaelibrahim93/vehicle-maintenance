@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.mike.maintenancealarm.data.storage.db.AppDatabase
 import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
+import com.mike.maintenancealarm.data.storage.db.dao.VehiclePartDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,12 +23,17 @@ class StorageModule {
             context = context,
             klass = AppDatabase::class.java,
             name = "app_database"
-        ).fallbackToDestructiveMigrationFrom(true, 1)
+        ).fallbackToDestructiveMigrationFrom(true, 2)
             .build()
     }
 
     @Provides
     fun provideVehicleDao(appDatabase: AppDatabase): VehicleDao {
         return appDatabase.vehicleDao()
+    }
+
+    @Provides
+    fun provideVehiclePartDao(appDatabase: AppDatabase): VehiclePartDao {
+        return appDatabase.vehiclePartDao()
     }
 }
