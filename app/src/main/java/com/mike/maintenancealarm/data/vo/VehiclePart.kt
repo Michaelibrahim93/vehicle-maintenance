@@ -17,29 +17,17 @@ data class VehiclePart(
     val supplier: String? = null,
     val price: Double? = null,
 ) {
-    fun partStatus(
-        currentVehicleKm: Double
-    ): VehiclePartStatus {
-        val currentCal = Calendar.getInstance()
-        val deploymentCal = Calendar.getInstance().apply {
-            time = deploymentDate
-        }
-        val expiryCal = Calendar.getInstance().apply {
-            time = deploymentDate
-            add(Calendar.MONTH, lifeSpan.months)
-        }
-        val kmLeft = lifeSpan.km - (currentVehicleKm - deploymentKM)
+    val expiryKm: Double
+        get() = deploymentKM + lifeSpan.km
 
-        val kmNearExpiry = kmLeft < (lifeSpan.km * 0.1)
-        val dateNearExpiry = (expiryCal.timeInMillis - deploymentCal.timeInMillis) <
-                lifeSpan.monthMillis() * 0.1
-
-        return when {
-            kmLeft <= 0 || currentCal.after(expiryCal) -> VehiclePartStatus.EXPIRED
-            kmNearExpiry || dateNearExpiry -> VehiclePartStatus.NEAR_EXPIRATION
-            else -> VehiclePartStatus.OK
+    val expiryDate: Date
+        get() {
+            val cal = Calendar.getInstance().apply {
+                time = deploymentDate
+                add(Calendar.MONTH, lifeSpan.months)
+            }
+            return cal.time
         }
-    }
 
     fun toEntity(
         dateFormat: SimpleDateFormat
@@ -69,5 +57,32 @@ enum class VehiclePartStatus(
 ) {
     OK(value = 0),
     NEAR_EXPIRATION(value = 1),
-    EXPIRED(value = 2)
+    EXPIRED(value = 2);
+
+    companion object {
+        fun partStatus(
+            part: VehiclePart,
+            currentVehicleKm: Double
+        ): VehiclePartStatus {
+            val currentCal = Calendar.getInstance()
+            val deploymentCal = Calendar.getInstance().apply {
+                time = part.deploymentDate
+            }
+            val expiryCal = Calendar.getInstance().apply {
+                time = part.expiryDate
+            }
+
+            val kmLeft = part.lifeSpan.km - (currentVehicleKm - part.deploymentKM)
+
+            val kmNearExpiry = kmLeft < (part.lifeSpan.km * 0.1)
+            val dateNearExpiry = (expiryCal.timeInMillis - deploymentCal.timeInMillis) <
+                    part.lifeSpan.monthMillis() * 0.1
+
+            return when {
+                kmLeft <= 0 || currentCal.after(expiryCal) -> EXPIRED
+                kmNearExpiry || dateNearExpiry -> NEAR_EXPIRATION
+                else -> OK
+            }
+        }
+    }
 }

@@ -67,10 +67,9 @@ fun SplashScreen(
 
     Box(
         modifier = modifier.fillMaxSize()
-            .background(Color.Green)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.ic_launcher),
             contentDescription = "Splash Screen",
             modifier = modifier.align(Alignment.Center)
         )
