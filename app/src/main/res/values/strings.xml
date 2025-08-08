@@ -17,5 +17,7 @@
     <string name="save">Save</string>
     <string name="vehicle_total_km">Total Kilometers/Miles Driven</string>
     <string name="vehicle_added_successfully">Vehicle has been added successfully.</string>
-    <string name="saving">Saving...</string>
+    <string name="saving">Saving…</string>
+    <string name="vehicle_details_title">Vehicle Details</string>
+    <string name="supplier_x">Supplier: %s</string>
 </resources>

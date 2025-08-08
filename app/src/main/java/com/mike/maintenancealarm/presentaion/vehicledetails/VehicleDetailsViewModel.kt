@@ -17,14 +17,18 @@ class VehicleDetailsViewModel @Inject constructor(
     partsRepository: VehiclePartsRepository,
     savedStateHandle: SavedStateHandle,
     ) : ViewModel() {
+
     val vehicleId = savedStateHandle.toRoute<Route.VehicleDetails>().vehicleId
     private val vehicleFlow = vehicleRepository.listenToVehicleById(vehicleId)
     private val parts = partsRepository.listenToVehicleParts(vehicleId)
-
-    val vehicleDetails: Flow<VehicleDetailsState> = combine(vehicleFlow, parts) { vehicle, parts ->
+    val fVehicleDetailsState: Flow<VehicleDetailsState> = combine(vehicleFlow, parts) { vehicle, parts ->
         VehicleDetailsState(
             vehicle = vehicle,
             vehicleParts = parts
         )
+    }
+
+    fun onEvent(events: VehicleDetailsEvents) {
+
     }
 }

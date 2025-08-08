@@ -1,14 +1,34 @@
 package com.mike.maintenancealarm.presentaion.vehicledetails
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.mike.maintenancealarm.R
+import com.mike.maintenancealarm.presentaion.vehicledetails.items.ItemVehicle
+import com.mike.maintenancealarm.presentaion.vehicledetails.items.ItemVehiclePart
+import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @SuppressLint("ContextCastToActivity")
 @Composable
@@ -17,19 +37,86 @@ fun VehicleDetailsScreenComposable(
     viewModel: VehicleDetailsViewModel = hiltViewModel()
 ) {
     VehicleDetailsScreen(
-        navController = navController,
-        vehicleId = viewModel.vehicleId,
+        fVehicleDetailsState = viewModel.fVehicleDetailsState,
+        onEvent = { event ->
+            Timber.tag("VehicleDetailsScreen").d("event: $event")
+            when(event) {
+                VehicleDetailsEvents.OnBackClick -> navController.popBackStack()
+                else -> viewModel.onEvent(event)
+            }
+        }
     )
 }
 
 @Composable
-fun VehicleDetailsScreen(navController: NavController, vehicleId: Long) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(
-            modifier = Modifier.align(Alignment.Center),
-            text = "Vehicle Details Screen for Vehicle ID: $vehicleId"
+fun VehicleDetailsScreen(
+    fVehicleDetailsState: Flow<VehicleDetailsState>,
+    onEvent: (VehicleDetailsEvents) -> Unit
+) {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = { VehicleDetailsTopBar(onEvent) }
+    ) { contentPadding ->
+        VehicleDetailsScreenContent(
+            contentPadding = contentPadding,
+            fVehicleDetailsState = fVehicleDetailsState,
+            onEvent = onEvent
         )
     }
+}
+
+@Composable
+fun VehicleDetailsScreenContent(
+    contentPadding: PaddingValues,
+    fVehicleDetailsState: Flow<VehicleDetailsState>,
+    onEvent: (VehicleDetailsEvents) -> Unit
+) {
+    var state = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
+    val dateFormat = remember { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) }
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+            .padding(contentPadding)
+    ) {
+        itemsIndexed(
+            items = state.value.displayList,
+        ) { index, item ->
+            when (item) {
+                is DetailsItem.VehicleItem -> ItemVehicle(
+                    item = item,
+                    dateFormat = dateFormat,
+                    onUpdateVehicleKm = { onEvent(VehicleDetailsEvents.UpdateVehicleKm(item.vehicle)) }
+                )
+                is DetailsItem.PartItem -> ItemVehiclePart(
+                    item = item,
+                    dateFormat = dateFormat,
+                    onRenewPart = { onEvent(VehicleDetailsEvents.RenewPart(item.part)) },
+                )
+                is DetailsItem.NoAddedParts -> { Text(text = "No parts") }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun VehicleDetailsTopBar(onEvent: (VehicleDetailsEvents) -> Unit) {
+    TopAppBar(
+        title = { Text(text = stringResource(id = R.string.vehicle_details_title)) },
+        navigationIcon = {
+            IconButton(onClick = {
+                onEvent(VehicleDetailsEvents.OnBackClick)
+            }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.back)
+                )
+            }
+        },
+        actions = {
+            IconButton (onClick = { onEvent(VehicleDetailsEvents.AddNewPart) }) {
+                Icon(Icons.Default.AddCircle, contentDescription = "Add Vehicle Part")
+            }
+        }
+    )
 }
