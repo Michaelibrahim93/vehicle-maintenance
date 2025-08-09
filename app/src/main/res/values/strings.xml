@@ -24,4 +24,5 @@
     <string name="part_status_near_expiry">Near expiry</string>
     <string name="part_status_ok">Good</string>
     <string name="empty_parts_title">No parts available</string>
+    <string name="vehicle_not_found_error_message">Vehicle is not found now.</string>
 </resources>

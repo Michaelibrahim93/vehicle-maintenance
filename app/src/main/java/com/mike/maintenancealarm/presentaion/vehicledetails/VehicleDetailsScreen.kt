@@ -23,6 +23,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mike.maintenancealarm.R
+import com.mike.maintenancealarm.presentaion.core.DateFormats
+import com.mike.maintenancealarm.presentaion.vehicledetails.items.ItemEmptyParts
 import com.mike.maintenancealarm.presentaion.vehicledetails.items.ItemVehicle
 import com.mike.maintenancealarm.presentaion.vehicledetails.items.ItemVehiclePart
 import kotlinx.coroutines.flow.Flow
@@ -72,7 +74,7 @@ fun VehicleDetailsScreenContent(
     onEvent: (VehicleDetailsEvents) -> Unit
 ) {
     var state = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
-    val dateFormat = remember { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) }
+    val dateFormat = remember { SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault()) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
@@ -92,7 +94,7 @@ fun VehicleDetailsScreenContent(
                     dateFormat = dateFormat,
                     onRenewPart = { onEvent(VehicleDetailsEvents.RenewPart(item.part)) },
                 )
-                is DetailsItem.NoAddedParts -> { Text(text = "No parts") }
+                is DetailsItem.NoAddedParts -> ItemEmptyParts()
             }
         }
     }

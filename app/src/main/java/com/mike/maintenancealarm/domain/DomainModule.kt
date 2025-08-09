@@ -1,5 +1,7 @@
 package com.mike.maintenancealarm.domain
 
+import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCase
+import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCaseImpl
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCaseImpl
 import dagger.Binds
@@ -14,4 +16,9 @@ abstract class DomainModule {
     abstract fun bindAddVehicleUseCase(
         addVehicleUseCaseImpl: AddVehicleUseCaseImpl
     ): AddVehicleUseCase
+
+    @Binds
+    abstract fun bindAddVehiclePartUseCase(
+        addVehiclePartUseCaseImpl: AddVehiclePartUseCaseImpl
+    ): AddVehiclePartUseCase
 }

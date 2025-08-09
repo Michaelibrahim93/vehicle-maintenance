@@ -22,9 +22,7 @@ import kotlin.random.Random
 
 @HiltViewModel
 class VehicleListViewModel @Inject constructor(
-    private val vehiclesRepository: VehiclesRepository,
-    @IoDispatcher
-    private val ioDispatcher: CoroutineDispatcher
+    vehiclesRepository: VehiclesRepository,
 ) : ViewModel() {
     private val sfVehicles: StateFlow<Vehicles> = vehiclesRepository.listenToAllVehicles()
         .stateIn(
@@ -36,19 +34,4 @@ class VehicleListViewModel @Inject constructor(
     val state: Flow<VehicleListState> = sfVehicles.map { vehicles ->
         VehicleListState(vehicles = vehicles)
     }
-
-    fun insertVehicle() = viewModelScope.launch {
-        val vehicle = Vehicle(
-            id = null,
-            vehicleImage = null,
-            vehicleName = "Vehicle ${sfVehicles.value.size + 1}",
-            currentKM = Random.nextInt(1000, 100000).toDouble(),
-            lastKmUpdate = Date(),
-            vehicleStatus = VehicleStatus.OK
-        )
-        withContext(ioDispatcher) {
-            vehiclesRepository.insertVehicle(vehicle)
-        }
-    }
-
 }

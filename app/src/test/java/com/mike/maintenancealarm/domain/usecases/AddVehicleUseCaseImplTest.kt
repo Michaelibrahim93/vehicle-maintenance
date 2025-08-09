@@ -43,7 +43,7 @@ class AddVehicleUseCaseImplTest {
             useCase.execute(testVehicle)
         }
 
-        assert(throwable.key == LocalDbErrorKey.VEHICLE_NAME_EXISTS)
+        assert(throwable.key == LocalDbErrorKey.NAME_EXISTS)
     }
 
     @Test

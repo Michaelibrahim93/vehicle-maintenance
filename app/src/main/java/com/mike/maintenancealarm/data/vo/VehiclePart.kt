@@ -8,8 +8,8 @@ import java.util.Date
 typealias VehicleParts = List<VehiclePart>
 
 data class VehiclePart(
-    val id: Long = -1,
-    val vehicleId: Long = -1,
+    val id: Long = 0,
+    val vehicleId: Long = 0,
     val partName: String,
     val deploymentDate: Date,
     val deploymentKM: Double,
@@ -35,7 +35,7 @@ data class VehiclePart(
         id = id,
         vehicleId = vehicleId,
         partName = partName,
-        deploymentDate = dateFormat.format(dateFormat),
+        deploymentDate = dateFormat.format(deploymentDate),
         deploymentKM = deploymentKM,
         lifeSpan = lifeSpan,
         supplier = supplier,
@@ -58,6 +58,14 @@ enum class VehiclePartStatus(
     OK(value = 0),
     NEAR_EXPIRATION(value = 1),
     EXPIRED(value = 2);
+
+    fun toVehicleStatus(): VehicleStatus {
+        return when (this) {
+            OK -> VehicleStatus.OK
+            NEAR_EXPIRATION -> VehicleStatus.HAS_NEAR_EXPIRATION
+            EXPIRED -> VehicleStatus.HAS_EXPIRED
+        }
+    }
 
     companion object {
         fun partStatus(

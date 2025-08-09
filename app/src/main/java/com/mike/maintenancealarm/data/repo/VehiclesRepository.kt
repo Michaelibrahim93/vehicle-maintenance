@@ -3,6 +3,7 @@ package com.mike.maintenancealarm.data.repo
 import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
 import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.Vehicles
+import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -11,6 +12,7 @@ interface VehiclesRepository {
     fun listenToAllVehicles(): Flow<Vehicles>
     fun listenToVehicleById(id: Long): Flow<Vehicle?>
     suspend fun insertVehicle(vehicle: Vehicle)
+    suspend fun loadVehicle(id: Long): Vehicle
 }
 
 class VehiclesRepositoryImpl @Inject constructor(
@@ -26,5 +28,10 @@ class VehiclesRepositoryImpl @Inject constructor(
 
     override suspend fun insertVehicle(vehicle: Vehicle) {
         vehicleDao.insertVehicle(vehicle.toEntity())
+    }
+
+    override suspend fun loadVehicle(id: Long): Vehicle {
+        return vehicleDao.loadVehicleById(id)?.toVehicle()
+            ?: throw IllegalArgumentException("Vehicle with id $id not found")
     }
 }

@@ -50,7 +50,10 @@ fun ItemVehicle(
 ) {
     val vehicle = item.vehicle
     Column (
-        modifier = Modifier.padding(start = SPACING_MEDIUM)
+        modifier = Modifier.padding(
+            start = SPACING_MEDIUM,
+            bottom = SPACING_EXTRA_LARGE
+        )
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

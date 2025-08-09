@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.presentaion.theme.MaintenanceAlarmTheme
+import com.mike.maintenancealarm.presentaion.theme.SPACING_EXTRA_LARGE
 import com.mike.maintenancealarm.presentaion.theme.SPACING_LARGE
 import com.mike.maintenancealarm.presentaion.theme.SPACING_MEDIUM_PLUS
 
@@ -24,7 +25,7 @@ fun ItemEmptyParts() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = SPACING_LARGE),
+            .padding(top = SPACING_EXTRA_LARGE),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(

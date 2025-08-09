@@ -23,7 +23,7 @@ class StorageModule {
             context = context,
             klass = AppDatabase::class.java,
             name = "app_database"
-        ).fallbackToDestructiveMigrationFrom(true, 2)
+        ).fallbackToDestructiveMigrationFrom(true, 3)
             .build()
     }
 
