@@ -5,12 +5,19 @@ import com.mike.maintenancealarm.data.vo.VehicleStatus
 import java.util.Date
 
 object TestVehicleFactory {
-    fun generateVehicle() = Vehicle(
-        id = 0,
-        vehicleName = "Test Vehicle",
-        vehicleImage = null,
-        currentKM = 1000.0,
-        lastKmUpdate = Date(),
-        vehicleStatus = VehicleStatus.OK
+    fun generateVehicle(
+        id: Long = 0,
+        vehicleName: String = "Test Vehicle",
+        vehicleImage: String? = null,
+        currentKM: Double = 1000.0,
+        lastKmUpdate: Date = Date(),
+        vehicleStatus: VehicleStatus = VehicleStatus.OK
+    ) = Vehicle(
+        id = id,
+        vehicleName = vehicleName,
+        vehicleImage = vehicleImage,
+        currentKM = currentKM,
+        lastKmUpdate = lastKmUpdate,
+        vehicleStatus = vehicleStatus
     )
 }

@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 interface VehiclePartsRepository {
     fun listenToVehicleParts(vehicleId: Long): Flow<VehicleParts>
+    @Throws
     suspend fun insertVehiclePart(vehiclePart: VehiclePart)
 
 }
@@ -27,6 +28,7 @@ class VehiclePartsRepositoryImpl @Inject constructor(
         }
     }
 
+    @Throws
     override suspend fun insertVehiclePart(vehiclePart: VehiclePart) {
         Timber.d("insertVehiclePart: $vehiclePart")
         vehiclePartDao.insertVehiclePart(vehiclePart.toEntity(dayDateFormat))

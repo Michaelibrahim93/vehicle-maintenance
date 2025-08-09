@@ -24,8 +24,8 @@ class AddVehiclePartUseCaseImpl @Inject constructor(
         vehiclePart: VehiclePart
     ) {
         try {
-            throw IllegalArgumentException("test")
             val vehicle = vehiclesRepository.loadVehicle(vehiclePart.vehicleId)
+                ?: throw IllegalArgumentException("Vehicle with id ${vehiclePart.vehicleId} not found")
             // Check if the vehicle exists
             vehiclePartsRepository.insertVehiclePart(vehiclePart)
             // Update the vehicle with the new part status

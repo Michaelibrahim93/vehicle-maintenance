@@ -12,7 +12,7 @@ interface VehiclesRepository {
     fun listenToAllVehicles(): Flow<Vehicles>
     fun listenToVehicleById(id: Long): Flow<Vehicle?>
     suspend fun insertVehicle(vehicle: Vehicle)
-    suspend fun loadVehicle(id: Long): Vehicle
+    suspend fun loadVehicle(id: Long): Vehicle?
 }
 
 class VehiclesRepositoryImpl @Inject constructor(
@@ -30,8 +30,7 @@ class VehiclesRepositoryImpl @Inject constructor(
         vehicleDao.insertVehicle(vehicle.toEntity())
     }
 
-    override suspend fun loadVehicle(id: Long): Vehicle {
+    override suspend fun loadVehicle(id: Long): Vehicle? {
         return vehicleDao.loadVehicleById(id)?.toVehicle()
-            ?: throw IllegalArgumentException("Vehicle with id $id not found")
     }
 }
