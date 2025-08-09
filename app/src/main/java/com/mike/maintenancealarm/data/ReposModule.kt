@@ -1,5 +1,7 @@
 package com.mike.maintenancealarm.data
 
+import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
+import com.mike.maintenancealarm.data.repo.VehiclePartsRepositoryImpl
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepositoryImpl
 import dagger.Binds
@@ -7,6 +9,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
+@Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class ReposModule {
@@ -14,4 +17,9 @@ abstract class ReposModule {
     abstract fun bindVehiclesRepository(
         impl: VehiclesRepositoryImpl
     ): VehiclesRepository
+
+    @Binds
+    abstract fun bindVehiclePartsRepository(
+        impl: VehiclePartsRepositoryImpl
+    ): VehiclePartsRepository
 }

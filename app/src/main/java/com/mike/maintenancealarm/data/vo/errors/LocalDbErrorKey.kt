@@ -1,6 +1,7 @@
 package com.mike.maintenancealarm.data.vo.errors
 
 enum class LocalDbErrorKey {
-    VEHICLE_NAME_EXISTS,
+    NAME_EXISTS,
+    NOT_FOUND,
     UNKNOWN_ERROR
 }

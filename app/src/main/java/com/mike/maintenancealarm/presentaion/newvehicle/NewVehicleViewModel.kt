@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
+import com.mike.maintenancealarm.utils.IoDispatcher
 import com.mike.maintenancealarm.utils.validator.Validator
 import com.mike.maintenancealarm.utils.validator.rules.NotBlankRule
 import com.mike.maintenancealarm.utils.validator.rules.ValidKmInputRule
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -15,11 +17,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 import javax.inject.Inject
 
 @HiltViewModel
 class NewVehicleViewModel @Inject constructor(
-    private val addVehicleUseCase: AddVehicleUseCase
+    private val addVehicleUseCase: AddVehicleUseCase,
+    @IoDispatcher
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _state = MutableStateFlow(NewVehicleState())
     val state: StateFlow<NewVehicleState> = _state
@@ -51,7 +57,9 @@ class NewVehicleViewModel @Inject constructor(
             _state.value = state.setLoading(true)
             try {
                 delay(3000)
-                addVehicleUseCase.execute(state.toVehicle())
+                withContext(dispatcher) {
+                    addVehicleUseCase.execute(state.toVehicle())
+                }
                 _actionChannel.send(NewVehicleUiAction.ShowSuccess)
             } catch (t: Throwable) {
                 _actionChannel.send(NewVehicleUiAction.ShowError(t))

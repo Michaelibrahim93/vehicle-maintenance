@@ -21,16 +21,12 @@ import com.mike.maintenancealarm.presentaion.theme.MaintenanceAlarmTheme
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.serialization.Serializable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mike.maintenancealarm.presentaion.vehicleslist.DestinationVehicleListScreen
+import com.mike.maintenancealarm.presentaion.main.Route
 import com.mike.maintenancealarm.utils.compose.ObserveEvent
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
-
-@Serializable
-data object DestinationSplashScreen
 
 data class SplashScreenState(
     val isLoading: Boolean = false
@@ -71,10 +67,9 @@ fun SplashScreen(
 
     Box(
         modifier = modifier.fillMaxSize()
-            .background(Color.Green)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.ic_launcher),
             contentDescription = "Splash Screen",
             modifier = modifier.align(Alignment.Center)
         )
@@ -94,8 +89,8 @@ fun handleViewModelActions(
     when (action) {
         is SplashUiAction.NavigateToVehiclesList -> {
             Timber.tag("SplashScreen").d("Navigating to Vehicles List")
-            navController.navigate(DestinationVehicleListScreen) {
-                popUpTo(DestinationSplashScreen) {
+            navController.navigate(Route.VehicleList) {
+                popUpTo(Route.Splash) {
                     inclusive = true
                 }
             }

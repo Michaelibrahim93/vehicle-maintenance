@@ -53,11 +53,8 @@ import com.mike.maintenancealarm.utils.compose.ObserveEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.serialization.Serializable
 import timber.log.Timber
 
-@Serializable
-data object DestinationNewVehicleScreen
 
 @Composable
 fun NewVehicleComposable(

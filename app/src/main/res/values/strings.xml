@@ -17,5 +17,12 @@
     <string name="save">Save</string>
     <string name="vehicle_total_km">Total Kilometers/Miles Driven</string>
     <string name="vehicle_added_successfully">Vehicle has been added successfully.</string>
-    <string name="saving">Saving...</string>
+    <string name="saving">Saving…</string>
+    <string name="vehicle_details_title">Vehicle Details</string>
+    <string name="supplier_x">Supplier: %s</string>
+    <string name="part_status_expired">Expired</string>
+    <string name="part_status_near_expiry">Near expiry</string>
+    <string name="part_status_ok">Good</string>
+    <string name="empty_parts_title">No parts available</string>
+    <string name="vehicle_not_found_error_message">Vehicle is not found now.</string>
 </resources>

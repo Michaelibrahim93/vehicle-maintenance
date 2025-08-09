@@ -13,6 +13,18 @@ data class Vehicle(
     val lastKmUpdate: Date,
     val vehicleStatus: VehicleStatus
 ) {
+    fun updateStatus(partsList: VehicleParts): Vehicle {
+        val currentKM: Double = this.currentKM
+        var status = this.vehicleStatus
+        partsList.forEach {
+            val itrStatus = VehiclePartStatus.partStatus(it, currentKM)
+            if (itrStatus.value > status.value) {
+                status = itrStatus.toVehicleStatus()
+            }
+        }
+        return copy(vehicleStatus = status)
+    }
+
     fun toEntity() = VehicleEntity(
             id = id ?: 0,
             vehicleName = vehicleName,

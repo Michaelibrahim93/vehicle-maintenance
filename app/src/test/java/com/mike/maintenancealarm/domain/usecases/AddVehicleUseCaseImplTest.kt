@@ -18,6 +18,7 @@ import kotlin.test.assertFailsWith
 class AddVehicleUseCaseImplTest {
     private lateinit var useCase: AddVehicleUseCaseImpl
     private lateinit var repository: VehiclesRepository
+
     @Before
     fun setUp() {
         repository = mock()
@@ -42,7 +43,7 @@ class AddVehicleUseCaseImplTest {
             useCase.execute(testVehicle)
         }
 
-        assert(throwable.key == LocalDbErrorKey.VEHICLE_NAME_EXISTS)
+        assert(throwable.key == LocalDbErrorKey.NAME_EXISTS)
     }
 
     @Test
