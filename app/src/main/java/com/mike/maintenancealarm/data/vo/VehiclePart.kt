@@ -46,11 +46,7 @@ data class VehiclePart(
 data class LifeSpan(
     val km: Double,
     val months: Int
-) {
-    fun monthMillis(): Long {
-        return (months * 30L * 24 * 60 * 60 * 1000)
-    }
-}
+)
 
 enum class VehiclePartStatus(
     val value: Int
@@ -83,8 +79,8 @@ enum class VehiclePartStatus(
             val kmLeft = part.lifeSpan.km - (currentVehicleKm - part.deploymentKM)
 
             val kmNearExpiry = kmLeft < (part.lifeSpan.km * 0.1)
-            val dateNearExpiry = (expiryCal.timeInMillis - deploymentCal.timeInMillis) <
-                    part.lifeSpan.monthMillis() * 0.1
+            val dateNearExpiry = (expiryCal.timeInMillis - currentCal.timeInMillis) <
+                    ((expiryCal.timeInMillis - deploymentCal.timeInMillis)) * 0.1
 
             return when {
                 kmLeft <= 0 || currentCal.after(expiryCal) -> EXPIRED

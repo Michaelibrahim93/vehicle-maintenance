@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,7 @@ import com.mike.maintenancealarm.presentaion.theme.BIG_BUTTON_HEIGHT
 import com.mike.maintenancealarm.presentaion.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentaion.theme.SPACE_SCREEN_H
 import com.mike.maintenancealarm.presentaion.theme.SPACING_EXTRA_LARGE
-import com.mike.maintenancealarm.presentaion.theme.SPACING_LARGE
+import com.mike.maintenancealarm.presentaion.theme.SPACING_EXTRA_LARGE_PLUS
 import com.mike.maintenancealarm.presentaion.theme.SPACING_LARGE_PLUS
 import com.mike.maintenancealarm.presentaion.theme.SPACING_SMALL
 import com.mike.maintenancealarm.utils.compose.ObserveEvent
@@ -54,7 +55,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
-
 
 @Composable
 fun NewVehicleComposable(
@@ -161,7 +161,11 @@ fun NewVehicleContent(
             value = state.vehicleName.input,
             onValueChange = { onEvent(NewVehicleEvent.OnVehicleNameChange(it)) },
             label = { Text(text = stringResource(id = R.string.vehicle_name_hint)) },
-            modifier = Modifier.fillMaxWidth().padding(SPACING_LARGE),
+            modifier = Modifier.fillMaxWidth().padding(
+                top = SPACING_EXTRA_LARGE_PLUS,
+                start = SPACE_SCREEN_H,
+                end = SPACE_SCREEN_H,
+            ),
             singleLine = true,
             isError = !state.vehicleName.isValid(),
             supportingText = {
@@ -170,7 +174,10 @@ fun NewVehicleContent(
                     Text(text = text, color = MaterialTheme.colorScheme.error)
                 }
             },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            )
         )
 
         TextField(
@@ -190,7 +197,10 @@ fun NewVehicleContent(
                     Text(text = text, color = MaterialTheme.colorScheme.error)
                 }
             },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            )
         )
         Box(
             modifier = Modifier.weight(1.0f)
