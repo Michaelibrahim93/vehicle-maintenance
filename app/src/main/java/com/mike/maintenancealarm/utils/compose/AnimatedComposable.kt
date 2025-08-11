@@ -42,16 +42,6 @@ fun enterTransition(
     }
 }
 
-fun exitTransition(
-    navAnimationType: NavAnimationType
-): ExitTransition {
-    return when (navAnimationType) {
-        NavAnimationType.SLIDE_IN_HORIZONTALLY -> slideOutHorizontally()
-        NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideOutVertically(targetOffsetY = { -it })
-        NavAnimationType.NONE -> ExitTransition.None
-    }
-}
-
 fun popEnterTransition(
     navAnimationType: NavAnimationType
 ): EnterTransition {
@@ -66,7 +56,7 @@ fun popExitTransition(
     navAnimationType: NavAnimationType
 ): ExitTransition {
     return when (navAnimationType) {
-        NavAnimationType.SLIDE_IN_HORIZONTALLY -> slideOutHorizontally { it }
+        NavAnimationType.SLIDE_IN_HORIZONTALLY -> slideOutHorizontally { -it }
         NavAnimationType.SLIDE_IN_FROM_BOTTOM -> slideOutVertically(targetOffsetY = { it })
         NavAnimationType.NONE -> ExitTransition.None
     }

@@ -3,7 +3,6 @@ package com.mike.maintenancealarm.domain.usecases
 import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
-import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.data.vo.errors.LocalDbErrorKey
 import com.mike.maintenancealarm.data.vo.errors.VehicleError
 import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
@@ -12,7 +11,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.`when`
-import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import timber.log.Timber
