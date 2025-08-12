@@ -26,7 +26,6 @@ obj/
 .kotlinc/
 
 # === Gradle cache ===
-.gradle/
 gradle-app.setting
 gradle.properties.local
 
@@ -36,10 +35,8 @@ gradle.properties.local
 **/out/
 
 # === IntelliJ IDEA / Android Studio ===
-.idea/
 *.iws
 *.ipr
-*.iml
 .idea/*
 
 # === Mac OS ===
@@ -57,8 +54,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 firebase/*.json
-
-local.properties
 
 .ksp/
 

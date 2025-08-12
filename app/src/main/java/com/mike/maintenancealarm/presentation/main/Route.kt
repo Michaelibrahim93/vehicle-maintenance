@@ -1,5 +1,6 @@
 package com.mike.maintenancealarm.presentation.main
 
+import com.mike.maintenancealarm.data.vo.VehiclePart
 import kotlinx.serialization.Serializable
 
 sealed class Route {
@@ -11,4 +12,9 @@ sealed class Route {
     object NewVehicle: Route()
     @Serializable
     data class VehicleDetails(val vehicleId: Long): Route()
+    @Serializable
+    data class NewVehiclePart(
+        val vehicleId: Long,
+        val vehiclePart: VehiclePart?
+    ): Route()
 }

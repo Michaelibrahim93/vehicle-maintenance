@@ -25,4 +25,14 @@
     <string name="part_status_ok">Good</string>
     <string name="empty_parts_title">No parts available</string>
     <string name="vehicle_not_found_error_message">Vehicle is not found now.</string>
+    <string name="vehicle_part_name_title">Part Name</string>
+    <string name="vehicle_deployment_date_title">Deployment Date</string>
+    <string name="edit_vehicle_part_title">Edit Vehicle Part</string>
+    <string name="add_vehicle_part_title">Add Vehicle Part</string>
+    <string name="vehicle_deployment_km_title">Deployment KM</string>
+    <string name="vehicle_part_life_span_months_title">Expiration Time (in Months)</string>
+    <string name="vehicle_part_life_span_km_title">Expiration Distance (in KM)</string>
+    <string name="vehicle_part_supplier_title">Supplier (optional)</string>
+    <string name="vehicle_part_price_title">Price (Optional)</string>
+    <string name="vehicle_part_added_successfully">Vehicle part has been added successfully</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mike.maintenancealarm.presentation.newpart.NewVehiclePartComposable
 import com.mike.maintenancealarm.presentation.newvehicle.NewVehicleComposable
 import com.mike.maintenancealarm.presentation.splash.SplashComposable
 import com.mike.maintenancealarm.presentation.vehicledetails.VehicleDetailsScreenComposable
@@ -38,6 +39,12 @@ fun MainNavigation() {
             navAnimationType = NavAnimationType.SLIDE_IN_HORIZONTALLY
         ) {
             VehicleDetailsScreenComposable(navController)
+        }
+
+        animatedComposable<Route.NewVehiclePart>(
+            navAnimationType = NavAnimationType.SLIDE_IN_FROM_BOTTOM
+        ) {
+            NewVehiclePartComposable(navController)
         }
     }
 }

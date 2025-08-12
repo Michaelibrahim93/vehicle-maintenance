@@ -10,7 +10,7 @@ class Validator {
         this.rulesMap = rules
     }
 
-    fun validate(validationMap: Map<String, Any>): Map<String, Int> {
+    fun validate(validationMap: Map<String, Any?>): Map<String, Int> {
         val validationResult = mutableMapOf<String, Int>()
         validationMap.forEach { (key, value) ->
             val rules = rulesMap[key] ?: emptyList()

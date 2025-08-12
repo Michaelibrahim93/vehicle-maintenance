@@ -51,7 +51,7 @@ class NewVehicleViewModel @Inject constructor(
         state: NewVehicleState = _state.value
     ) = viewModelScope.launch {
         val validationResult = validator.validate(state.toValidationMap())
-        _state.value = state.setValidationErrors(validationResult)
+        _state.value = state.updateValidationErrors(validationResult)
         if (validationResult.isEmpty()) {
             _state.value = state.setLoading(true)
             try {

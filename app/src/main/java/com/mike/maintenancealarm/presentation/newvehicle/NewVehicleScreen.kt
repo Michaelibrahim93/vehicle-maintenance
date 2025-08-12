@@ -213,17 +213,12 @@ fun NewVehicleContent(
             enabled = !state.isLoading,
             onClick = { onEvent(NewVehicleEvent.OnSaveClick) },
             content = {
-                if (state.isLoading){
-                    Text(
-                        text = stringResource(id = R.string.saving),
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                } else {
-                    Text(
-                        text = stringResource(id = R.string.save),
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
+                Text(
+                    text = stringResource(
+                        id = if (state.isLoading) R.string.saving else R.string.save
+                    ),
+                    style = MaterialTheme.typography.titleMedium
+                )
             },
         )
     }
