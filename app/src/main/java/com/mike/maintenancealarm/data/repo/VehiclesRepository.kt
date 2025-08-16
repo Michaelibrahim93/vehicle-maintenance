@@ -11,6 +11,7 @@ interface VehiclesRepository {
     fun listenToAllVehicles(): Flow<Vehicles>
     fun listenToVehicleById(id: Long): Flow<Vehicle?>
     suspend fun insertVehicle(vehicle: Vehicle)
+    suspend fun updateVehicle(vehicle: Vehicle)
     suspend fun loadVehicle(id: Long): Vehicle?
 }
 
@@ -27,6 +28,10 @@ class VehiclesRepositoryImpl @Inject constructor(
 
     override suspend fun insertVehicle(vehicle: Vehicle) {
         vehicleDao.insertVehicle(vehicle.toEntity())
+    }
+
+    override suspend fun updateVehicle(vehicle: Vehicle) {
+        vehicleDao.updateVehicle(vehicle.toEntity())
     }
 
     override suspend fun loadVehicle(id: Long): Vehicle? {

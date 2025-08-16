@@ -32,6 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mike.maintenancealarm.R
+import com.mike.maintenancealarm.presentation.core.error.handleUiError
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartEvent
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartUiAction
 import com.mike.maintenancealarm.presentation.newpart.uistate.NewVehiclePartUiState
@@ -57,9 +58,8 @@ fun NewVehiclePartComposable(
         onUiAction = viewModel.actionFlow,
         onEvent = { event ->
             when(event) {
-                is NewVehiclePartEvent.OnBackClick -> {
+                is NewVehiclePartEvent.OnBackClick ->
                     navController.popBackStack()
-                }
                 else -> viewModel.onEvent(event)
             }
         }
@@ -267,7 +267,10 @@ fun handleUiAction(
             navController.popBackStack()
         }
         is NewVehiclePartUiAction.ShowError -> {
-            //TODO:: Handle error appropriately
+            handleUiError(
+                context = context,
+                throwable = uiAction.throwable
+            )
         }
     }
 }
@@ -281,7 +284,9 @@ fun NewVehiclePartScreenPreview() {
     MaintenanceAlarmTheme {
         NewVehiclePartScreen(
             navController = NavController(LocalContext.current),
-            uiStateFlow = flowOf(NewVehiclePartUiState()),
+            uiStateFlow = flowOf(NewVehiclePartUiState(
+                isLoading = true
+            )),
             onUiAction = flowOf(),
             onEvent = {}
         )

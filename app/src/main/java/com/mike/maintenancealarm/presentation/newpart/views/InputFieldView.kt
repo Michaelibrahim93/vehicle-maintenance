@@ -1,6 +1,7 @@
 package com.mike.maintenancealarm.presentation.newpart.views
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -24,26 +25,31 @@ fun InputFieldView(
     onClick: (() -> Unit)? = null,
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
-    val clickableModifier = if (onClick != null)
-         modifier.clickable { onClick() }
-    else
-        modifier
+    Box(modifier) {
+        TextField(
+            modifier = modifier,
+            value = value,
+            onValueChange = { onValueChange(it) },
+            label = { Text(text = label) },
+            singleLine = singleLine,
+            isError = isError,
+            readOnly = readOnly,
+            supportingText = {
+                if (!supportingText.isNullOrEmpty()) {
+                    Text(text = supportingText, color = MaterialTheme.colorScheme.error)
+                }
+            },
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions
+        )
 
-    TextField(
-        modifier = clickableModifier,
-        value = value,
-        onValueChange = { onValueChange(it) },
-        label = { Text(text = label) },
-        singleLine = singleLine,
-        isError = isError,
-        readOnly = readOnly,
-        supportingText = {
-            if (!supportingText.isNullOrEmpty()) {
-                Text(text = supportingText, color = MaterialTheme.colorScheme.error)
-            }
-        },
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions
-    )
+        if (onClick != null) {
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .clickable { onClick() }
+            )
+        }
+    }
 }
 

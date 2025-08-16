@@ -43,6 +43,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.mike.maintenancealarm.R
+import com.mike.maintenancealarm.presentation.core.error.handleUiError
 import com.mike.maintenancealarm.presentation.theme.BIG_BUTTON_HEIGHT
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACE_SCREEN_H
@@ -88,7 +89,7 @@ fun NewVehicleScreen(
     val context = LocalContext.current
     ObserveEvent(actionFlow) {
         handleViewModelActions(
-            action = it,
+            uiAction = it,
             navController = navController,
             context = context
         )
@@ -225,13 +226,16 @@ fun NewVehicleContent(
 }
 
 fun handleViewModelActions(
-    action: NewVehicleUiAction,
+    uiAction: NewVehicleUiAction,
     navController: NavController,
     context: Context
 ) {
-    when (action) {
+    when (uiAction) {
         is NewVehicleUiAction.ShowError -> {
-            // Show error message to the user
+            handleUiError(
+                context = context,
+                throwable = uiAction.throwable
+            )
         }
         NewVehicleUiAction.ShowSuccess -> {
             Toast.makeText(context, R.string.vehicle_added_successfully, Toast.LENGTH_SHORT).show()

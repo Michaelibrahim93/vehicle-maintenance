@@ -15,6 +15,6 @@ sealed class Route {
     @Serializable
     data class NewVehiclePart(
         val vehicleId: Long,
-        val vehiclePart: VehiclePart?
+        val vehiclePartId: Long?
     ): Route()
 }

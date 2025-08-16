@@ -7,9 +7,9 @@ sealed class VehicleError : Throwable() {
         val throwable: Throwable,
         val key: LocalDbErrorKey,
         @StringRes
-        val errorName: Int? = null,
+        val errorName: Int,
         @StringRes
-        val messageRes: Int? = null
+        val messageRes: Int
     ) : VehicleError()
 }
 

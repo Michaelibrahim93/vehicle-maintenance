@@ -24,6 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.presentation.core.DateFormats
+import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.presentation.vehicledetails.items.ItemEmptyParts
 import com.mike.maintenancealarm.presentation.vehicledetails.items.ItemVehicle
 import com.mike.maintenancealarm.presentation.vehicledetails.items.ItemVehiclePart
@@ -43,7 +44,11 @@ fun VehicleDetailsScreenComposable(
         onEvent = { event ->
             Timber.tag("VehicleDetailsScreen").d("event: $event")
             when(event) {
-                VehicleDetailsEvents.OnBackClick -> navController.popBackStack()
+                is VehicleDetailsEvents.OnBackClick -> navController.popBackStack()
+                VehicleDetailsEvents.AddNewPart ->
+                    navController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, null))
+                is VehicleDetailsEvents.RenewPart ->
+                    navController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, event.part.id))
                 else -> viewModel.onEvent(event)
             }
         }
