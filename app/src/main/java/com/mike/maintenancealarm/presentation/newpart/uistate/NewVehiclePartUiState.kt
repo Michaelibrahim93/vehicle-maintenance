@@ -1,6 +1,7 @@
 package com.mike.maintenancealarm.presentation.newpart.uistate
 
 import com.mike.maintenancealarm.data.vo.ValidationInput
+import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.VehiclePart
 import java.util.Date
 
@@ -27,10 +28,14 @@ data class NewVehiclePartUiState(
         const val KEY_SUPPLIER = "supplier"
         const val KEY_PRICE = "price"
 
-        fun initialState(vehicleId: Long, partToBeRenewed: VehiclePart? = null): NewVehiclePartUiState {
+        fun initialState(
+            vehicleId: Long,
+            vehicle: Vehicle? = null,
+            partToBeRenewed: VehiclePart? = null): NewVehiclePartUiState {
             return NewVehiclePartUiState(
                 vehicleId = vehicleId,
                 partToBeRenewed = partToBeRenewed,
+                deploymentKm = ValidationInput(vehicle?.currentKM?.toString() ?: ""),
                 partName = ValidationInput(partToBeRenewed?.partName ?: ""),
                 lifeSpanInMonths = ValidationInput(partToBeRenewed?.lifeSpan?.months?.toString() ?: ""),
                 lifeSpanInKm = ValidationInput(partToBeRenewed?.lifeSpan?.km?.toString() ?: ""),

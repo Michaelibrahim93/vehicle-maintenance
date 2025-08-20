@@ -55,7 +55,7 @@ class NewVehicleViewModel @Inject constructor(
         if (validationResult.isEmpty()) {
             _state.value = state.setLoading(true)
             try {
-                delay(3000)
+                delay(2000)
                 withContext(dispatcher) {
                     addVehicleUseCase.execute(state.toVehicle())
                 }

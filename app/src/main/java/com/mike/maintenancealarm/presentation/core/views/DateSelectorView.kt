@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.presentation.newpart.views
+package com.mike.maintenancealarm.presentation.core.views
 
 import android.app.DatePickerDialog
 import android.content.Context

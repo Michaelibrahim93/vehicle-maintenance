@@ -12,9 +12,14 @@ sealed class NewVehiclePartEvent {
     data class OnPriceChange(val price: String) : NewVehiclePartEvent()
     object OnSaveClick : NewVehiclePartEvent()
     object OnBackClick : NewVehiclePartEvent()
+    object OnUpdateVehicleKmClick : NewVehiclePartEvent()
 }
 
 sealed class NewVehiclePartUiAction {
     data class ShowError(val throwable: Throwable) : NewVehiclePartUiAction()
     data object ShowSuccess : NewVehiclePartUiAction()
+    data class ValidationCarKm(
+        val vehicleKm: Double,
+        val partKm: Double
+    ) : NewVehiclePartUiAction()
 }

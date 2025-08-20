@@ -1,5 +1,6 @@
 package com.mike.maintenancealarm.presentation.newpart
 
+import android.app.AlertDialog
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -36,8 +37,8 @@ import com.mike.maintenancealarm.presentation.core.error.handleUiError
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartEvent
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartUiAction
 import com.mike.maintenancealarm.presentation.newpart.uistate.NewVehiclePartUiState
-import com.mike.maintenancealarm.presentation.newpart.views.DateSelectorView
-import com.mike.maintenancealarm.presentation.newpart.views.InputFieldView
+import com.mike.maintenancealarm.presentation.core.views.DateSelectorView
+import com.mike.maintenancealarm.presentation.core.views.InputFieldView
 import com.mike.maintenancealarm.presentation.theme.BIG_BUTTON_HEIGHT
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACE_SCREEN_H
@@ -82,6 +83,7 @@ fun NewVehiclePartScreen(
             context = context,
             navController = navController,
             uiAction = it,
+            onEvent = onEvent
         )
     }
 
@@ -259,9 +261,18 @@ fun NewVehiclePartTopBar(
 fun handleUiAction(
     context: Context,
     navController: NavController,
-    uiAction: NewVehiclePartUiAction
+    uiAction: NewVehiclePartUiAction,
+    onEvent: (NewVehiclePartEvent) -> Unit
 ) {
     when(uiAction) {
+        is NewVehiclePartUiAction.ValidationCarKm -> {
+            showUpdateVehicleKmDialog(
+                context = context,
+                vehicleKm = uiAction.vehicleKm,
+                partKm = uiAction.partKm,
+                updateVehicleKm = { onEvent(NewVehiclePartEvent.OnUpdateVehicleKmClick) }
+            )
+        }
         is NewVehiclePartUiAction.ShowSuccess -> {
             Toast.makeText(context, R.string.vehicle_part_added_successfully, Toast.LENGTH_SHORT).show()
             navController.popBackStack()
@@ -273,6 +284,20 @@ fun handleUiAction(
             )
         }
     }
+}
+
+fun showUpdateVehicleKmDialog(
+    vehicleKm: Double,
+    partKm: Double,
+    context: Context,
+    updateVehicleKm: () -> Unit
+) {
+    AlertDialog.Builder(context)
+        .setTitle(R.string.attention)
+        .setMessage(R.string.vehicle_part_update_km_message)
+        .setPositiveButton(R.string.yes) { _, _ -> updateVehicleKm() }
+        .setNegativeButton(R.string.no, null)
+        .show()
 }
 
 @Preview(

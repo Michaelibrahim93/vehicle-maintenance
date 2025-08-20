@@ -3,7 +3,9 @@ package com.mike.maintenancealarm.domain.usecases
 import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
+import com.mike.maintenancealarm.data.vo.errors.VehicleError
 import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
+import timber.log.Timber
 import java.util.Date
 
 interface UpdateVehicleUseCase {
@@ -21,7 +23,7 @@ class UpdateVehicleUseCaseImpl(
             loadVehicle = {
                 val vehicle = vehiclesRepository.loadVehicle(vehicleId)
 
-                val updatedVehicle = vehicle?.copy(
+                val updatedVehicle = vehicle.copy(
                     currentKM = newKMs,
                     lastKmUpdate = Date()
                 )
@@ -39,11 +41,10 @@ class UpdateVehicleUseCaseImpl(
 
     private suspend fun updateVehicleStatus(
         vehicleId: Long,
-        loadVehicle: suspend () -> Vehicle?
+        loadVehicle: suspend () -> Vehicle
     ) {
         try {
             val vehicle = loadVehicle()
-                ?: throw IllegalArgumentException("Vehicle with id $vehicleId not found")
 
             val vehicleParts = vehiclePartsRepository.loadVehicleParts(vehicle.id!!)
             val vehicleStatus = vehicle.updateStatus(vehicleParts)
@@ -52,9 +53,10 @@ class UpdateVehicleUseCaseImpl(
             vehiclesRepository.updateVehicle(
                 vehicle = vehicle.copy(vehicleStatus = vehicleStatus.vehicleStatus)
             )
-        } catch (e: IllegalArgumentException) {
-            throw VehicleErrorFactory.vehicleNotFoundError(IllegalArgumentException("Vehicle with id $vehicleId not found"))
+        } catch (e: VehicleError.LocalDbError) {
+            throw e
         } catch (t: Throwable) {
+            Timber.d(t)
             throw VehicleErrorFactory.unknownError(t)
         }
     }

@@ -36,4 +36,8 @@
     <string name="vehicle_part_price_title">Price (Optional)</string>
     <string name="vehicle_part_added_successfully">Vehicle part has been added successfully</string>
     <string name="ok">OK\n</string>
+    <string name="attention">Attention</string>
+    <string name="vehicle_part_update_km_message">The deployment KM for this part is higher than the vehicle\'s current KM. Would you like to update the vehicle's KM now?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
