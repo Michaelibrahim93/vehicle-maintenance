@@ -7,13 +7,14 @@ import com.mike.maintenancealarm.data.vo.errors.VehicleError
 import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import timber.log.Timber
 import java.util.Date
+import javax.inject.Inject
 
 interface UpdateVehicleUseCase {
     suspend fun executeUpdateKm(vehicleId: Long, newKMs: Double)
     suspend fun executeUpdateStatus(vehicleId: Long)
 }
 
-class UpdateVehicleUseCaseImpl(
+class UpdateVehicleUseCaseImpl @Inject constructor(
     private val vehiclesRepository: VehiclesRepository,
     private val vehiclePartsRepository: VehiclePartsRepository
 ) : UpdateVehicleUseCase {

@@ -26,10 +26,12 @@ class AddVehiclePartUseCaseImpl @Inject constructor(
     ) {
         try {
             val vehicle = vehiclesRepository.loadVehicle(vehiclePart.vehicleId)
-            // Check if the vehicle exists
-            vehiclePartsRepository.insertVehiclePart(vehiclePart)
+            if (vehiclePart.id > 0)
+                vehiclePartsRepository.updateVehiclePart(vehiclePart)
+            else
+                vehiclePartsRepository.insertVehiclePart(vehiclePart)
             // Update the vehicle with the new part status
-            vehiclesRepository.insertVehicle(
+            vehiclesRepository.updateVehicle(
                 vehicle = vehicle.updateStatus(listOf(vehiclePart))
             )
         } catch (e: VehicleError.LocalDbError) {

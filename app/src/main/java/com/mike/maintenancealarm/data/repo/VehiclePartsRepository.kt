@@ -18,6 +18,7 @@ interface VehiclePartsRepository {
     suspend fun loadVehiclePartById(vehicleId: Long): VehiclePart
     @Throws
     suspend fun insertVehiclePart(vehiclePart: VehiclePart)
+
     @Throws
     suspend fun updateVehiclePart(vehiclePart: VehiclePart)
 }
@@ -55,6 +56,7 @@ class VehiclePartsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateVehiclePart(vehiclePart: VehiclePart) {
-
+        Timber.d("insertVehiclePart: $vehiclePart")
+        vehiclePartDao.updateVehiclePart(vehiclePart.toEntity(dayDateFormat))
     }
 }

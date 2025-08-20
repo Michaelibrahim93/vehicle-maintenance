@@ -10,11 +10,11 @@ import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.VehiclePart
 import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCase
+import com.mike.maintenancealarm.domain.usecases.UpdateVehicleUseCase
 import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartEvent
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartUiAction
 import com.mike.maintenancealarm.presentation.newpart.uistate.*
-import com.mike.maintenancealarm.presentation.splash.SplashScreenState
 import com.mike.maintenancealarm.utils.IoDispatcher
 import com.mike.maintenancealarm.utils.validator.Validator
 import com.mike.maintenancealarm.utils.validator.rules.NotBlankRule
@@ -25,11 +25,11 @@ import com.mike.maintenancealarm.utils.validator.rules.ValidIntRule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -45,6 +45,7 @@ class NewVehiclePartViewModel @Inject constructor(
     private val addVehiclePartUseCase: AddVehiclePartUseCase,
     private val vehiclePartsRepository: VehiclePartsRepository,
     private val vehiclesRepository: VehiclesRepository,
+    private val updateVehicleUseCase: UpdateVehicleUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val route: Route.NewVehiclePart = savedStateHandle.toRoute()
@@ -54,8 +55,10 @@ class NewVehiclePartViewModel @Inject constructor(
         partToBeRenewed = null // can be changed in intialization if partId is provided
     ))
     val state: StateFlow<NewVehiclePartUiState> = _state.onStart {
-        if (route.vehiclePartId != null)
-            updatePrefilledFields(route.vehiclePartId)
+        updatePrefilledFields(
+            route.vehicleId,
+            route.vehiclePartId
+        )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -72,19 +75,25 @@ class NewVehiclePartViewModel @Inject constructor(
 
     private val validator: Validator = buildNewVehiclePartValidator()
 
-    private fun updatePrefilledFields(partId: Long) = viewModelScope.launch {
+    private fun updatePrefilledFields(
+        vehicleId: Long,
+        partId: Long?
+    ) = viewModelScope.launch {
         try {
             val vehicle = withContext(dispatcher) {
-                vehiclesRepository.loadVehicle(route.vehicleId)
+                vehiclesRepository.loadVehicle(vehicleId)
             }
-            val part = withContext(dispatcher) {
-                vehiclePartsRepository.loadVehiclePartById(partId)
+            val part = partId?.let{
+                withContext(dispatcher) {
+                    vehiclePartsRepository.loadVehiclePartById(partId)
+                }
             }
 
             this@NewVehiclePartViewModel.vehicle = vehicle
 
             _state.value = NewVehiclePartUiState.initialState(
                 vehicleId = route.vehicleId,
+                vehicle= vehicle,
                 partToBeRenewed = part // can be changed in intialization if partId is provided
             )
         } catch (t: Throwable) {
@@ -110,8 +119,38 @@ class NewVehiclePartViewModel @Inject constructor(
                 _state.value = _state.value.updatePrice(price = event.price)
             is NewVehiclePartEvent.OnSaveClick ->
                 validateAndSave()
+            is NewVehiclePartEvent.OnUpdateVehicleKmClick ->
+                updateVehicleKm()
             else -> {}
         }
+    }
+
+    private fun updateVehicleKm() = viewModelScope.launch {
+        val uiState = this@NewVehiclePartViewModel._state.value
+        val vehicle = this@NewVehiclePartViewModel.vehicle
+        val updatedKm = uiState.deploymentKm.input.toDouble()
+        val vehiclePart = uiState.toVehiclePart()
+
+        _state.value = uiState.copy(isLoading = true)
+        try {
+            delay(1500)
+            withContext(dispatcher) {
+                updateVehicleUseCase.executeUpdateKm(
+                    vehicleId = vehicle.id!!,
+                    newKMs = updatedKm
+                )
+            }
+            this@NewVehiclePartViewModel.vehicle = vehicle.copy(currentKM = updatedKm)
+
+            withContext(dispatcher) {
+                addVehiclePartUseCase.execute(vehiclePart)
+            }
+            _actionChannel.send(NewVehiclePartUiAction.ShowSuccess)
+        } catch (t: Throwable) {
+            Timber.w(t)
+            _actionChannel.send(NewVehiclePartUiAction.ShowError(t))
+        }
+        _state.value = uiState.copy(isLoading = false)
     }
 
     private fun buildNewVehiclePartValidator(): Validator {
@@ -155,6 +194,7 @@ class NewVehiclePartViewModel @Inject constructor(
         val uiState = _state.value
         _state.value = uiState.copy(isLoading = true)
         try {
+            delay(1500)
             withContext(dispatcher) {
                 addVehiclePartUseCase.execute(vehiclePart)
             }

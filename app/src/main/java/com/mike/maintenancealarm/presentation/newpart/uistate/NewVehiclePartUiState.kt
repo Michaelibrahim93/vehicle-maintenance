@@ -31,7 +31,8 @@ data class NewVehiclePartUiState(
         fun initialState(
             vehicleId: Long,
             vehicle: Vehicle? = null,
-            partToBeRenewed: VehiclePart? = null): NewVehiclePartUiState {
+            partToBeRenewed: VehiclePart? = null
+        ): NewVehiclePartUiState {
             return NewVehiclePartUiState(
                 vehicleId = vehicleId,
                 partToBeRenewed = partToBeRenewed,

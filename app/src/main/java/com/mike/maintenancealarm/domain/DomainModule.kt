@@ -4,6 +4,8 @@ import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCase
 import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCaseImpl
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCaseImpl
+import com.mike.maintenancealarm.domain.usecases.UpdateVehicleUseCase
+import com.mike.maintenancealarm.domain.usecases.UpdateVehicleUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +23,9 @@ abstract class DomainModule {
     abstract fun bindAddVehiclePartUseCase(
         addVehiclePartUseCaseImpl: AddVehiclePartUseCaseImpl
     ): AddVehiclePartUseCase
+
+    @Binds
+    abstract fun bindUpdateVehicleUseCase(
+        updateVehicleUseCase: UpdateVehicleUseCaseImpl
+    ): UpdateVehicleUseCase
 }

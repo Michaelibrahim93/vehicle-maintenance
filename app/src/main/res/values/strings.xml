@@ -8,7 +8,7 @@
     <string name="vehicle_last_km_update">Last update\n%s</string>
     <string name="vehicle_name_exists_error_message">Oops! That vehicle name is already taken. Please try a different one.</string>
     <string name="error">Error</string>
-    <string name="generic_error_message">Something went wrong.\\nPlease, Try again later.</string>
+    <string name="generic_error_message">Something went wrong.\nPlease, Try again later.</string>
     <string name="required_field">Required field</string>
     <string name="invalid_input">Invalid input</string>
     <string name="back">Back</string>
@@ -37,7 +37,7 @@
     <string name="vehicle_part_added_successfully">Vehicle part has been added successfully</string>
     <string name="ok">OK\n</string>
     <string name="attention">Attention</string>
-    <string name="vehicle_part_update_km_message">The deployment KM for this part is higher than the vehicle\'s current KM. Would you like to update the vehicle's KM now?</string>
+    <string name="vehicle_part_update_km_message">The deployment KM for this part is higher than the vehicle\'s current KM. Would you like to update the vehicle\'s KM now?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 </resources>
