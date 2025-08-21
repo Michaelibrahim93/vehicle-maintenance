@@ -10,6 +10,14 @@ sealed class VehicleError : Throwable() {
         val errorName: Int,
         @StringRes
         val messageRes: Int
-    ) : VehicleError()
+    ): VehicleError()
+
+    data class UnknownVehicleError(
+        val throwable: Throwable,
+        @StringRes
+        val errorName: Int,
+        @StringRes
+        val messageRes: Int
+    ): VehicleError()
 }
 

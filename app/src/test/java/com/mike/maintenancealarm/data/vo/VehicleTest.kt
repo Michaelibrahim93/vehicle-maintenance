@@ -3,7 +3,7 @@ package com.mike.maintenancealarm.data.vo
 import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
 import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
 import kotlinx.coroutines.test.runTest
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.Date
 
 class VehicleTest {

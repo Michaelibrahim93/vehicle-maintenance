@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.data.vo
 
 import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.Calendar
 import java.util.Date
 

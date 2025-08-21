@@ -6,4 +6,9 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.dagger.hilt.android) apply false
     alias(libs.plugins.ksp) apply false // KSP plugin
+    kotlin("jvm") version libs.versions.kotlin
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
