@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor() : ViewModel() {
         waitAndNavigate()
     }.stateIn(
         scope = viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
+        started = SharingStarted.WhileSubscribed(5000),
         initialValue = SplashScreenState(isLoading = false)
     )
 

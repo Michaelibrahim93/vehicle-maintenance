@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp) // Apply KSP
     alias(libs.plugins.dagger.hilt.android) // Apply Hilt
+    alias(libs.plugins.junit5)
 }
 
 kotlin {
@@ -66,6 +67,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.core.splashscreen)
 
     // AndroidX Lifecycle
     implementation(libs.lifecycle.viewmodel.ktx)
@@ -92,10 +94,16 @@ dependencies {
     implementation(libs.coil.compose)
 
     // unit tests
-    testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.androidx.espresso.core)
+
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

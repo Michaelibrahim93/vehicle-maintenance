@@ -1,6 +1,7 @@
 package com.mike.maintenancealarm.data.storage.db.models
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.mike.maintenancealarm.data.vo.LifeSpan
 import com.mike.maintenancealarm.data.vo.VehiclePart
@@ -8,11 +9,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-@Entity(tableName = "vehicle_parts")
+@Entity(
+    tableName = "vehicle_parts",
+    indices = [Index(value = ["partName"], unique = true)]
+)
 data class VehiclePartEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = -1,
-    val vehicleId: Long = -1,
+    val id: Long = 0,
+    val vehicleId: Long = 0,
     val partName: String,
     val deploymentDate: String,
     val deploymentKM: Double,

@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-
 #
 # Copyright 2015 the original author or authors.
 #
@@ -21,6 +20,8 @@
 ##  Gradle start up script for UN*X
 ##
 ##############################################################################
+
+chmod +x gradlew
 
 # Attempt to set APP_HOME
 # Resolve links: $0 may be a link

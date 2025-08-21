@@ -1,16 +1,21 @@
 package com.mike.maintenancealarm.data.vo
 
+import com.mike.maintenancealarm.data.serializers.DateSerializer
 import com.mike.maintenancealarm.data.storage.db.models.VehiclePartEntity
+import com.mike.maintenancealarm.utils.extensions.toCalendar
+import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
 typealias VehicleParts = List<VehiclePart>
 
+@Serializable
 data class VehiclePart(
     val id: Long = 0,
     val vehicleId: Long = 0,
     val partName: String,
+    @Serializable(with = DateSerializer::class)
     val deploymentDate: Date,
     val deploymentKM: Double,
     val lifeSpan: LifeSpan,
@@ -43,6 +48,7 @@ data class VehiclePart(
     )
 }
 
+@Serializable
 data class LifeSpan(
     val km: Double,
     val months: Int
@@ -69,9 +75,7 @@ enum class VehiclePartStatus(
             currentVehicleKm: Double
         ): VehiclePartStatus {
             val currentCal = Calendar.getInstance()
-            val deploymentCal = Calendar.getInstance().apply {
-                time = part.deploymentDate
-            }
+            val deploymentCal = part.deploymentDate.toCalendar()
             val expiryCal = Calendar.getInstance().apply {
                 time = part.expiryDate
             }

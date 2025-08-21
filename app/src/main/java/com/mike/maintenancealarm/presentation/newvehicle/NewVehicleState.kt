@@ -43,7 +43,7 @@ data class NewVehicleState(
         )
     }
 
-    fun setValidationErrors(validationResult: Map<String, Int>): NewVehicleState {
+    fun updateValidationErrors(validationResult: Map<String, Int>): NewVehicleState {
         return copy(
             vehicleName = vehicleName.copy(errorStringRes = validationResult[KEY_VEHICLE_NAME]),
             currentKM = currentKM.copy(errorStringRes = validationResult[KEY_CURRENT_KM])

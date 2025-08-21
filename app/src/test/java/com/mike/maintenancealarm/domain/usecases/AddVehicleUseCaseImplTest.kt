@@ -1,62 +1,78 @@
 package com.mike.maintenancealarm.domain.usecases
 
-import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
-import com.mike.maintenancealarm.data.vo.errors.LocalDbErrorKey
+import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.errors.VehicleError
-import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
+import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
-import org.junit.Test
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doThrow
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import kotlin.test.assertFailsWith
-
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 
 class AddVehicleUseCaseImplTest {
-    private lateinit var useCase: AddVehicleUseCaseImpl
-    private lateinit var repository: VehiclesRepository
+    private lateinit var addVehicleUseCaseImpl: AddVehicleUseCaseImpl
+    private lateinit var vehicleRepository: VehiclesRepository
 
-    @Before
-    fun setUp() {
-        repository = mock()
-        useCase = AddVehicleUseCaseImpl(repository)
+    @BeforeEach
+    fun setup() {
+        vehicleRepository = mockk()
+        addVehicleUseCaseImpl = AddVehicleUseCaseImpl(vehicleRepository)
+
     }
 
     @Test
-    fun `execute should call insertVehicle on repository`() = runTest {
-        val testVehicle = TestVehicleFactory.generateVehicle()
-        useCase.execute(testVehicle)
-        verify(repository).insertVehicle(testVehicle)
+    @DisplayName("Test insertVehicle is called")
+    fun testInsertVehicleIsCalled() = runTest {
+        //test install
+        val vehicle = mockk<Vehicle>()
+        coEvery { vehicleRepository.insertVehicle(vehicle) } returns Unit
+        // call use case
+        addVehicleUseCaseImpl.execute(vehicle)
+        // verify
+        coVerify { vehicleRepository.insertVehicle(vehicle) }
     }
 
     @Test
-    fun `execute should throw vehicleNameExistsError on SQLiteConstraintException`() = runTest {
-        val exception = SQLiteConstraintException("UNIQUE constraint failed")
-        val testVehicle = TestVehicleFactory.generateVehicle()
-
-        doThrow(exception).`when`(repository).insertVehicle(any())
-
-        val throwable = assertFailsWith<VehicleError.LocalDbError> {
-            useCase.execute(testVehicle)
+    @DisplayName("Test insertVehicle succeed if insertVehicle is called")
+    fun testInsertVehicleSucceed() = runTest {
+        //test install
+        val vehicle = mockk<Vehicle>()
+        coEvery { vehicleRepository.insertVehicle(vehicle) } returns Unit
+        // call
+        val result = runCatching {
+            addVehicleUseCaseImpl.execute(vehicle)
         }
-
-        assert(throwable.key == LocalDbErrorKey.NAME_EXISTS)
+        // verify
+        assert(result.isSuccess)
     }
 
     @Test
-    fun `execute should throw unknownError on generic exception`() = runTest {
-        val exception = RuntimeException("Something went wrong")
-        val testVehicle = TestVehicleFactory.generateVehicle()
-
-        doThrow(exception).`when`(repository).insertVehicle(any())
-
-        val throwable = assertFailsWith<VehicleError.LocalDbError> {
-            useCase.execute(testVehicle)
+    @DisplayName("Test insertVehicle throws LocalDbError execute throws LocalDbError")
+    fun testInsertVehicleThrowsLocalDbError() = runTest {
+        //test install
+        val vehicle = mockk<Vehicle>()
+        coEvery { vehicleRepository.insertVehicle(vehicle) } throws VehicleErrorFactory
+            .vehicleNameExistsError(Throwable())
+        // verify execute throws LocalDbError
+        val result = runCatching {
+            addVehicleUseCaseImpl.execute(vehicle)
         }
+        assert(result.exceptionOrNull() is VehicleError.LocalDbError)
+    }
 
-        assert(throwable.key == LocalDbErrorKey.UNKNOWN_ERROR)
+    @Test
+    @DisplayName("Test insertVehicle throws Throwable execute throws UnknownError")
+    fun testInsertVehicleThrowsThrowableExecuteThrowsUnknownError() = runTest {
+        //test install
+        val vehicle = mockk<Vehicle>()
+        coEvery { vehicleRepository.insertVehicle(vehicle) } throws RuntimeException("Message")
+        // verify execute throws LocalDbError
+        val result = runCatching {
+            addVehicleUseCaseImpl.execute(vehicle)
+        }
+        assert(result.exceptionOrNull() is VehicleError.UnknownVehicleError)
     }
 }

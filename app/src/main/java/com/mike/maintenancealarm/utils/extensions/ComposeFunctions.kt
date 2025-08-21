@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.utils
+package com.mike.maintenancealarm.utils.extensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

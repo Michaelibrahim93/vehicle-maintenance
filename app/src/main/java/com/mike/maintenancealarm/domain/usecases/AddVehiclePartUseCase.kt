@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.VehiclePart
+import com.mike.maintenancealarm.data.vo.errors.VehicleError
 import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,17 +26,16 @@ class AddVehiclePartUseCaseImpl @Inject constructor(
     ) {
         try {
             val vehicle = vehiclesRepository.loadVehicle(vehiclePart.vehicleId)
-                ?: throw IllegalArgumentException("Vehicle with id ${vehiclePart.vehicleId} not found")
-            // Check if the vehicle exists
-            vehiclePartsRepository.insertVehiclePart(vehiclePart)
+            if (vehiclePart.id > 0)
+                vehiclePartsRepository.updateVehiclePart(vehiclePart)
+            else
+                vehiclePartsRepository.insertVehiclePart(vehiclePart)
             // Update the vehicle with the new part status
-            vehiclesRepository.insertVehicle(
+            vehiclesRepository.updateVehicle(
                 vehicle = vehicle.updateStatus(listOf(vehiclePart))
             )
-        } catch (e: SQLiteConstraintException) {
-            throw VehicleErrorFactory.vehicleNameExistsError(e)
-        } catch (e: IllegalArgumentException) {
-            throw VehicleErrorFactory.vehicleNotFoundError(e)
+        } catch (e: VehicleError.LocalDbError) {
+            throw e
         } catch (t: Throwable) {
             Timber.d(t)
             throw VehicleErrorFactory.unknownError(t)
