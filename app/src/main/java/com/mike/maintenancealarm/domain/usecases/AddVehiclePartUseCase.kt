@@ -34,8 +34,6 @@ class AddVehiclePartUseCaseImpl @Inject constructor(
             vehiclesRepository.updateVehicle(
                 vehicle = vehicle.updateStatus(listOf(vehiclePart))
             )
-        } catch (e: VehicleError.LocalDbError) {
-            throw e
         } catch (t: Throwable) {
             Timber.d(t)
             throw VehicleErrorFactory.unknownError(t)

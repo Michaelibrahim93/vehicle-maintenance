@@ -23,4 +23,7 @@ interface VehicleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateVehicle(vehicle: VehicleEntity)
+
+    @Query("SELECT id FROM vehicles")
+    suspend fun loadAllVehiclesIds(): List<Long>
 }

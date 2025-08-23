@@ -47,14 +47,14 @@ class UpdateVehicleUseCaseImpl @Inject constructor(
         try {
             val vehicle = loadVehicle()
 
-            val vehicleParts = vehiclePartsRepository.loadVehicleParts(vehicle.id!!)
+            val vehicleParts = vehiclePartsRepository.loadVehicleParts(vehicleId)
             val vehicleStatus = vehicle.updateStatus(vehicleParts)
 
             // Update the vehicle's KMs
             vehiclesRepository.updateVehicle(
                 vehicle = vehicle.copy(vehicleStatus = vehicleStatus.vehicleStatus)
             )
-        } catch (e: VehicleError.LocalDbError) {
+        } catch (e: VehicleError) {
             throw e
         } catch (t: Throwable) {
             Timber.d(t)

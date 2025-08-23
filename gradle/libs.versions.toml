@@ -1,6 +1,6 @@
 [versions]
-agp = "8.9.3"
-kotlin = "2.2.0"
+agp = "8.12.1"
+kotlin = "2.2.10"
 coreKtx = "1.16.0"
 espressoCore = "3.7.0"
 room_version = "2.7.2"
@@ -96,7 +96,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "2.2.0-2.0.2" }
+ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
 dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
 

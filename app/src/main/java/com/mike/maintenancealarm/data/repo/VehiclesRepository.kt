@@ -16,6 +16,8 @@ interface VehiclesRepository {
     suspend fun insertVehicle(vehicle: Vehicle)
     suspend fun updateVehicle(vehicle: Vehicle)
     suspend fun loadVehicle(id: Long): Vehicle
+
+    suspend fun loadAllVehiclesIds(): List<Long>
 }
 
 class VehiclesRepositoryImpl @Inject constructor(
@@ -58,5 +60,9 @@ class VehiclesRepositoryImpl @Inject constructor(
         } catch (t: Throwable) {
             throw VehicleErrorFactory.unknownError(t)
         }
+    }
+
+    override suspend fun loadAllVehiclesIds(): List<Long> {
+        return vehicleDao.loadAllVehiclesIds()
     }
 }

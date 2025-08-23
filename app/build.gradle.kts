@@ -21,12 +21,12 @@ kotlin {
 
 android {
     namespace = "com.mike.maintenancealarm"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.mike.maintenancealarm"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
