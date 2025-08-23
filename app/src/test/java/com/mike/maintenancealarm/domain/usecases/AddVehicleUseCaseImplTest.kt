@@ -2,8 +2,6 @@ package com.mike.maintenancealarm.domain.usecases
 
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.errors.VehicleError
-import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -26,53 +24,26 @@ class AddVehicleUseCaseImplTest {
     @Test
     @DisplayName("Test insertVehicle is called")
     fun testInsertVehicleIsCalled() = runTest {
-        //test install
+        // Given
         val vehicle = mockk<Vehicle>()
         coEvery { vehicleRepository.insertVehicle(vehicle) } returns Unit
-        // call use case
+        // When
         addVehicleUseCaseImpl.execute(vehicle)
-        // verify
+        // Then
         coVerify { vehicleRepository.insertVehicle(vehicle) }
     }
 
     @Test
     @DisplayName("Test insertVehicle succeed if insertVehicle is called")
     fun testInsertVehicleSucceed() = runTest {
-        //test install
+        // Given
         val vehicle = mockk<Vehicle>()
         coEvery { vehicleRepository.insertVehicle(vehicle) } returns Unit
-        // call
+        // When
         val result = runCatching {
             addVehicleUseCaseImpl.execute(vehicle)
         }
-        // verify
+        // Then
         assert(result.isSuccess)
-    }
-
-    @Test
-    @DisplayName("Test insertVehicle throws LocalDbError execute throws LocalDbError")
-    fun testInsertVehicleThrowsLocalDbError() = runTest {
-        //test install
-        val vehicle = mockk<Vehicle>()
-        coEvery { vehicleRepository.insertVehicle(vehicle) } throws VehicleErrorFactory
-            .vehicleNameExistsError(Throwable())
-        // verify execute throws LocalDbError
-        val result = runCatching {
-            addVehicleUseCaseImpl.execute(vehicle)
-        }
-        assert(result.exceptionOrNull() is VehicleError.LocalDbError)
-    }
-
-    @Test
-    @DisplayName("Test insertVehicle throws Throwable execute throws UnknownError")
-    fun testInsertVehicleThrowsThrowableExecuteThrowsUnknownError() = runTest {
-        //test install
-        val vehicle = mockk<Vehicle>()
-        coEvery { vehicleRepository.insertVehicle(vehicle) } throws RuntimeException("Message")
-        // verify execute throws LocalDbError
-        val result = runCatching {
-            addVehicleUseCaseImpl.execute(vehicle)
-        }
-        assert(result.exceptionOrNull() is VehicleError.UnknownVehicleError)
     }
 }

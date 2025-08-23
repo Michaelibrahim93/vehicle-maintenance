@@ -5,6 +5,7 @@ import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.errors.VehicleError
 import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
@@ -23,10 +24,9 @@ class AddVehicleUseCaseImpl @Inject constructor(
     ) {
         try {
             vehicleRepository.insertVehicle(vehicle)
-        } catch (e: VehicleError.LocalDbError) {
-            throw e
         } catch (t: Throwable) {
-            throw VehicleErrorFactory.unknownError(t)
+            Timber.e(t)
+            throw t
         }
     }
 }

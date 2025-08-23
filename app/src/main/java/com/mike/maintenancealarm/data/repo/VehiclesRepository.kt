@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
 import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.Vehicles
+import com.mike.maintenancealarm.data.vo.errors.VehicleError
 import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -33,17 +34,29 @@ class VehiclesRepositoryImpl @Inject constructor(
             vehicleDao.insertVehicle(vehicle.toEntity())
         } catch (e: SQLiteConstraintException) {
             throw VehicleErrorFactory.vehicleNameExistsError(e)
+        } catch (t: Throwable) {
+            throw VehicleErrorFactory.unknownError(t)
         }
     }
 
     override suspend fun updateVehicle(vehicle: Vehicle) {
-        vehicleDao.updateVehicle(vehicle.toEntity())
+        try {
+            vehicleDao.updateVehicle(vehicle.toEntity())
+        } catch (t: Throwable) {
+            throw VehicleErrorFactory.unknownError(t)
+        }
     }
 
     override suspend fun loadVehicle(id: Long): Vehicle {
-        return vehicleDao.loadVehicleById(id)?.toVehicle() ?:
+        try {
+            return vehicleDao.loadVehicleById(id)?.toVehicle() ?:
             throw VehicleErrorFactory.vehicleNotFoundError(
                 throwable = IllegalArgumentException("Vehicle with id $id not found")
             )
+        } catch (t: VehicleError.LocalDbError) {
+            throw t
+        } catch (t: Throwable) {
+            throw VehicleErrorFactory.unknownError(t)
+        }
     }
 }
