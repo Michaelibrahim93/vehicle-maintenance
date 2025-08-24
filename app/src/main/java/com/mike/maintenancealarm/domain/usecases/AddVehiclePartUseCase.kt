@@ -36,7 +36,7 @@ class AddVehiclePartUseCaseImpl @Inject constructor(
             )
         } catch (t: Throwable) {
             Timber.d(t)
-            throw VehicleErrorFactory.unknownError(t)
+            throw t
         }
     }
 }

@@ -54,11 +54,9 @@ class UpdateVehicleUseCaseImpl @Inject constructor(
             vehiclesRepository.updateVehicle(
                 vehicle = vehicle.copy(vehicleStatus = vehicleStatus.vehicleStatus)
             )
-        } catch (e: VehicleError) {
-            throw e
         } catch (t: Throwable) {
             Timber.d(t)
-            throw VehicleErrorFactory.unknownError(t)
+            throw t
         }
     }
 }
