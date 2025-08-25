@@ -40,7 +40,7 @@ class UpdateVehicleUseCaseImpl @Inject constructor(
         )
     }
 
-    private suspend fun updateVehicleStatus(
+    private suspend inline fun updateVehicleStatus(
         vehicleId: Long,
         loadVehicle: suspend () -> Vehicle
     ) {

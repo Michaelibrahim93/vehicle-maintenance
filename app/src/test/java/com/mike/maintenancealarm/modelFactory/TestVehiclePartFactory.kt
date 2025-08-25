@@ -26,4 +26,30 @@ object TestVehiclePartFactory {
             price = price
         )
     }
+
+    fun generateVehicleParts(
+        count: Int,
+        deploymentKMList: List<Double>,
+        vehicleId: Long = 1L,
+        basePartName: String = "Test Part",
+        deploymentDate: Date = Date(),
+        lifeSpan: LifeSpan = LifeSpan(km = 5000.0, months = 6),
+        supplier: String? = "Test Supplier",
+        price: Double? = 100.0
+    ): List<VehiclePart> {
+        val vehicleParts = mutableListOf<VehiclePart>()
+        for (i in 1..count) {
+            val vehiclePart = generateVehiclePart(
+                vehicleId = vehicleId,
+                partName = "$basePartName $i",
+                deploymentDate = deploymentDate,
+                deploymentKM = deploymentKMList[i - 1],
+                lifeSpan = lifeSpan,
+                supplier = supplier,
+                price = price
+            )
+            vehicleParts.add(vehiclePart)
+        }
+        return vehicleParts
+    }
 }
