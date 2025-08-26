@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.mike.maintenancealarm.domain
 
 import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCase

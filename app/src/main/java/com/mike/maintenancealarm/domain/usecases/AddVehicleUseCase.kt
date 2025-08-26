@@ -1,10 +1,8 @@
 package com.mike.maintenancealarm.domain.usecases
 
-import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
 import com.mike.maintenancealarm.data.vo.errors.VehicleError
-import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.jvm.Throws

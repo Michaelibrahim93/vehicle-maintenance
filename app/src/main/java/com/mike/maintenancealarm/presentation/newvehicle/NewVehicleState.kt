@@ -6,9 +6,9 @@ import com.mike.maintenancealarm.data.vo.VehicleStatus
 import java.util.Date
 
 data class NewVehicleState(
-    val vehicleName: ValidationInput<String> = ValidationInput<String>(""),
+    val vehicleName: ValidationInput<String> = ValidationInput(""),
     val vehicleImage: String? = null,
-    val currentKM: ValidationInput<String> = ValidationInput<String>(""),
+    val currentKM: ValidationInput<String> = ValidationInput(""),
     val isLoading: Boolean = false,
 ) {
     fun setLoading(isLoading: Boolean): NewVehicleState {

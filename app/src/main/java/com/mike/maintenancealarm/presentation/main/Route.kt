@@ -1,6 +1,5 @@
 package com.mike.maintenancealarm.presentation.main
 
-import com.mike.maintenancealarm.data.vo.VehiclePart
 import kotlinx.serialization.Serializable
 
 sealed class Route {

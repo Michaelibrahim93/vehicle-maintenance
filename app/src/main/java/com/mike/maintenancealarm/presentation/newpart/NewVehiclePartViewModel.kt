@@ -132,7 +132,7 @@ class NewVehiclePartViewModel @Inject constructor(
         val updatedKm = uiState.deploymentKm.input.toDouble()
         val vehiclePart = uiState.toVehiclePart()
 
-        _state.value = uiState.copy(isLoading = true)
+        _state.value = uiState.updateLoading(true)
         try {
             delay(1500)
             withContext(dispatcher) {
@@ -151,7 +151,7 @@ class NewVehiclePartViewModel @Inject constructor(
             Timber.w(t)
             _actionChannel.send(NewVehiclePartUiAction.ShowError(t))
         }
-        _state.value = uiState.copy(isLoading = false)
+        _state.value = uiState.updateLoading(true)
     }
 
     private fun buildNewVehiclePartValidator(): Validator {

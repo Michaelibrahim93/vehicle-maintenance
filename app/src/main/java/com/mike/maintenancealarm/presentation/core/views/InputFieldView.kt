@@ -40,6 +40,7 @@ fun InputFieldView(
                     Text(text = supportingText, color = MaterialTheme.colorScheme.error)
                 }
             },
+            maxLines = maxLines,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions
         )

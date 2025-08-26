@@ -104,7 +104,7 @@ fun SplashScreenPreview() {
             navController = NavController(context = LocalContext.current),
             modifier = Modifier.fillMaxSize(),
             stateFlow = MutableStateFlow(SplashScreenState(isLoading = true)),
-            actionsFlow = MutableSharedFlow<SplashUiAction>()
+            actionsFlow = MutableSharedFlow()
         )
     }
 }

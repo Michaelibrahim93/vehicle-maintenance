@@ -3,8 +3,6 @@ package com.mike.maintenancealarm.domain.usecases
 import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.errors.VehicleError
-import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
 import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject

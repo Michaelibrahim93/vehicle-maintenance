@@ -7,13 +7,13 @@ import java.util.Date
 
 data class NewVehiclePartUiState(
     val isLoading: Boolean = false,
-    val partName: ValidationInput<String> = ValidationInput<String>(""),
-    val deploymentDate: ValidationInput<Date?> = ValidationInput<Date?>(null),
-    val deploymentKm: ValidationInput<String> = ValidationInput<String>(""),
-    val lifeSpanInMonths: ValidationInput<String> = ValidationInput<String>(""),
-    val lifeSpanInKm: ValidationInput<String> = ValidationInput<String>(""),
-    val supplier: ValidationInput<String> = ValidationInput<String>(""),
-    val price: ValidationInput<String> = ValidationInput<String>(""),
+    val partName: ValidationInput<String> = ValidationInput(""),
+    val deploymentDate: ValidationInput<Date?> = ValidationInput(null),
+    val deploymentKm: ValidationInput<String> = ValidationInput(""),
+    val lifeSpanInMonths: ValidationInput<String> = ValidationInput(""),
+    val lifeSpanInKm: ValidationInput<String> = ValidationInput(""),
+    val supplier: ValidationInput<String> = ValidationInput(""),
+    val price: ValidationInput<String> = ValidationInput(""),
     val vehicleId: Long = 0L,
     val partToBeRenewed: VehiclePart? = null
 ) {
@@ -40,7 +40,7 @@ data class NewVehiclePartUiState(
                 partName = ValidationInput(partToBeRenewed?.partName ?: ""),
                 lifeSpanInMonths = ValidationInput(partToBeRenewed?.lifeSpan?.months?.toString() ?: ""),
                 lifeSpanInKm = ValidationInput(partToBeRenewed?.lifeSpan?.km?.toString() ?: ""),
-                supplier = ValidationInput(partToBeRenewed?.supplier?.toString() ?: ""),
+                supplier = ValidationInput(partToBeRenewed?.supplier ?: ""),
                 price = ValidationInput(partToBeRenewed?.price?.toString() ?: ""),
             )
         }

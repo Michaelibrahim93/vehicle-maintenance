@@ -8,7 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.compareTo
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
