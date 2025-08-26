@@ -23,12 +23,15 @@ import com.mike.maintenancealarm.data.vo.Vehicle
 import kotlinx.coroutines.flow.Flow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.firebase.Firebase
+import com.google.firebase.crashlytics.crashlytics
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.flow.MutableStateFlow
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -75,7 +78,11 @@ fun VehicleListScreen(
             TopAppBar(
                 title = { Text(R.string.my_vehicles.stringRes()) },
                 actions = {
-                    IconButton (onClick = { onEvent(VehicleListEvent.AddNewVehicle) }) {
+                    IconButton (onClick = {
+                        Timber.d("Firebase.crashlytics.isCrashlyticsCollectionEnabled: ${Firebase.crashlytics.isCrashlyticsCollectionEnabled}")
+
+                        onEvent(VehicleListEvent.AddNewVehicle)
+                    }) {
                         Icon(Icons.Default.AddCircle, contentDescription = "Add Vehicle")
                     }
                 }

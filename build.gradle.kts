@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.dagger.hilt.android) apply false
     alias(libs.plugins.ksp) apply false // KSP plugin
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.crashlytics) apply false
     kotlin("jvm") version libs.versions.kotlin
 }
 

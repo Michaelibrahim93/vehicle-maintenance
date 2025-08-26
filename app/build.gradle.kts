@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.ksp) // Apply KSP
     alias(libs.plugins.dagger.hilt.android) // Apply Hilt
     alias(libs.plugins.junit5)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.crashlytics)
 }
 
 kotlin {
@@ -32,10 +34,27 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        create("debugKeystore") {
+            storeFile = file("../key/debug-key.jks")
+            keyAlias = "android-alias"
+            keyPassword = "pass1234"
+            storePassword = "pass1234"
+        }
+    }
 
     buildTypes {
-        release {
+        debug {
+            signingConfig = signingConfigs.getByName("debugKeystore")
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        release {
+            signingConfig = signingConfigs.getByName("debugKeystore")
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -93,6 +112,11 @@ dependencies {
     //Compose Image Loader
     implementation(libs.coil.compose)
 
+    //firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics.ndk)
+    implementation(libs.firebase.analytics)
+
     // unit tests
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.jupiter.engine)
@@ -103,7 +127,6 @@ dependencies {
 
     testImplementation(libs.androidx.junit)
     testImplementation(libs.androidx.espresso.core)
-
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
