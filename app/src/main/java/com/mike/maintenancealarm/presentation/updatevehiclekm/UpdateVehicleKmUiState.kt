@@ -12,6 +12,15 @@ data class UpdateVehicleKmUiState(
         inputKm = inputKm.copy(input = km)
     )
 
+    fun toValidationMap() = mapOf(
+        KEY_INPUT_KM to inputKm.input
+    )
+
+    fun setValidationErrors(validationErrors: Map<String, Int>) = copy(
+        inputKm = inputKm.copy(errorStringRes = validationErrors[KEY_INPUT_KM])
+    )
+
+
     companion object {
         const val KEY_INPUT_KM = "inputKm"
     }

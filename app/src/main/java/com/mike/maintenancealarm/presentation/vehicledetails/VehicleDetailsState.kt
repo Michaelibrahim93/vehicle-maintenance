@@ -6,8 +6,10 @@ import com.mike.maintenancealarm.data.vo.VehiclePartStatus
 import com.mike.maintenancealarm.data.vo.VehicleParts
 
 data class VehicleDetailsState(
+    val vehicleId: Long = 0,
     val vehicle: Vehicle? = null,
-    val vehicleParts: VehicleParts? = null
+    val vehicleParts: VehicleParts? = null,
+    val showUpdateKmDialog: Boolean = false
 ) {
     val displayList: List<DetailsItem>
         get() = if (vehicle == null || vehicleParts == null)

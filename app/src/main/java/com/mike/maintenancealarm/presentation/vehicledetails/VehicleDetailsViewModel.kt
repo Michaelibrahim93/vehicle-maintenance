@@ -8,6 +8,7 @@ import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.presentation.main.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -21,14 +22,19 @@ class VehicleDetailsViewModel @Inject constructor(
     partsRepository: VehiclePartsRepository,
     savedStateHandle: SavedStateHandle,
     ) : ViewModel() {
-
     val vehicleId = savedStateHandle.toRoute<Route.VehicleDetails>().vehicleId
     private val vehicleFlow = vehicleRepository.listenToVehicleById(vehicleId)
     private val partsFlow = partsRepository.listenToVehicleParts(vehicleId)
-    val fVehicleDetailsState: StateFlow<VehicleDetailsState> = combine(vehicleFlow, partsFlow) { vehicle, parts ->
+
+    private val sfShowUpdateDialog = MutableStateFlow(false)
+    val fVehicleDetailsState: StateFlow<VehicleDetailsState> = combine(
+        vehicleFlow, partsFlow, sfShowUpdateDialog
+    ) { vehicle, parts, showUpdateDialog ->
         VehicleDetailsState(
+            vehicleId = vehicleId,
             vehicle = vehicle,
-            vehicleParts = parts
+            vehicleParts = parts,
+            showUpdateKmDialog = showUpdateDialog && vehicle != null
         )
     }.stateIn(
         scope = viewModelScope,
@@ -37,6 +43,13 @@ class VehicleDetailsViewModel @Inject constructor(
     )
 
     fun onEvent(event: VehicleDetailsEvents) {
-        Timber.d("onEvent: $event")
+        Timber.d("event: $event")
+        when(event) {
+            is VehicleDetailsEvents.UpdateVehicleKm ->
+                sfShowUpdateDialog.value = true
+            VehicleDetailsEvents.DismissUpdateKmDialog ->
+                sfShowUpdateDialog.value = false
+            else -> {}
+        }
     }
 }
