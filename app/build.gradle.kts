@@ -30,7 +30,7 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.03"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,6 +41,20 @@ android {
             keyPassword = "pass1234"
             storePassword = "pass1234"
         }
+    }
+
+    applicationVariants.all {
+        outputs.filterIsInstance<com.android.build.gradle.internal.api.BaseVariantOutputImpl>()
+            .forEach { output ->
+                val variant = output
+                val buildTypeName = variant.baseName
+                val versionName = versionName
+                val versionCode = versionCode
+                val extension = variant.outputFile.extension
+
+                val newName = "app-${buildTypeName}-v${versionName}(${versionCode}).$extension"
+                output.outputFileName = newName
+            }
     }
 
     buildTypes {
