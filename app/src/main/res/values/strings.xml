@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MaintenanceAlarm</string>
     <string name="my_vehicles">My Vehicle</string>
-    <string name="vehicle_km">KM: %s</string>
+    <string name="vehicle_km_x">KM: %s</string>
     <string name="vehicle_status_ok">All parts are in good condition</string>
     <string name="vehicle_status_near_expiration">Some parts are nearing replacement</string>
     <string name="vehicle_status_expired">Some parts need immediate replacement</string>
@@ -17,6 +17,7 @@
     <string name="save">Save</string>
     <string name="vehicle_total_km">Total Kilometers/Miles Driven</string>
     <string name="vehicle_added_successfully">Vehicle has been added successfully.</string>
+    <string name="vehicle_km_updated_successfully">Vehicle KM has been updated successfully.</string>
     <string name="saving">Saving…</string>
     <string name="vehicle_details_title">Vehicle Details</string>
     <string name="supplier_x">Supplier: %s</string>
@@ -40,4 +41,5 @@
     <string name="vehicle_part_update_km_message">The deployment KM for this part is higher than the vehicle\'s current KM. Would you like to update the vehicle\'s KM now?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="vehicle_km_title">Vehicle KM</string>
 </resources>

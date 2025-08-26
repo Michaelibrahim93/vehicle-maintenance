@@ -80,7 +80,7 @@ fun ItemVehicle(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.vehicle_km, vehicle.currentKM.roundToInt().toString()),
+                text = stringResource(R.string.vehicle_km_x, vehicle.currentKM.roundToInt().toString()),
                 style = MaterialTheme.typography.bodyLarge,
             )
             IconButton(onClick = {

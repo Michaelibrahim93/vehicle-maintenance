@@ -100,7 +100,7 @@ fun CardContent(
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = stringResource(R.string.vehicle_km, vehicle.currentKM.roundToInt().toString()),
+                text = stringResource(R.string.vehicle_km_x, vehicle.currentKM.roundToInt().toString()),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(top = SPACING_SMALL)
             )

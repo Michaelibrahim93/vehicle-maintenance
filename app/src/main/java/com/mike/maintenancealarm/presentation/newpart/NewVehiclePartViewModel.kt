@@ -55,6 +55,7 @@ class NewVehiclePartViewModel @Inject constructor(
         partToBeRenewed = null // can be changed in intialization if partId is provided
     ))
     val state: StateFlow<NewVehiclePartUiState> = _state.onStart {
+        Timber.d("state: started")
         updatePrefilledFields(
             route.vehicleId,
             route.vehiclePartId

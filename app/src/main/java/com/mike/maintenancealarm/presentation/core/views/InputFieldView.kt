@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 @Composable
 fun InputFieldView(
     modifier: Modifier,
-    value: String = "",
     onValueChange: (String) -> Unit,
+    value: String = "",
     label: String = "",
     singleLine: Boolean = true,
     maxLines: Int = 1,
@@ -34,6 +34,7 @@ fun InputFieldView(
             singleLine = singleLine,
             isError = isError,
             readOnly = readOnly,
+            maxLines = maxLines,
             supportingText = {
                 if (!supportingText.isNullOrEmpty()) {
                     Text(text = supportingText, color = MaterialTheme.colorScheme.error)

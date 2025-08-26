@@ -51,7 +51,7 @@ import com.mike.maintenancealarm.presentation.theme.SPACING_EXTRA_LARGE
 import com.mike.maintenancealarm.presentation.theme.SPACING_EXTRA_LARGE_PLUS
 import com.mike.maintenancealarm.presentation.theme.SPACING_LARGE_PLUS
 import com.mike.maintenancealarm.presentation.theme.SPACING_SMALL
-import com.mike.maintenancealarm.utils.compose.ObserveEvent
+import com.mike.maintenancealarm.utils.compose.ObserveUiAction
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -87,7 +87,7 @@ fun NewVehicleScreen(
 ) {
     val state: NewVehicleState = fState.collectAsStateWithLifecycle(initialValue = NewVehicleState()).value
     val context = LocalContext.current
-    ObserveEvent(actionFlow) {
+    ObserveUiAction(actionFlow) {
         handleViewModelActions(
             uiAction = it,
             navController = navController,
@@ -225,7 +225,7 @@ fun NewVehicleContent(
     }
 }
 
-fun handleViewModelActions(
+private fun handleViewModelActions(
     uiAction: NewVehicleUiAction,
     navController: NavController,
     context: Context
@@ -250,7 +250,7 @@ fun NewVehicleScreenPreview() {
     MaintenanceAlarmTheme {
         NewVehicleScreen(
             navController = NavController(context = LocalContext.current),
-            actionFlow = MutableSharedFlow<NewVehicleUiAction>(),
+            actionFlow = MutableSharedFlow(),
             fState = MutableStateFlow(NewVehicleState()),
             onEvent = {}
         )

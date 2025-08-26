@@ -78,7 +78,7 @@ fun VehicleDetailsScreenContent(
     fVehicleDetailsState: Flow<VehicleDetailsState>,
     onEvent: (VehicleDetailsEvents) -> Unit
 ) {
-    var state = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
+    val state = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
     val dateFormat = remember { SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault()) }
 
     LazyColumn(
