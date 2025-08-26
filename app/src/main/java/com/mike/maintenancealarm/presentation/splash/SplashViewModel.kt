@@ -30,7 +30,7 @@ class SplashViewModel @Inject constructor(
     private val _actionChannel = Channel<SplashUiAction>()
     val actionFlow: Flow<SplashUiAction> = _actionChannel.receiveAsFlow()
 
-    private val delayFlow = flow<Boolean> {
+    private val delayFlow = flow {
         delay(3000)
         emit(true)
     }

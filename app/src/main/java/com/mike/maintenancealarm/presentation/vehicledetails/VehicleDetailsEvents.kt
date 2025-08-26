@@ -8,4 +8,5 @@ sealed class VehicleDetailsEvents {
     object AddNewPart : VehicleDetailsEvents()
     data class RenewPart(val part: VehiclePart) : VehicleDetailsEvents()
     data class UpdateVehicleKm(val vehicle: Vehicle) : VehicleDetailsEvents()
+    object DismissUpdateKmDialog : VehicleDetailsEvents()
 }
