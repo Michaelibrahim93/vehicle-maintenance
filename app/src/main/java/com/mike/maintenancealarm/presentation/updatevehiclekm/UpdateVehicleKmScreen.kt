@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -91,8 +92,7 @@ fun UpdateVehicleKmScreenContent(
     uiState: Flow<UpdateVehicleKmUiState>,
     onEvent: (UpdateVehicleKmEvent) -> Unit
 ) {
-    val state: UpdateVehicleKmUiState =
-        uiState.collectAsStateWithLifecycle(initialValue = UpdateVehicleKmUiState()).value
+    val state: UpdateVehicleKmUiState by uiState.collectAsStateWithLifecycle(initialValue = UpdateVehicleKmUiState())
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally

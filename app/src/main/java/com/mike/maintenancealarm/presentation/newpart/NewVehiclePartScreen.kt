@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -74,7 +75,7 @@ fun NewVehiclePartScreen(
     onUiAction: Flow<NewVehiclePartUiAction>,
     onEvent: (NewVehiclePartEvent) -> Unit,
 ) {
-    val uiState = uiStateFlow.collectAsStateWithLifecycle(initialValue = NewVehiclePartUiState())
+    val uiState by uiStateFlow.collectAsStateWithLifecycle(initialValue = NewVehiclePartUiState())
     val context = LocalContext.current
     ObserveUiAction(
         flow = onUiAction
@@ -90,12 +91,12 @@ fun NewVehiclePartScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { NewVehiclePartTopBar(
-            isEditMode = uiState.value.isEditing,
+            isEditMode = uiState.isEditing,
             onBackClick = { onEvent(NewVehiclePartEvent.OnBackClick) }
         ) }
     ) { contentPadding ->
         NewVehiclePartContent(
-            uiState = uiState.value,
+            uiState = uiState,
             contentPadding = contentPadding,
             onEvent = onEvent
         )

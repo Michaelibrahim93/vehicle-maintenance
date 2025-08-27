@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -85,7 +86,7 @@ fun NewVehicleScreen(
     fState: Flow<NewVehicleState>,
     onEvent: (NewVehicleEvent) -> Unit
 ) {
-    val state: NewVehicleState = fState.collectAsStateWithLifecycle(initialValue = NewVehicleState()).value
+    val state: NewVehicleState by fState.collectAsStateWithLifecycle(initialValue = NewVehicleState())
     val context = LocalContext.current
     ObserveUiAction(actionFlow) {
         handleViewModelActions(

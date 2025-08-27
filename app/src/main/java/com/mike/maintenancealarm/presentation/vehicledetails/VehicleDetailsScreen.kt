@@ -17,10 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,7 +62,7 @@ fun VehicleDetailsScreen(
     fVehicleDetailsState: Flow<VehicleDetailsState>,
     onEvent: (VehicleDetailsEvents) -> Unit
 ) {
-    val uiState = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
+    val uiState by fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { VehicleDetailsTopBar(onEvent) }
@@ -75,8 +72,8 @@ fun VehicleDetailsScreen(
             fVehicleDetailsState = fVehicleDetailsState,
             onEvent = onEvent
         )
-        if (uiState.value.showUpdateKmDialog) {
-            UpdateVehicleKmScreenComposable(uiState.value.vehicle?.id!!) {
+        if (uiState.showUpdateKmDialog) {
+            UpdateVehicleKmScreenComposable(uiState.vehicle?.id!!) {
                 onEvent(VehicleDetailsEvents.DismissUpdateKmDialog)
             }
         }
