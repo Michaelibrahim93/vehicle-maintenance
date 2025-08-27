@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,6 +24,7 @@ import com.mike.maintenancealarm.data.vo.Vehicle
 import kotlinx.coroutines.flow.Flow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.google.firebase.Firebase
 import com.google.firebase.crashlytics.crashlytics
 import com.mike.maintenancealarm.R
@@ -30,6 +32,7 @@ import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.utils.stringRes
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -44,11 +47,43 @@ fun VehicleListComposable(
     val dateFormat = remember {
         SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault())
     }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(viewModel.channelFlow, lifecycleOwner.lifecycle) {
+        viewModel.channelFlow.collect {
+            Timber.tag("Test_Flows").d("before channel: $it")
+            delay(1000)
+            Timber.tag("Test_Flows").d("channel: $it")
+        }
+    }
+
+    LaunchedEffect(viewModel.normalFlow, lifecycleOwner.lifecycle) {
+        viewModel.normalFlow.collect {
+            Timber.tag("Test_Flows").d("before normalFlow: $it")
+            delay(1000)
+            Timber.tag("Test_Flows").d("normalFlow: $it")
+        }
+    }
+
+    LaunchedEffect(viewModel.sharedFlow, lifecycleOwner.lifecycle) {
+        viewModel.sharedFlow.collect {
+            Timber.tag("Test_Flows").d("before sharedFlow: $it")
+            delay(1000)
+            Timber.tag("Test_Flows").d("sharedFlow: $it")
+        }
+    }
+
+    LaunchedEffect(viewModel.stateFlow, lifecycleOwner.lifecycle) {
+        viewModel.stateFlow.collect {
+            Timber.tag("Test_Flows").d("stateFlow: $it")
+        }
+    }
+
     VehicleListScreen(
         fState = viewModel.state,
         dateFormat = dateFormat,
         onEvent = { vehicleListEvent ->
             when (vehicleListEvent) {
+
                 is VehicleListEvent.NavigateToVehicleDetails -> {
                     navController.navigate(Route.VehicleDetails(
                         vehicleId = vehicleListEvent.vehicle.id ?: 0

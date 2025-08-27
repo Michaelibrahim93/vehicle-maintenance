@@ -61,6 +61,7 @@ android {
         debug {
             signingConfig = signingConfigs.getByName("debugKeystore")
             isMinifyEnabled = false
+            isDebuggable = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
