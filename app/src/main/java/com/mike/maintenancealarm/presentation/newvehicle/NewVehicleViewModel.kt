@@ -62,7 +62,6 @@ class NewVehicleViewModel @Inject constructor(
                 _actionChannel.send(NewVehicleUiAction.ShowSuccess)
             } catch (t: Throwable) {
                 _actionChannel.send(NewVehicleUiAction.ShowError(t))
-                return@launch
             }
             _state.value = state.setLoading(false)
         }
