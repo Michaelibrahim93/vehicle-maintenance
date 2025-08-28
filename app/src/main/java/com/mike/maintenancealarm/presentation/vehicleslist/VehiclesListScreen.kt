@@ -34,6 +34,7 @@ import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -67,8 +68,8 @@ fun VehicleListComposable(
     LaunchedEffect(viewModel.sharedFlow, lifecycleOwner.lifecycle) {
         viewModel.sharedFlow.collect {
             Timber.tag("Test_Flows").d("before sharedFlow: $it")
-            delay(1000)
-            Timber.tag("Test_Flows").d("sharedFlow: $it")
+//            delay(1000)
+//            Timber.tag("Test_Flows").d("sharedFlow: $it")
         }
     }
 
