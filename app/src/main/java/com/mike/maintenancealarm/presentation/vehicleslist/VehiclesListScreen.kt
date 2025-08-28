@@ -1,5 +1,6 @@
 package com.mike.maintenancealarm.presentation.vehicleslist
 
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -23,6 +25,7 @@ import androidx.navigation.NavController
 import com.mike.maintenancealarm.data.vo.Vehicle
 import kotlinx.coroutines.flow.Flow
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.google.firebase.Firebase
@@ -30,6 +33,7 @@ import com.google.firebase.crashlytics.crashlytics
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.data.vo.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
+import com.mike.maintenancealarm.presentation.main.Main2Activity
 import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.delay
@@ -49,6 +53,11 @@ fun VehicleListComposable(
         SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault())
     }
     val lifecycleOwner = LocalLifecycleOwner.current
+
+    LaunchedEffect(Unit) {
+        viewModel.printUserId()
+    }
+
     LaunchedEffect(viewModel.channelFlow, lifecycleOwner.lifecycle) {
         viewModel.channelFlow.collect {
             Timber.tag("Test_Flows").d("before channel: $it")
@@ -79,6 +88,13 @@ fun VehicleListComposable(
         }
     }
 
+    DisposableEffect(viewModel.stateFlow, lifecycleOwner.lifecycle) {
+        onDispose {
+            Timber.tag("Test_Flows").d("onDispose viewModel.stateFlow lifecycleOwner.lifecycle")
+        }
+    }
+
+    val context = LocalContext.current
     VehicleListScreen(
         fState = viewModel.state,
         dateFormat = dateFormat,
@@ -91,9 +107,7 @@ fun VehicleListComposable(
                     ))
                 }
                 is VehicleListEvent.AddNewVehicle -> {
-                    navController.navigate(
-                        route = Route.NewVehicle
-                    )
+                    context.startActivity(Intent(context, Main2Activity::class.java))
                 }
             }
         }

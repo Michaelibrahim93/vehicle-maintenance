@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
 import com.mike.maintenancealarm.data.vo.Vehicles
+import com.mike.maintenancealarm.domain.UserManager
 import com.mike.maintenancealarm.presentation.newvehicle.NewVehicleUiAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -35,7 +36,12 @@ import javax.inject.Inject
 @HiltViewModel
 class VehicleListViewModel @Inject constructor(
     vehiclesRepository: VehiclesRepository,
+    private val userManager: UserManager
 ) : ViewModel() {
+
+    fun printUserId() {
+        userManager.logUserId()
+    }
 
     val myScope = CoroutineScope(Job() + Dispatchers.Main.immediate)
     private val sfVehicles: StateFlow<Vehicles> = vehiclesRepository.listenToAllVehicles()
