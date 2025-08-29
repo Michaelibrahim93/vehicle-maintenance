@@ -11,10 +11,10 @@ class Main2VM @Inject constructor(
     private val userManager: UserManager
 ): ViewModel(){
     fun updateUserId() {
-        userManager.setUserId(1)
+        userManager.setUserId(2)
     }
 
     fun print() {
-        Timber.tag("Test_ActivityComponent").d("print: ${userManager.logUserId()}")
+        userManager.logUserId("Main2VM")
     }
 }

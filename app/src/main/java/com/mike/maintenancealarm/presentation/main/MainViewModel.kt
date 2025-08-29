@@ -12,10 +12,10 @@ class MainViewModel @Inject constructor(
 ): ViewModel() {
 
     fun updateUserId() {
-        userManager.setUserId(2)
+        userManager.setUserId(1)
     }
 
     fun print() {
-        Timber.tag("Test_ActivityComponent").d("print: ${userManager.logUserId()}")
+        userManager.logUserId("MainViewModel")
     }
 }

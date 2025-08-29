@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 
 import androidx.compose.ui.Alignment
@@ -40,6 +41,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -63,6 +65,10 @@ fun NewVehicleComposable(
     navController: NavController,
     viewModel: NewVehicleViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(LocalLifecycleOwner.current.lifecycle) {
+        viewModel.print()
+    }
+
     NewVehicleScreen(
         navController = navController,
         actionFlow = viewModel.actionFlow,

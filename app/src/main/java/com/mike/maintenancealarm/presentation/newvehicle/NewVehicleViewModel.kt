@@ -3,6 +3,7 @@ package com.mike.maintenancealarm.presentation.newvehicle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mike.maintenancealarm.R
+import com.mike.maintenancealarm.domain.UserManager
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
 import com.mike.maintenancealarm.utils.IoDispatcher
 import com.mike.maintenancealarm.utils.validator.Validator
@@ -24,7 +25,8 @@ import javax.inject.Inject
 class NewVehicleViewModel @Inject constructor(
     private val addVehicleUseCase: AddVehicleUseCase,
     @IoDispatcher
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher,
+    private val userManager: UserManager
 ) : ViewModel() {
     private val _state = MutableStateFlow(NewVehicleState())
     val state: StateFlow<NewVehicleState> = _state
@@ -33,6 +35,10 @@ class NewVehicleViewModel @Inject constructor(
     val actionFlow: Flow<NewVehicleUiAction> = _actionChannel.receiveAsFlow()
 
     private val validator = buildNewVehicleValidator()
+
+    fun print() {
+        userManager.logUserId("NewVehicleViewModel")
+    }
 
     fun onEvent(event: NewVehicleEvent) {
         when (event) {

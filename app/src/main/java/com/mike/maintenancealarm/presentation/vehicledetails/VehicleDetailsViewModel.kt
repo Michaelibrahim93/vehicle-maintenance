@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
 import com.mike.maintenancealarm.data.repo.VehiclesRepository
+import com.mike.maintenancealarm.domain.UserManager
 import com.mike.maintenancealarm.presentation.main.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +22,7 @@ class VehicleDetailsViewModel @Inject constructor(
     vehicleRepository: VehiclesRepository,
     partsRepository: VehiclePartsRepository,
     savedStateHandle: SavedStateHandle,
+    private val userManager: UserManager
     ) : ViewModel() {
     val vehicleId = savedStateHandle.toRoute<Route.VehicleDetails>().vehicleId
     private val vehicleFlow = vehicleRepository.listenToVehicleById(vehicleId)
@@ -41,6 +43,11 @@ class VehicleDetailsViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = VehicleDetailsState()
     )
+
+
+    init {
+        userManager.logUserId("VehicleDetailsViewModel")
+    }
 
     fun onEvent(event: VehicleDetailsEvents) {
         Timber.d("event: $event")

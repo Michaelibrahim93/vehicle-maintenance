@@ -40,7 +40,7 @@ class VehicleListViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun printUserId() {
-        userManager.logUserId()
+        userManager.logUserId("VehicleListViewModel")
     }
 
     val myScope = CoroutineScope(Job() + Dispatchers.Main.immediate)
