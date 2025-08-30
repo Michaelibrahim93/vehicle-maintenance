@@ -46,7 +46,8 @@ fun VehicleDetailsScreenComposable(
         onEvent = { event ->
             Timber.tag("VehicleDetailsScreen").d("event: $event")
             when(event) {
-                is VehicleDetailsEvents.OnBackClick -> navController.popBackStack()
+                is VehicleDetailsEvents.OnBackClick ->
+                    navController.popBackStack()
                 VehicleDetailsEvents.AddNewPart ->
                     navController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, null))
                 is VehicleDetailsEvents.RenewPart ->

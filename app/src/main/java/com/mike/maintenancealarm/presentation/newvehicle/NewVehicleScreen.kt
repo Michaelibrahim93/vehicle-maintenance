@@ -22,7 +22,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,6 +44,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.presentation.core.error.handleUiError
+import com.mike.maintenancealarm.presentation.core.views.InputFieldView
 import com.mike.maintenancealarm.presentation.theme.BIG_BUTTON_HEIGHT
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACE_SCREEN_H
@@ -159,10 +159,10 @@ fun NewVehicleContent(
                 }
         )
 
-        TextField(
+        InputFieldView(
             value = state.vehicleName.input,
             onValueChange = { onEvent(NewVehicleEvent.OnVehicleNameChange(it)) },
-            label = { Text(text = stringResource(id = R.string.vehicle_name_hint)) },
+            label = stringResource(id = R.string.vehicle_name_hint),
             modifier = Modifier.fillMaxWidth().padding(
                 top = SPACING_EXTRA_LARGE_PLUS,
                 start = SPACE_SCREEN_H,
@@ -170,22 +170,17 @@ fun NewVehicleContent(
             ),
             singleLine = true,
             isError = !state.vehicleName.isValid(),
-            supportingText = {
-                val text = state.vehicleName.errorMessage(LocalContext.current)
-                if (!text.isNullOrEmpty()) {
-                    Text(text = text, color = MaterialTheme.colorScheme.error)
-                }
-            },
+            supportingText = state.vehicleName.errorMessage(LocalContext.current),
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             )
         )
 
-        TextField(
+        InputFieldView(
             value = state.currentKM.input,
             onValueChange = { onEvent(NewVehicleEvent.OnVehicleKmChange(it)) },
-            label = { Text(text = stringResource(id = R.string.vehicle_total_km)) },
+            label = stringResource(id = R.string.vehicle_total_km),
             modifier = Modifier.fillMaxWidth().padding(
                 start = SPACE_SCREEN_H,
                 end = SPACE_SCREEN_H,
@@ -193,12 +188,7 @@ fun NewVehicleContent(
             ),
             singleLine = true,
             isError = !state.currentKM.isValid(),
-            supportingText = {
-                val text = state.currentKM.errorMessage(LocalContext.current)
-                if (!text.isNullOrEmpty()) {
-                    Text(text = text, color = MaterialTheme.colorScheme.error)
-                }
-            },
+            supportingText = state.currentKM.errorMessage(LocalContext.current),
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
