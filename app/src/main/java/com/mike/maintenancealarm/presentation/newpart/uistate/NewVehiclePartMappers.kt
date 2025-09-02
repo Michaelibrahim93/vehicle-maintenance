@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.presentation.newpart.uistate
 
-import com.mike.maintenancealarm.data.vo.LifeSpan
-import com.mike.maintenancealarm.data.vo.VehiclePart
+import com.mike.maintenancealarm.domain.vo.LifeSpan
+import com.mike.maintenancealarm.domain.vo.VehiclePart
 import java.util.Date
 
 fun NewVehiclePartUiState.toVehiclePart(): VehiclePart {

@@ -3,7 +3,7 @@ package com.mike.maintenancealarm.presentation.updatevehiclekm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mike.maintenancealarm.R
-import com.mike.maintenancealarm.data.repo.VehiclesRepository
+import com.mike.maintenancealarm.domain.repos.VehiclesRepository
 import com.mike.maintenancealarm.domain.usecases.UpdateVehicleUseCase
 import com.mike.maintenancealarm.utils.IoDispatcher
 import com.mike.maintenancealarm.utils.validator.Validator

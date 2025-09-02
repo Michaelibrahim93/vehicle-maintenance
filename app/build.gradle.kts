@@ -57,6 +57,12 @@ android {
             }
     }
 
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+
     buildTypes {
         debug {
             signingConfig = signingConfigs.getByName("debugKeystore")
@@ -146,7 +152,11 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    debugImplementation(libs.leakcanary.android)
 
+    testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
 }

@@ -1,9 +1,9 @@
 package com.mike.maintenancealarm.presentation.vehicledetails
 
-import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.VehiclePart
-import com.mike.maintenancealarm.data.vo.VehiclePartStatus
-import com.mike.maintenancealarm.data.vo.VehicleParts
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.VehiclePart
+import com.mike.maintenancealarm.domain.vo.VehiclePartStatus
+import com.mike.maintenancealarm.domain.vo.VehicleParts
 
 data class VehicleDetailsState(
     val vehicleId: Long = 0,

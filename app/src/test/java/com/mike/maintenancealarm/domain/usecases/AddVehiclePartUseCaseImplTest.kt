@@ -1,9 +1,9 @@
 package com.mike.maintenancealarm.domain.usecases
 
-import com.mike.maintenancealarm.data.repo.VehiclePartsRepository
-import com.mike.maintenancealarm.data.repo.VehiclesRepository
-import com.mike.maintenancealarm.data.vo.errors.VehicleError
-import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
+import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
+import com.mike.maintenancealarm.domain.repos.VehiclesRepository
+import com.mike.maintenancealarm.domain.vo.errors.VehicleError
+import com.mike.maintenancealarm.domain.vo.errors.VehicleErrorFactory
 import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
 import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
 import io.mockk.coEvery

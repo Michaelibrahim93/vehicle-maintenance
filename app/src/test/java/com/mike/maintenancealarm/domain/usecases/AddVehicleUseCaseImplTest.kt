@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.domain.usecases
 
-import com.mike.maintenancealarm.data.repo.VehiclesRepository
-import com.mike.maintenancealarm.data.vo.Vehicle
+import com.mike.maintenancealarm.domain.repos.VehiclesRepository
+import com.mike.maintenancealarm.domain.vo.Vehicle
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

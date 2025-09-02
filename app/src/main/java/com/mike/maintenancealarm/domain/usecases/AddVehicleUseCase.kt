@@ -1,8 +1,8 @@
 package com.mike.maintenancealarm.domain.usecases
 
-import com.mike.maintenancealarm.data.repo.VehiclesRepository
-import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.errors.VehicleError
+import com.mike.maintenancealarm.domain.repos.VehiclesRepository
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.errors.VehicleError
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.jvm.Throws

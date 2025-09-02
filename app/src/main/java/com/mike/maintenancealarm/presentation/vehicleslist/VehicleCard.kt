@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.mike.maintenancealarm.R
-import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.VehicleStatus
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.core.partStatusColor
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme

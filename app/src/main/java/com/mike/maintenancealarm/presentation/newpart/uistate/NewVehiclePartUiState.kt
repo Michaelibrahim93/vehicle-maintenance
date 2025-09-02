@@ -1,8 +1,8 @@
 package com.mike.maintenancealarm.presentation.newpart.uistate
 
-import com.mike.maintenancealarm.data.vo.ValidationInput
-import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.VehiclePart
+import com.mike.maintenancealarm.domain.vo.ValidationInput
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.VehiclePart
 import java.util.Date
 
 data class NewVehiclePartUiState(

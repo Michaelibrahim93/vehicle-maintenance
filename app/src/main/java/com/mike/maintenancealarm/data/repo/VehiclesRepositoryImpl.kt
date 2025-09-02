@@ -2,23 +2,14 @@ package com.mike.maintenancealarm.data.repo
 
 import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
-import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.Vehicles
-import com.mike.maintenancealarm.data.vo.errors.VehicleError
-import com.mike.maintenancealarm.data.vo.errors.VehicleErrorFactory
+import com.mike.maintenancealarm.domain.repos.VehiclesRepository
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.Vehicles
+import com.mike.maintenancealarm.domain.vo.errors.VehicleError
+import com.mike.maintenancealarm.domain.vo.errors.VehicleErrorFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-
-interface VehiclesRepository {
-    fun listenToAllVehicles(): Flow<Vehicles>
-    fun listenToVehicleById(id: Long): Flow<Vehicle?>
-    suspend fun insertVehicle(vehicle: Vehicle)
-    suspend fun updateVehicle(vehicle: Vehicle)
-    suspend fun loadVehicle(id: Long): Vehicle
-
-    suspend fun loadAllVehiclesIds(): List<Long>
-}
 
 class VehiclesRepositoryImpl @Inject constructor(
     private val vehicleDao: VehicleDao

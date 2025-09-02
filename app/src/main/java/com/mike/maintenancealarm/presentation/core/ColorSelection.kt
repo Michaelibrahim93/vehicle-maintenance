@@ -3,8 +3,8 @@ package com.mike.maintenancealarm.presentation.core
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.mike.maintenancealarm.data.vo.VehiclePartStatus
-import com.mike.maintenancealarm.data.vo.VehicleStatus
+import com.mike.maintenancealarm.domain.vo.VehiclePartStatus
+import com.mike.maintenancealarm.domain.vo.VehicleStatus
 import com.mike.maintenancealarm.presentation.theme.*
 
 @Composable

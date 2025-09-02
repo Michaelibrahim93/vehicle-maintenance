@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.data.vo
+package com.mike.maintenancealarm.domain.vo
 
 import android.content.Context
 import androidx.annotation.StringRes

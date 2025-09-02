@@ -1,0 +1,15 @@
+package com.mike.maintenancealarm.domain.repos
+
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.Vehicles
+import kotlinx.coroutines.flow.Flow
+
+interface VehiclesRepository {
+    fun listenToAllVehicles(): Flow<Vehicles>
+    fun listenToVehicleById(id: Long): Flow<Vehicle?>
+    suspend fun insertVehicle(vehicle: Vehicle)
+    suspend fun updateVehicle(vehicle: Vehicle)
+    suspend fun loadVehicle(id: Long): Vehicle
+
+    suspend fun loadAllVehiclesIds(): List<Long>
+}

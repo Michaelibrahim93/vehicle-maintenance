@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.presentation.vehicledetails
 
-import com.mike.maintenancealarm.data.vo.Vehicle
-import com.mike.maintenancealarm.data.vo.VehiclePart
+import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.vo.VehiclePart
 
 sealed class VehicleDetailsEvents {
     object OnBackClick : VehicleDetailsEvents()

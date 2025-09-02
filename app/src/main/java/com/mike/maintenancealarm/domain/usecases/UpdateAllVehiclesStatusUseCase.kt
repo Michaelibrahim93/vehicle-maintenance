@@ -1,6 +1,6 @@
 package com.mike.maintenancealarm.domain.usecases
 
-import com.mike.maintenancealarm.data.repo.VehiclesRepository
+import com.mike.maintenancealarm.domain.repos.VehiclesRepository
 import timber.log.Timber
 import javax.inject.Inject
 

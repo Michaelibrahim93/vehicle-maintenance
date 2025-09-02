@@ -21,9 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mike.maintenancealarm.R
-import com.mike.maintenancealarm.data.vo.LifeSpan
-import com.mike.maintenancealarm.data.vo.VehiclePart
-import com.mike.maintenancealarm.data.vo.VehiclePartStatus
+import com.mike.maintenancealarm.domain.vo.LifeSpan
+import com.mike.maintenancealarm.domain.vo.VehiclePart
+import com.mike.maintenancealarm.domain.vo.VehiclePartStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.core.partStatusColor
 import com.mike.maintenancealarm.presentation.core.views.Separator

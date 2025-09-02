@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.data.vo
+package com.mike.maintenancealarm.domain.vo
 
 import com.mike.maintenancealarm.data.serializers.DateSerializer
 import com.mike.maintenancealarm.data.storage.db.models.VehiclePartEntity

@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.data.vo.errors
+package com.mike.maintenancealarm.domain.vo.errors
 
 import com.mike.maintenancealarm.R
 
