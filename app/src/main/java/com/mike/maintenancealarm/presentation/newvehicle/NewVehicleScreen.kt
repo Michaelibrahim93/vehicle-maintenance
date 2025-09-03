@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 
 import androidx.compose.ui.Alignment
@@ -52,6 +53,7 @@ import com.mike.maintenancealarm.presentation.theme.SPACING_EXTRA_LARGE
 import com.mike.maintenancealarm.presentation.theme.SPACING_EXTRA_LARGE_PLUS
 import com.mike.maintenancealarm.presentation.theme.SPACING_LARGE_PLUS
 import com.mike.maintenancealarm.presentation.theme.SPACING_SMALL
+import com.mike.maintenancealarm.utils.compose.LogCurrentScreen
 import com.mike.maintenancealarm.utils.compose.ObserveUiAction
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -88,6 +90,9 @@ fun NewVehicleScreen(
 ) {
     val state: NewVehicleState by fState.collectAsStateWithLifecycle(initialValue = NewVehicleState())
     val context = LocalContext.current
+
+    LogCurrentScreen("NewVehicleScreen")
+
     ObserveUiAction(actionFlow) {
         handleViewModelActions(
             uiAction = it,
@@ -96,6 +101,13 @@ fun NewVehicleScreen(
         )
     }
 
+
+    DisposableEffect(Unit) {
+        Timber.tag("NewVehicleScreen").d("DisposableEffect")
+        onDispose {
+            Timber.tag("NewVehicleScreen").d("onDispose")
+        }
+    }
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = { NewVehicleTopBar(

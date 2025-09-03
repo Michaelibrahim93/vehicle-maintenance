@@ -28,6 +28,7 @@ import com.mike.maintenancealarm.presentation.core.views.InputFieldView
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACING_LARGE
 import com.mike.maintenancealarm.presentation.theme.SPACING_LARGE_PLUS
+import com.mike.maintenancealarm.utils.compose.LogCurrentScreen
 import com.mike.maintenancealarm.utils.compose.ObserveUiAction
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.flow.Flow
@@ -68,6 +69,9 @@ fun UpdateVehicleKmScreen(
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val context = LocalContext.current
+
+    LogCurrentScreen("UpdateVehicleKmScreen")
+
     ObserveUiAction(actionFlow) {
         handleViewModelActions(
             context = context,

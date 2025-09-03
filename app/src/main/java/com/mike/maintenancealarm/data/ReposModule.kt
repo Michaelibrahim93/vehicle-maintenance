@@ -1,9 +1,9 @@
 package com.mike.maintenancealarm.data
 
 import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
-import com.mike.maintenancealarm.data.repo.VehiclePartsRepositoryImpl
+import com.mike.maintenancealarm.data.repos.VehiclePartsRepositoryImpl
 import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.data.repo.VehiclesRepositoryImpl
+import com.mike.maintenancealarm.data.repos.VehiclesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

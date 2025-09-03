@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.data.repo
+package com.mike.maintenancealarm.data.repos
 
 import com.mike.maintenancealarm.data.storage.db.dao.VehiclePartDao
 import com.mike.maintenancealarm.data.storage.db.models.VehiclePartEntity

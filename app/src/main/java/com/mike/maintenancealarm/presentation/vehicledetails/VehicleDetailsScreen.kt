@@ -30,6 +30,7 @@ import com.mike.maintenancealarm.presentation.updatevehiclekm.UpdateVehicleKmScr
 import com.mike.maintenancealarm.presentation.vehicledetails.items.ItemEmptyParts
 import com.mike.maintenancealarm.presentation.vehicledetails.items.ItemVehicle
 import com.mike.maintenancealarm.presentation.vehicledetails.items.ItemVehiclePart
+import com.mike.maintenancealarm.utils.compose.LogCurrentScreen
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -64,6 +65,9 @@ fun VehicleDetailsScreen(
     onEvent: (VehicleDetailsEvents) -> Unit
 ) {
     val uiState by fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
+
+    LogCurrentScreen("VehicleDetailsScreen")
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { VehicleDetailsTopBar(onEvent) }

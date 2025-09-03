@@ -45,6 +45,7 @@ import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACE_SCREEN_H
 import com.mike.maintenancealarm.presentation.theme.SPACING_LARGE_PLUS
 import com.mike.maintenancealarm.presentation.theme.SPACING_SMALL
+import com.mike.maintenancealarm.utils.compose.LogCurrentScreen
 import com.mike.maintenancealarm.utils.compose.ObserveUiAction
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -77,6 +78,9 @@ fun NewVehiclePartScreen(
 ) {
     val uiState by uiStateFlow.collectAsStateWithLifecycle(initialValue = NewVehiclePartUiState())
     val context = LocalContext.current
+
+    LogCurrentScreen("NewVehiclePartScreen")
+
     ObserveUiAction(
         flow = onUiAction
     ) {

@@ -6,6 +6,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.firebase.Firebase
+import com.google.firebase.crashlytics.crashlytics
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,5 +29,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         splashScreen.setKeepOnScreenCondition { false }
+
+        Firebase.crashlytics.setCustomKey("user_id", "test_user")
     }
 }

@@ -29,6 +29,7 @@ import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.domain.models.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.main.Route
+import com.mike.maintenancealarm.utils.compose.LogCurrentScreen
 import com.mike.maintenancealarm.utils.stringRes
 import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
@@ -72,6 +73,8 @@ fun VehicleListScreen(
     onEvent: (VehicleListEvent) -> Unit
 ) {
     val state: VehicleListState by fState.collectAsStateWithLifecycle(initialValue = VehicleListState())
+
+    LogCurrentScreen("VehicleListScreen")
 
     Scaffold(
         topBar = {

@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mike.maintenancealarm.presentation.main.Route
+import com.mike.maintenancealarm.utils.compose.LogCurrentScreen
 import com.mike.maintenancealarm.utils.compose.ObserveUiAction
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
@@ -55,6 +56,8 @@ fun SplashScreen(
     actionsFlow: Flow<SplashUiAction>
 ) {
     val state: SplashScreenState by stateFlow.collectAsStateWithLifecycle()
+
+    LogCurrentScreen("NewVehicleScreen")
 
     ObserveUiAction(actionsFlow) {
         handleViewModelActions(
