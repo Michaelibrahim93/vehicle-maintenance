@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.modelFactory
 
-import com.mike.maintenancealarm.domain.vo.LifeSpan
-import com.mike.maintenancealarm.domain.vo.VehiclePart
+import com.mike.maintenancealarm.domain.models.LifeSpan
+import com.mike.maintenancealarm.domain.models.VehiclePart
 import java.util.Date
 
 object TestVehiclePartFactory {

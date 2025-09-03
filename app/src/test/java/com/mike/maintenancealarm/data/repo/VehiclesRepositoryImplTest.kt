@@ -2,8 +2,8 @@ package com.mike.maintenancealarm.data.repo
 
 import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
-import com.mike.maintenancealarm.domain.vo.errors.LocalDbErrorKey
-import com.mike.maintenancealarm.domain.vo.errors.VehicleError
+import com.mike.maintenancealarm.domain.models.errors.LocalDbErrorKey
+import com.mike.maintenancealarm.domain.models.errors.VehicleError
 import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
 import io.mockk.coEvery
 import io.mockk.coVerify

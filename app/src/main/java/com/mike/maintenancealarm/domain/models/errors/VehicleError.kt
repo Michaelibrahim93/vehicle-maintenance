@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.domain.vo.errors
+package com.mike.maintenancealarm.domain.models.errors
 
 import androidx.annotation.StringRes
 

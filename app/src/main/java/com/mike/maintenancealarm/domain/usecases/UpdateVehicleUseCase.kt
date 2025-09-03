@@ -2,7 +2,7 @@ package com.mike.maintenancealarm.domain.usecases
 
 import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
 import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.models.Vehicle
 import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject

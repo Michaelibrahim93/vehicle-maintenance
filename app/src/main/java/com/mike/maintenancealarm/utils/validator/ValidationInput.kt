@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.domain.vo
+package com.mike.maintenancealarm.utils.validator
 
 import android.content.Context
 import androidx.annotation.StringRes

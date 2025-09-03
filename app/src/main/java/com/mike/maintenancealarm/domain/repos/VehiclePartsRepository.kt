@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.domain.repos
 
-import com.mike.maintenancealarm.domain.vo.VehiclePart
-import com.mike.maintenancealarm.domain.vo.VehicleParts
+import com.mike.maintenancealarm.domain.models.VehiclePart
+import com.mike.maintenancealarm.domain.models.VehicleParts
 import kotlinx.coroutines.flow.Flow
 
 interface VehiclePartsRepository {

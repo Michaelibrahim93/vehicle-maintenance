@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.domain.vo
+package com.mike.maintenancealarm.domain.models
 
 import com.mike.maintenancealarm.data.storage.db.models.VehicleEntity
 import java.util.Date

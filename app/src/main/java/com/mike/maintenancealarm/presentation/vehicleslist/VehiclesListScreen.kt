@@ -19,14 +19,14 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.models.Vehicle
 import kotlinx.coroutines.flow.Flow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.Firebase
 import com.google.firebase.crashlytics.crashlytics
 import com.mike.maintenancealarm.R
-import com.mike.maintenancealarm.domain.vo.VehicleStatus
+import com.mike.maintenancealarm.domain.models.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.utils.stringRes

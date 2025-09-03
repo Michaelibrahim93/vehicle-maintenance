@@ -2,7 +2,7 @@ package com.mike.maintenancealarm.domain.usecases
 
 import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
 import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.domain.vo.Vehicle
+import com.mike.maintenancealarm.domain.models.Vehicle
 import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
 import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
 import io.mockk.coEvery

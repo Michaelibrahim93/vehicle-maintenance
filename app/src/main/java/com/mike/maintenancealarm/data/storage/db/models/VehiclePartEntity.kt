@@ -3,8 +3,8 @@ package com.mike.maintenancealarm.data.storage.db.models
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.mike.maintenancealarm.domain.vo.LifeSpan
-import com.mike.maintenancealarm.domain.vo.VehiclePart
+import com.mike.maintenancealarm.domain.models.LifeSpan
+import com.mike.maintenancealarm.domain.models.VehiclePart
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.data.vo
 
-import com.mike.maintenancealarm.domain.vo.LifeSpan
-import com.mike.maintenancealarm.domain.vo.VehicleStatus
+import com.mike.maintenancealarm.domain.models.LifeSpan
+import com.mike.maintenancealarm.domain.models.VehicleStatus
 import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
 import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
 import kotlinx.coroutines.test.runTest

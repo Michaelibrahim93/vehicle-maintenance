@@ -3,9 +3,9 @@ package com.mike.maintenancealarm.data.repo
 import com.mike.maintenancealarm.data.storage.db.dao.VehiclePartDao
 import com.mike.maintenancealarm.data.storage.db.models.VehiclePartEntity
 import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
-import com.mike.maintenancealarm.domain.vo.VehiclePart
-import com.mike.maintenancealarm.domain.vo.VehicleParts
-import com.mike.maintenancealarm.domain.vo.errors.VehicleErrorFactory
+import com.mike.maintenancealarm.domain.models.VehiclePart
+import com.mike.maintenancealarm.domain.models.VehicleParts
+import com.mike.maintenancealarm.domain.models.errors.VehicleErrorFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber

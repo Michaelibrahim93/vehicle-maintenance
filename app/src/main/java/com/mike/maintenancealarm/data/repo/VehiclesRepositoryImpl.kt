@@ -3,10 +3,10 @@ package com.mike.maintenancealarm.data.repo
 import android.database.sqlite.SQLiteConstraintException
 import com.mike.maintenancealarm.data.storage.db.dao.VehicleDao
 import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.domain.vo.Vehicle
-import com.mike.maintenancealarm.domain.vo.Vehicles
-import com.mike.maintenancealarm.domain.vo.errors.VehicleError
-import com.mike.maintenancealarm.domain.vo.errors.VehicleErrorFactory
+import com.mike.maintenancealarm.domain.models.Vehicle
+import com.mike.maintenancealarm.domain.models.Vehicles
+import com.mike.maintenancealarm.domain.models.errors.VehicleError
+import com.mike.maintenancealarm.domain.models.errors.VehicleErrorFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

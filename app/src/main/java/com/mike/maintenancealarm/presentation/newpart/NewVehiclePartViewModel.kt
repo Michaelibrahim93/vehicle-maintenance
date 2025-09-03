@@ -7,8 +7,8 @@ import androidx.navigation.toRoute
 import com.mike.maintenancealarm.R
 import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
 import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.domain.vo.Vehicle
-import com.mike.maintenancealarm.domain.vo.VehiclePart
+import com.mike.maintenancealarm.domain.models.Vehicle
+import com.mike.maintenancealarm.domain.models.VehiclePart
 import com.mike.maintenancealarm.domain.usecases.AddVehiclePartUseCase
 import com.mike.maintenancealarm.domain.usecases.UpdateVehicleUseCase
 import com.mike.maintenancealarm.presentation.main.Route

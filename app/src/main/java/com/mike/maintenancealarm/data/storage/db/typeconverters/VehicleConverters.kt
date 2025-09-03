@@ -1,8 +1,8 @@
 package com.mike.maintenancealarm.data.storage.db.typeconverters
 
 import androidx.room.TypeConverter
-import com.mike.maintenancealarm.domain.vo.LifeSpan
-import com.mike.maintenancealarm.domain.vo.VehicleStatus
+import com.mike.maintenancealarm.domain.models.LifeSpan
+import com.mike.maintenancealarm.domain.models.VehicleStatus
 import java.util.Date
 
 class VehicleConverters {
