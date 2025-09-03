@@ -51,10 +51,8 @@ class VehicleDetailsViewModel @Inject constructor(
     fun onEvent(event: VehicleDetailsEvents) {
         Timber.d("event: $event")
         when(event) {
-            is VehicleDetailsEvents.UpdateVehicleKm -> {
-                throw Exception("test breadcrumbs")
+            is VehicleDetailsEvents.UpdateVehicleKm ->
                 sfShowUpdateDialog.value = true
-            }
             VehicleDetailsEvents.DismissUpdateKmDialog ->
                 sfShowUpdateDialog.value = false
             else -> {}
