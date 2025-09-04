@@ -33,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 import com.mike.maintenancealarm.presentation.core.error.handleUiError
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartEvent
 import com.mike.maintenancealarm.presentation.newpart.events.NewVehiclePartUiAction

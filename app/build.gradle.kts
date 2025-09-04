@@ -97,7 +97,10 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core:resources"))
+    implementation(project(":core:domain"))
+    //modules
+    //android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 import com.mike.maintenancealarm.domain.repos.VehiclePartsRepository
 import com.mike.maintenancealarm.domain.repos.VehiclesRepository
 import com.mike.maintenancealarm.domain.models.Vehicle

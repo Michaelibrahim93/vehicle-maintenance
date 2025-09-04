@@ -26,13 +26,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -43,7 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 import com.mike.maintenancealarm.presentation.core.error.handleUiError
 import com.mike.maintenancealarm.presentation.core.views.InputFieldView
 import com.mike.maintenancealarm.presentation.theme.BIG_BUTTON_HEIGHT
@@ -163,7 +162,7 @@ fun NewVehicleContent(
                 .width(100.dp)
                 .height(100.dp)
                 .clip(CircleShape)
-                .border(2.dp, colorResource(R.color.image_foreground), CircleShape)
+                .border(2.dp, Color.Black, CircleShape)
                 .padding(6.dp)
                 .align(Alignment.CenterHorizontally)
                 .clickable{

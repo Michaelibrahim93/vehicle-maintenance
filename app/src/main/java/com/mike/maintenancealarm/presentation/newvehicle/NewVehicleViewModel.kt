@@ -2,7 +2,7 @@ package com.mike.maintenancealarm.presentation.newvehicle
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
 import com.mike.maintenancealarm.utils.IoDispatcher
 import com.mike.maintenancealarm.utils.validator.Validator

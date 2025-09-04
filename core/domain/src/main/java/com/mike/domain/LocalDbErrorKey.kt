@@ -1,4 +1,4 @@
-package com.mike.maintenancealarm.domain.models.errors
+package com.mike.domain
 
 enum class LocalDbErrorKey {
     NAME_EXISTS,

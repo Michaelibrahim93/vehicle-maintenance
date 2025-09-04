@@ -2,8 +2,8 @@ package com.mike.maintenancealarm.presentation.core.error
 
 import android.app.AlertDialog
 import android.content.Context
-import com.mike.maintenancealarm.R
-import com.mike.maintenancealarm.domain.models.errors.VehicleError
+import com.mike.resources.R
+import com.mike.domain.VehicleError
 
 fun handleUiError(
     context: Context,

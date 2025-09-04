@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.mike.maintenancealarm.R
+
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.main.Route
 import com.mike.maintenancealarm.presentation.updatevehiclekm.UpdateVehicleKmScreenComposable
@@ -35,6 +35,7 @@ import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Locale
+import com.mike.resources.R
 
 @SuppressLint("ContextCastToActivity")
 @Composable

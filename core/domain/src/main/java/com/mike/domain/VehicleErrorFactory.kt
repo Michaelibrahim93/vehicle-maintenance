@@ -1,6 +1,6 @@
-package com.mike.maintenancealarm.domain.models.errors
+package com.mike.domain
 
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 
 object VehicleErrorFactory {
     fun vehicleNameExistsError(throwable: Throwable): VehicleError.LocalDbError {

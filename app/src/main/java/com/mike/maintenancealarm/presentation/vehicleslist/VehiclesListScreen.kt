@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.Firebase
 import com.google.firebase.crashlytics.crashlytics
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 import com.mike.maintenancealarm.domain.models.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.main.Route

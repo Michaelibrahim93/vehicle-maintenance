@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mike.maintenancealarm.R
+import com.mike.resources.R
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACING_EXTRA_LARGE
 import com.mike.maintenancealarm.presentation.theme.SPACING_MEDIUM_PLUS
