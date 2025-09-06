@@ -1,9 +1,10 @@
 package com.mike.vehicles.data.repos
 
 import android.database.sqlite.SQLiteConstraintException
-import com.mike.data.vo.errors.LocalDbErrorKey
-import com.mike.data.vo.errors.VehicleError
+import com.mike.core.domain.models.LocalDbErrorKey
+import com.mike.core.domain.models.VehicleError
 import com.mike.vehicles.data.storage.db.dao.VehicleDao
+import com.mike.vehicles.data.storage.db.models.toEntity
 import com.mike.vehicles.testutils.TestVehicleFactory
 import io.mockk.coEvery
 import io.mockk.coVerify

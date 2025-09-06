@@ -1,8 +1,8 @@
 package com.mike.vehicles.data.vo
 
-import com.mike.maintenancealarm.domain.models.LifeSpan
-import com.mike.maintenancealarm.domain.models.VehiclePartStatus
-import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
+import com.mike.domian.vehicles.models.LifeSpan
+import com.mike.domian.vehicles.models.VehiclePartStatus
+import com.mike.vehicles.testutils.TestVehiclePartFactory
 import org.junit.jupiter.api.Test
 import java.util.Calendar
 import java.util.Date

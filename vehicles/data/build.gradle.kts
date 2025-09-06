@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp) // Apply KSP
     alias(libs.plugins.dagger.hilt.android) // Apply Hilt
+    alias(libs.plugins.junit5)
 }
 
 android {

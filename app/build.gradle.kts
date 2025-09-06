@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -11,14 +8,6 @@ plugins {
     alias(libs.plugins.junit5)
     alias(libs.plugins.google.services)
     alias(libs.plugins.crashlytics)
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_18)
-        freeCompilerArgs.add("-Xannotation-default-target=param-property")
-        freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
-    }
 }
 
 android {

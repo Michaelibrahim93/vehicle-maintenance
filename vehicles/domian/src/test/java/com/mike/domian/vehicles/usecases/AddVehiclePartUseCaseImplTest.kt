@@ -2,10 +2,10 @@ package com.mike.domian.vehicles.usecases
 
 import com.mike.core.domain.models.VehicleError
 import com.mike.core.domain.models.VehicleErrorFactory
-import com.mike.domian.vehicles.modelfactory.TestVehicleFactory
-import com.mike.domian.vehicles.modelfactory.TestVehiclePartFactory
 import com.mike.domian.vehicles.repos.VehiclePartsRepository
 import com.mike.domian.vehicles.repos.VehiclesRepository
+import com.mike.vehicles.testutils.TestVehicleFactory
+import com.mike.vehicles.testutils.TestVehiclePartFactory
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

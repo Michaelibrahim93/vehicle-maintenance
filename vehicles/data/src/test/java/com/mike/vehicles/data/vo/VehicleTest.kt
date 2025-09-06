@@ -1,9 +1,9 @@
 package com.mike.vehicles.data.vo
 
-import com.mike.maintenancealarm.domain.models.LifeSpan
-import com.mike.maintenancealarm.domain.models.VehicleStatus
-import com.mike.maintenancealarm.modelFactory.TestVehicleFactory
-import com.mike.maintenancealarm.modelFactory.TestVehiclePartFactory
+import com.mike.domian.vehicles.models.LifeSpan
+import com.mike.domian.vehicles.models.VehicleStatus
+import com.mike.vehicles.testutils.TestVehicleFactory
+import com.mike.vehicles.testutils.TestVehiclePartFactory
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import java.util.Date
