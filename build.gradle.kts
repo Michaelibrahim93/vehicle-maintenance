@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.crashlytics) apply false
     kotlin("jvm") version libs.versions.kotlin
+    alias(libs.plugins.android.library) apply false
 }
 
 tasks.test {

@@ -1,0 +1,29 @@
+package com.mike.vehicles.data.storage.db.dao
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.mike.vehicles.data.storage.db.models.VehicleEntity
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface VehicleDao {
+    @Query("SELECT * FROM vehicles")
+    fun listenToAllVehicles(): Flow<List<VehicleEntity>>
+
+    @Query("SELECT * FROM vehicles WHERE id = :id")
+    fun listenToVehicleById(id: Long): Flow<VehicleEntity?>
+
+    @Query("SELECT * FROM vehicles WHERE id = :id")
+    suspend fun loadVehicleById(id: Long): VehicleEntity?
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertVehicle(vehicle: VehicleEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateVehicle(vehicle: VehicleEntity)
+
+    @Query("SELECT id FROM vehicles")
+    suspend fun loadAllVehiclesIds(): List<Long>
+}

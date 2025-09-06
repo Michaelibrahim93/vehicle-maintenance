@@ -1,0 +1,34 @@
+package com.mike.domian.vehicles.models
+
+import java.util.Date
+
+typealias Vehicles = List<Vehicle>
+
+data class Vehicle(
+    val id: Long?,
+    val vehicleImage: String?,
+    val vehicleName: String,
+    val currentKM: Double,
+    val lastKmUpdate: Date,
+    val vehicleStatus: VehicleStatus
+) {
+    fun updateStatus(partsList: VehicleParts): Vehicle {
+        val currentKM: Double = this.currentKM
+        var status = this.vehicleStatus
+        partsList.forEach {
+            val itrStatus = VehiclePartStatus.partStatus(it, currentKM)
+            if (itrStatus.value > status.value) {
+                status = itrStatus.toVehicleStatus()
+            }
+        }
+        return copy(vehicleStatus = status)
+    }
+}
+
+enum class VehicleStatus(
+    val value: Int
+) {
+    OK(value = 0),
+    HAS_NEAR_EXPIRATION(value = 1),
+    HAS_EXPIRED(value = 2)
+}

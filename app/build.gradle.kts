@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -13,22 +10,14 @@ plugins {
     alias(libs.plugins.crashlytics)
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_18)
-        freeCompilerArgs.add("-Xannotation-default-target=param-property")
-        freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
-    }
-}
-
 android {
     namespace = "com.mike.maintenancealarm"
-    compileSdk = 36
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.mike.maintenancealarm"
-        minSdk = 24
-        targetSdk = 36
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "0.0.04"
 
@@ -97,7 +86,15 @@ android {
 }
 
 dependencies {
+    //modules
+    implementation(project(":core:resources"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:presentation"))
+    implementation(project(":vehicles:domian"))
+    implementation(project(":vehicles:data"))
+    implementation(project(":vehicles:presentation"))
 
+    //android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -113,6 +110,7 @@ dependencies {
 
     // Type Safe Navigation
     implementation(libs.navigation.compose)
+    //Serialization
     implementation(libs.kotlinx.serialization.json)
 
     // Hilt
