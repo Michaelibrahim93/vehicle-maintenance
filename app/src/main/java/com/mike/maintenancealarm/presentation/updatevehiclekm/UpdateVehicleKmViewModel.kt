@@ -2,13 +2,13 @@ package com.mike.maintenancealarm.presentation.updatevehiclekm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mike.core.domain.utils.validator.Validator
+import com.mike.core.domain.utils.validator.rules.NotBlankRule
+import com.mike.core.domain.utils.validator.rules.ValidKmInputRule
+import com.mike.domian.vehicles.repos.VehiclesRepository
+import com.mike.domian.vehicles.usecases.UpdateVehicleUseCase
 import com.mike.resources.R
-import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.domain.usecases.UpdateVehicleUseCase
 import com.mike.maintenancealarm.utils.IoDispatcher
-import com.mike.maintenancealarm.utils.validator.Validator
-import com.mike.maintenancealarm.utils.validator.rules.NotBlankRule
-import com.mike.maintenancealarm.utils.validator.rules.ValidKmInputRule
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

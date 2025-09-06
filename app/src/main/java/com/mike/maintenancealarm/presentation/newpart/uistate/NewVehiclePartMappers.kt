@@ -1,7 +1,7 @@
 package com.mike.maintenancealarm.presentation.newpart.uistate
 
-import com.mike.maintenancealarm.domain.models.LifeSpan
-import com.mike.maintenancealarm.domain.models.VehiclePart
+import com.mike.domian.vehicles.models.LifeSpan
+import com.mike.domian.vehicles.models.VehiclePart
 import java.util.Date
 
 fun NewVehiclePartUiState.toVehiclePart(): VehiclePart {
@@ -15,7 +15,7 @@ fun NewVehiclePartUiState.toVehiclePart(): VehiclePart {
             km = lifeSpanInKm.input.toDouble(),
             months = lifeSpanInMonths.input.toInt()
         ),
-        supplier = if (supplier.input.isBlank()) null else supplier.input,
+        supplier = supplier.input.ifBlank { null },
         price = if (price.input.isBlank()) null else price.input.toDouble()
     )
 }

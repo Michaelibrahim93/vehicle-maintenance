@@ -1,6 +1,6 @@
 package com.mike.maintenancealarm.presentation.updatevehiclekm
 
-import com.mike.maintenancealarm.utils.validator.ValidationInput
+import com.mike.core.domain.utils.validator.ValidationInput
 
 data class UpdateVehicleKmUiState(
     val vehicleId: Long = 0,

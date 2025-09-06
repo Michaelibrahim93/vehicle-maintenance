@@ -2,8 +2,8 @@ package com.mike.maintenancealarm.presentation.vehicleslist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mike.maintenancealarm.domain.repos.VehiclesRepository
-import com.mike.maintenancealarm.domain.models.Vehicles
+import com.mike.domian.vehicles.models.Vehicles
+import com.mike.domian.vehicles.repos.VehiclesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted

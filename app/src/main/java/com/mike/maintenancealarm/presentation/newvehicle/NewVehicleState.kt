@@ -1,8 +1,8 @@
 package com.mike.maintenancealarm.presentation.newvehicle
 
-import com.mike.maintenancealarm.utils.validator.ValidationInput
-import com.mike.maintenancealarm.domain.models.Vehicle
-import com.mike.maintenancealarm.domain.models.VehicleStatus
+import com.mike.core.domain.utils.validator.ValidationInput
+import com.mike.domian.vehicles.models.Vehicle
+import com.mike.domian.vehicles.models.VehicleStatus
 import java.util.Date
 
 data class NewVehicleState(

@@ -20,10 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mike.domian.vehicles.models.LifeSpan
+import com.mike.domian.vehicles.models.VehiclePart
+import com.mike.domian.vehicles.models.VehiclePartStatus
 import com.mike.resources.R
-import com.mike.maintenancealarm.domain.models.LifeSpan
-import com.mike.maintenancealarm.domain.models.VehiclePart
-import com.mike.maintenancealarm.domain.models.VehiclePartStatus
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.core.partStatusColor
 import com.mike.maintenancealarm.presentation.core.views.Separator
@@ -86,7 +86,7 @@ fun CardContent(
         )
         if (!part.supplier.isNullOrEmpty()) {
             Text(
-                text = stringResource(R.string.supplier_x, part.supplier),
+                text = stringResource(R.string.supplier_x, (part.supplier ?: "")),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxWidth()

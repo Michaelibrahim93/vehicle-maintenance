@@ -1,6 +1,6 @@
 package com.mike.maintenancealarm.presentation.vehicleslist
 
-import com.mike.maintenancealarm.domain.models.Vehicle
+import com.mike.domian.vehicles.models.Vehicle
 
 sealed class VehicleListEvent {
     data class NavigateToVehicleDetails(val vehicle: Vehicle) : VehicleListEvent()

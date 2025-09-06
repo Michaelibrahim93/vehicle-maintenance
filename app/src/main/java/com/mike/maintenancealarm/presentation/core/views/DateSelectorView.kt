@@ -13,10 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mike.maintenancealarm.presentation.core.DateFormats
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.utils.DateFactory
-import com.mike.maintenancealarm.utils.extensions.dayOfMonth
-import com.mike.maintenancealarm.utils.extensions.month
-import com.mike.maintenancealarm.utils.extensions.toCalendar
-import com.mike.maintenancealarm.utils.extensions.year
+import com.mike.core.domain.utils.dayOfMonth
+import com.mike.core.domain.utils.month
+import com.mike.core.domain.utils.toCalendar
+import com.mike.core.domain.utils.year
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

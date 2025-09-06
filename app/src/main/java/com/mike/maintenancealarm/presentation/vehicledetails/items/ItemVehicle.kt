@@ -26,9 +26,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.mike.domian.vehicles.models.Vehicle
+import com.mike.domian.vehicles.models.VehicleStatus
 import com.mike.resources.R
-import com.mike.maintenancealarm.domain.models.Vehicle
-import com.mike.maintenancealarm.domain.models.VehicleStatus
 import com.mike.maintenancealarm.presentation.core.partStatusColor
 import com.mike.maintenancealarm.presentation.theme.MaintenanceAlarmTheme
 import com.mike.maintenancealarm.presentation.theme.SPACING_EXTRA_LARGE

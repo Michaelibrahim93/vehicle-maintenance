@@ -2,12 +2,12 @@ package com.mike.maintenancealarm.presentation.newvehicle
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mike.core.domain.utils.validator.Validator
+import com.mike.core.domain.utils.validator.rules.NotBlankRule
+import com.mike.core.domain.utils.validator.rules.ValidKmInputRule
+import com.mike.domian.vehicles.usecases.AddVehicleUseCase
 import com.mike.resources.R
-import com.mike.maintenancealarm.domain.usecases.AddVehicleUseCase
 import com.mike.maintenancealarm.utils.IoDispatcher
-import com.mike.maintenancealarm.utils.validator.Validator
-import com.mike.maintenancealarm.utils.validator.rules.NotBlankRule
-import com.mike.maintenancealarm.utils.validator.rules.ValidKmInputRule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel

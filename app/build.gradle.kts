@@ -23,12 +23,12 @@ kotlin {
 
 android {
     namespace = "com.mike.maintenancealarm"
-    compileSdk = 36
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.mike.maintenancealarm"
-        minSdk = 24
-        targetSdk = 36
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "0.0.04"
 
@@ -97,9 +97,12 @@ android {
 }
 
 dependencies {
+    //modules
     implementation(project(":core:resources"))
     implementation(project(":core:domain"))
-    //modules
+    implementation(project(":vehicles:domian"))
+    implementation(project(":vehicles:data"))
+
     //android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -116,6 +119,7 @@ dependencies {
 
     // Type Safe Navigation
     implementation(libs.navigation.compose)
+    //Serialization
     implementation(libs.kotlinx.serialization.json)
 
     // Hilt

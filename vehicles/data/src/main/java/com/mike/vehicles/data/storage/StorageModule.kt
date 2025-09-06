@@ -1,0 +1,37 @@
+package com.mike.vehicles.data.storage
+
+import android.content.Context
+import androidx.room.Room
+import com.mike.vehicles.data.storage.db.AppDatabase
+import com.mike.vehicles.data.storage.db.dao.VehicleDao
+import com.mike.vehicles.data.storage.db.dao.VehiclePartDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+class StorageModule {
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context = context,
+            klass = AppDatabase::class.java,
+            name = "app_database"
+        ).build()
+    }
+
+    @Provides
+    fun provideVehicleDao(appDatabase: AppDatabase): VehicleDao {
+        return appDatabase.vehicleDao()
+    }
+
+    @Provides
+    fun provideVehiclePartDao(appDatabase: AppDatabase): VehiclePartDao {
+        return appDatabase.vehiclePartDao()
+    }
+}

@@ -3,7 +3,7 @@ package com.mike.maintenancealarm.presentation.core.error
 import android.app.AlertDialog
 import android.content.Context
 import com.mike.resources.R
-import com.mike.domain.VehicleError
+import com.mike.core.domain.models.VehicleError
 
 fun handleUiError(
     context: Context,

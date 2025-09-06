@@ -2,7 +2,7 @@ package com.mike.maintenancealarm.presentation.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mike.maintenancealarm.domain.usecases.UpdateAllVehiclesStatusUseCase
+import com.mike.domian.vehicles.usecases.UpdateAllVehiclesStatusUseCase
 import com.mike.maintenancealarm.utils.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
