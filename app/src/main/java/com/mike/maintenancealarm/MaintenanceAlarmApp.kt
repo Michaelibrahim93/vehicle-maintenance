@@ -9,7 +9,7 @@ class MaintenanceAlarmApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // Initialize any global resources or configurations here
+
         Timber.plant(Timber.DebugTree())
     }
 }

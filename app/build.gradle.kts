@@ -100,8 +100,10 @@ dependencies {
     //modules
     implementation(project(":core:resources"))
     implementation(project(":core:domain"))
+    implementation(project(":core:presentation"))
     implementation(project(":vehicles:domian"))
     implementation(project(":vehicles:data"))
+    implementation(project(":vehicles:presentation"))
 
     //android
     implementation(libs.androidx.core.ktx)
