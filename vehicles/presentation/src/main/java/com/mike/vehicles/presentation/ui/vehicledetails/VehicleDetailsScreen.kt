@@ -1,7 +1,9 @@
 package com.mike.vehicles.presentation.ui.vehicledetails
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,7 +27,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mike.core.domain.utils.DateFormats
 import com.mike.core.presentation.navigation.Route
+import com.mike.core.presentation.utils.compose.DeviceType
 import com.mike.core.presentation.utils.compose.LogCurrentScreen
+import com.mike.core.presentation.utils.compose.OrientationType
+import com.mike.core.presentation.utils.compose.rememberDeviceInfo
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -89,17 +94,90 @@ fun VehicleDetailsScreen(
 fun VehicleDetailsScreenContent(
     contentPadding: PaddingValues,
     fVehicleDetailsState: Flow<VehicleDetailsState>,
-    onEvent: (VehicleDetailsEvents) -> Unit
+    onEvent: (VehicleDetailsEvents) -> Unit,
 ) {
-    val state = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState())
+    val state = fVehicleDetailsState.collectAsStateWithLifecycle(initialValue = VehicleDetailsState()).value
     val dateFormat = remember { SimpleDateFormat(DateFormats.DAY_FORMAT, Locale.getDefault()) }
+    val deviceInfo = rememberDeviceInfo()
+    if (deviceInfo.orientation == OrientationType.LANDSCAPE || deviceInfo.deviceType == DeviceType.DESKTOP) {
+        VehicleDetailsContentLandscapeColumn(
+            state = state,
+            dateFormat = dateFormat,
+            contentPadding = contentPadding,
+            onEvent = onEvent
+        )
+    } else {
+        VehicleDetailsContentAllColumn(
+            state = state,
+            dateFormat = dateFormat,
+            contentPadding = contentPadding,
+            onEvent = onEvent
+        )
+    }
+}
+
+@Composable
+fun VehicleDetailsContentLandscapeColumn(
+    state: VehicleDetailsState,
+    dateFormat: SimpleDateFormat,
+    contentPadding: PaddingValues,
+    onEvent: (VehicleDetailsEvents) -> Unit,
+) {
+    val vehicle = state.vehicle
+    if (vehicle == null) return
+
+    Row(
+        modifier = Modifier.padding(contentPadding)
+    ){
+        Box(
+            modifier = Modifier.weight(1f)
+        ) {
+            ItemVehicle(
+                item = DetailsItem.VehicleItem(vehicle),
+                dateFormat = dateFormat,
+                onUpdateVehicleKm = {
+                    onEvent(VehicleDetailsEvents.UpdateVehicleKm(vehicle))
+                }
+            )
+        }
+        Box(
+            modifier = Modifier.weight(1f)
+        ) {
+            LazyColumn {
+                itemsIndexed(
+                    items = state.displayList.filter { it !is DetailsItem.VehicleItem }
+                ) { index, item ->
+                    when(item) {
+                        is DetailsItem.PartItem -> ItemVehiclePart(
+                            item = item,
+                            dateFormat = dateFormat,
+                            onRenewPart = { onEvent(VehicleDetailsEvents.RenewPart(item.part)) }
+                        )
+                        is DetailsItem.NoAddedParts -> ItemEmptyParts()
+                        else -> {}
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun VehicleDetailsContentAllColumn(
+    state: VehicleDetailsState,
+    dateFormat: SimpleDateFormat,
+    contentPadding: PaddingValues,
+    onEvent: (VehicleDetailsEvents) -> Unit,
+) {
+    val vehicle = state.vehicle
+    if (vehicle == null) return
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
             .padding(contentPadding)
     ) {
         itemsIndexed(
-            items = state.value.displayList,
+            items = state.displayList,
         ) { index, item ->
             when (item) {
                 is DetailsItem.VehicleItem -> ItemVehicle(
