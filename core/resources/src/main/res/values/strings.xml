@@ -42,4 +42,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="vehicle_km_title">Vehicle KM</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
 </resources>

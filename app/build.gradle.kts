@@ -96,12 +96,18 @@ android {
 
 dependencies {
     //modules
+    //core
     implementation(project(":core:resources"))
     implementation(project(":core:domain"))
     implementation(project(":core:presentation"))
+    //vehicles
     implementation(project(":vehicles:domian"))
     implementation(project(":vehicles:data"))
     implementation(project(":vehicles:presentation"))
+    //profile
+    implementation(project(":profile:domain"))
+    implementation(project(":profile:data"))
+    implementation(project(":profile:presentation"))
 
     //android
     implementation(libs.androidx.core.ktx)

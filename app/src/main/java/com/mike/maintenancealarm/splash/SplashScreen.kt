@@ -90,7 +90,7 @@ fun handleViewModelActions(
     when (action) {
         is SplashUiAction.NavigateToVehiclesList -> {
             Timber.tag("SplashScreen").d("Navigating to Vehicles List")
-            navController.navigate(Route.VehicleList) {
+            navController.navigate(Route.Home) {
                 popUpTo(Route.Splash) {
                     inclusive = true
                 }
