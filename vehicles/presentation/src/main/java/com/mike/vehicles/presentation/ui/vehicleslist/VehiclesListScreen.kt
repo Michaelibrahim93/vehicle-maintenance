@@ -1,6 +1,7 @@
 package com.mike.vehicles.presentation.ui.vehicleslist
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +23,7 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.flow.Flow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.mike.core.domain.utils.DateFormats
 import com.mike.core.presentation.navigation.Route
 import com.mike.core.presentation.utils.compose.LogCurrentScreen
@@ -73,8 +75,10 @@ fun VehicleListScreen(
     LogCurrentScreen("VehicleListScreen")
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0.dp),
         topBar = {
             TopAppBar(
+                windowInsets = WindowInsets(0.dp),
                 title = { Text(R.string.my_vehicles.stringRes()) },
                 actions = {
                     IconButton (

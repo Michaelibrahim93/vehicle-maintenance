@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -76,6 +77,7 @@ fun VehicleDetailsScreen(
     LogCurrentScreen("VehicleDetailsScreen")
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0.dp),
         modifier = Modifier.fillMaxSize(),
         topBar = { VehicleDetailsTopBar(onEvent) }
     ) { contentPadding ->
@@ -147,7 +149,7 @@ fun VehicleDetailsContentLandscapeColumn(
         ) {
             ScrollableItems(
                 contentPadding = PaddingValues(start = 0.dp, end = 0.dp),
-                items = state.displayList.filter { it !is DetailsItem.VehicleItem },
+                items = state.displayList(addVehicleHeader = false),
                 dateFormat = dateFormat,
                 onEvent = onEvent
             )
@@ -167,7 +169,7 @@ fun VehicleDetailsContentAllColumn(
 
     ScrollableItems(
         contentPadding = contentPadding,
-        items = state.displayList,
+        items = state.displayList(addVehicleHeader = true),
         dateFormat = dateFormat,
         onEvent = onEvent
     )
@@ -212,6 +214,7 @@ fun ScrollableItems(
 @Composable
 fun VehicleDetailsTopBar(onEvent: (VehicleDetailsEvents) -> Unit) {
     TopAppBar(
+        windowInsets = WindowInsets(0.dp),
         title = { Text(text = stringResource(id = R.string.vehicle_details_title)) },
         navigationIcon = {
             IconButton(onClick = {

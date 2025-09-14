@@ -1,5 +1,6 @@
 package com.mike.vehicles.presentation.ui.vehicledetails
 
+import com.mike.core.presentation.utils.compose.OrientationType
 import com.mike.domian.vehicles.models.Vehicle
 import com.mike.domian.vehicles.models.VehiclePart
 import com.mike.domian.vehicles.models.VehiclePartStatus
@@ -11,21 +12,30 @@ data class VehicleDetailsState(
     val vehicleParts: VehicleParts? = null,
     val showUpdateKmDialog: Boolean = false
 ) {
-    val displayList: List<DetailsItem>
-        get() = if (vehicle == null || vehicleParts == null)
-                emptyList()
-            else if (vehicleParts.isEmpty())
-                listOf<DetailsItem>(DetailsItem.VehicleItem(vehicle)) +
-                        listOf(DetailsItem.NoAddedParts)
-            else
-                listOf<DetailsItem>(DetailsItem.VehicleItem(vehicle)) +
-                        vehicleParts.map { DetailsItem.PartItem(
-                            part = it,
-                            partStatus = VehiclePartStatus.partStatus(
-                                part = it,
-                                currentVehicleKm = vehicle.currentKM
-                            )
-                        ) }
+    fun displayList(addVehicleHeader: Boolean): List<DetailsItem> {
+        if (vehicle == null || vehicleParts == null)
+            return emptyList()
+
+        val listBuilder = mutableListOf<DetailsItem>()
+
+        if (addVehicleHeader)
+            listBuilder.add(DetailsItem.VehicleItem(vehicle))
+
+        if (vehicleParts.isEmpty())
+            listBuilder.add(DetailsItem.NoAddedParts)
+        else {
+            val vehiclePartsItems = vehicleParts.map { DetailsItem.PartItem(
+                part = it,
+                partStatus = VehiclePartStatus.partStatus(
+                    part = it,
+                    currentVehicleKm = vehicle.currentKM
+                )
+            ) }
+            listBuilder.addAll(vehiclePartsItems)
+        }
+
+        return listBuilder.toList()
+    }
 }
 
 sealed class DetailsItem {
