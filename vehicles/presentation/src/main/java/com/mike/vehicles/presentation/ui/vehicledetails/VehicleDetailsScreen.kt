@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -143,21 +144,12 @@ fun VehicleDetailsContentLandscapeColumn(
         Box(
             modifier = Modifier.weight(1f)
         ) {
-            LazyColumn {
-                itemsIndexed(
-                    items = state.displayList.filter { it !is DetailsItem.VehicleItem }
-                ) { index, item ->
-                    when(item) {
-                        is DetailsItem.PartItem -> ItemVehiclePart(
-                            item = item,
-                            dateFormat = dateFormat,
-                            onRenewPart = { onEvent(VehicleDetailsEvents.RenewPart(item.part)) }
-                        )
-                        is DetailsItem.NoAddedParts -> ItemEmptyParts()
-                        else -> {}
-                    }
-                }
-            }
+            ScrollableItems(
+                contentPadding = PaddingValues(start = 0.dp, end = 0.dp),
+                items = state.displayList.filter { it !is DetailsItem.VehicleItem },
+                dateFormat = dateFormat,
+                onEvent = onEvent
+            )
         }
     }
 }
@@ -172,12 +164,27 @@ fun VehicleDetailsContentAllColumn(
     val vehicle = state.vehicle
     if (vehicle == null) return
 
+    ScrollableItems(
+        contentPadding = contentPadding,
+        items = state.displayList,
+        dateFormat = dateFormat,
+        onEvent = onEvent
+    )
+}
+
+@Composable
+fun ScrollableItems(
+    contentPadding: PaddingValues,
+    items: List<DetailsItem>,
+    dateFormat: SimpleDateFormat,
+    onEvent: (VehicleDetailsEvents) -> Unit,
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
             .padding(contentPadding)
     ) {
         itemsIndexed(
-            items = state.displayList,
+            items = items,
         ) { index, item ->
             when (item) {
                 is DetailsItem.VehicleItem -> ItemVehicle(
@@ -187,11 +194,13 @@ fun VehicleDetailsContentAllColumn(
                         onEvent(VehicleDetailsEvents.UpdateVehicleKm(item.vehicle))
                     }
                 )
+
                 is DetailsItem.PartItem -> ItemVehiclePart(
                     item = item,
                     dateFormat = dateFormat,
                     onRenewPart = { onEvent(VehicleDetailsEvents.RenewPart(item.part)) },
                 )
+
                 is DetailsItem.NoAddedParts -> ItemEmptyParts()
             }
         }
