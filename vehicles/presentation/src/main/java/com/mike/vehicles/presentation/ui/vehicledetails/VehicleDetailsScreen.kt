@@ -45,6 +45,7 @@ import com.mike.vehicles.presentation.ui.vehicledetails.items.ItemVehiclePart
 @SuppressLint("ContextCastToActivity")
 @Composable
 fun VehicleDetailsScreenComposable(
+    rootNavController: NavController,
     navController: NavController,
     viewModel: VehicleDetailsViewModel = hiltViewModel()
 ) {
@@ -56,9 +57,9 @@ fun VehicleDetailsScreenComposable(
                 is VehicleDetailsEvents.OnBackClick ->
                     navController.popBackStack()
                 VehicleDetailsEvents.AddNewPart ->
-                    navController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, null))
+                    rootNavController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, null))
                 is VehicleDetailsEvents.RenewPart ->
-                    navController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, event.part.id))
+                    rootNavController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, event.part.id))
                 else -> viewModel.onEvent(event)
             }
         }

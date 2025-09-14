@@ -5,6 +5,10 @@ import kotlinx.serialization.Serializable
 sealed class Route {
     @Serializable
     object Splash: Route()
+
+    @Serializable
+    object Home: Route()
+
     @Serializable
     object VehicleList: Route()
     @Serializable
@@ -16,4 +20,7 @@ sealed class Route {
         val vehicleId: Long,
         val vehiclePartId: Long?
     ): Route()
+
+    @Serializable
+    object Profile: Route()
 }

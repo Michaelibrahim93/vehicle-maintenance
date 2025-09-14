@@ -36,6 +36,7 @@ import java.util.Locale
 
 @Composable
 fun VehicleListComposable(
+    rootNavController: NavController,
     navController: NavController,
     viewModel: VehicleListViewModel = hiltViewModel()
 ) {
@@ -48,15 +49,12 @@ fun VehicleListComposable(
         onEvent = { vehicleListEvent ->
             when (vehicleListEvent) {
                 is VehicleListEvent.NavigateToVehicleDetails -> {
-                    navController.navigate(
-                        Route.VehicleDetails(
+                    navController.navigate(Route.VehicleDetails(
                         vehicleId = vehicleListEvent.vehicle.id ?: 0
                     ))
                 }
                 is VehicleListEvent.AddNewVehicle -> {
-                    navController.navigate(
-                        route = Route.NewVehicle
-                    )
+                    rootNavController.navigate(route = Route.NewVehicle)
                 }
             }
         }

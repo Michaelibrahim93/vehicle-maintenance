@@ -16,11 +16,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
 
-//        requestedOrientation = if (resources.configuration.smallestScreenWidthDp < 600)
-//            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-//        else
-//            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-
         enableEdgeToEdge()
         setContent {
             MaintenanceAlarmTheme {
