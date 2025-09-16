@@ -1,10 +1,8 @@
 package com.mike.core.presentation.utils.compose
 
 import android.content.res.Configuration
-import android.util.DisplayMetrics
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 
 enum class DeviceType {
     MOBILE, TABLET, DESKTOP

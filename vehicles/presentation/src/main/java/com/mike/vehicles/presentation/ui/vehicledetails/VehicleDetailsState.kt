@@ -1,6 +1,5 @@
 package com.mike.vehicles.presentation.ui.vehicledetails
 
-import com.mike.core.presentation.utils.compose.OrientationType
 import com.mike.domian.vehicles.models.Vehicle
 import com.mike.domian.vehicles.models.VehiclePart
 import com.mike.domian.vehicles.models.VehiclePartStatus
