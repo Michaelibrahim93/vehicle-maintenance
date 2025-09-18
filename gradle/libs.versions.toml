@@ -48,6 +48,8 @@ coil = "2.7.0"
 google-services = "4.4.3"
 firebase-bom = "34.2.0"
 firebase-crashlytics = "3.0.6"
+firebase-perf = "2.0.1"
+
 
 #Leak detection
 leakcanaryAndroid = "2.14"
@@ -87,6 +89,7 @@ lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-ndk" }
+firebase-performance = { module = "com.google.firebase:firebase-perf" }
 
 # Room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
@@ -129,5 +132,6 @@ junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" 
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf" }
 
 
