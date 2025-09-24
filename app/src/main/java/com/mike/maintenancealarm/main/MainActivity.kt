@@ -9,12 +9,14 @@ import com.google.firebase.Firebase
 import com.google.firebase.crashlytics.crashlytics
 import com.mike.core.presentation.theme.MaintenanceAlarmTheme
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
+        Timber.d("onCreate")
 
         enableEdgeToEdge()
         setContent {
