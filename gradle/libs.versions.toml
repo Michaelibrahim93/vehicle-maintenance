@@ -7,7 +7,6 @@ targetSdk = "36"
 agp = "8.13.0"
 kotlin = "2.2.10"
 coreKtx = "1.17.0"
-room_version = "2.7.2"
 timber = "5.0.1"
 
 splashScreen = "1.0.1"
@@ -50,6 +49,9 @@ firebase-bom = "34.2.0"
 firebase-crashlytics = "3.0.6"
 firebase-perf = "2.0.1"
 
+#storage
+room_version = "2.7.2"
+datastore_version = "1.1.7"
 
 #Leak detection
 leakcanaryAndroid = "2.14"
@@ -95,6 +97,11 @@ firebase-performance = { module = "com.google.firebase:firebase-perf" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
+
+#data-store
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore_version" }
+datastore-proto = { group = "androidx.datastore", name = "datastore", version.ref = "datastore_version" }
+
 
 #Timber Logs
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }

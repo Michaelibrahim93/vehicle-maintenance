@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.mike.profile";
+option java_multiple_files = true;
+
+message ProfileEntity {
+  string id = 1;
+  string name = 2;
+  string birthDate = 3;
+}

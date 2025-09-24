@@ -1,14 +1,19 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp) // Apply KSP
+    alias(libs.plugins.dagger.hilt.android) // Apply Hilt
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.mike.profile.data"
-    compileSdk = 36
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -24,11 +29,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_18)
+            freeCompilerArgs.add("-Xannotation-default-target=param-property")
+            freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
+        }
     }
 }
 
@@ -42,4 +51,20 @@ dependencies {
 
     //Modules
     implementation(project(":profile:domain"))
+    implementation(project(":core:data"))
+
+    //data store
+    implementation(libs.datastore.preferences)
+    implementation(libs.datastore.proto)
+
+    // Timber Logs
+    implementation(libs.timber)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler) // Use ksp for Hilt's annotation processor
+    ksp(libs.hilt.compiler) // For androidx.hilt extensions
+
+    //Serialization
+    implementation(libs.kotlinx.serialization.json)
 }

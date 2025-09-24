@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProfileRepository {
     fun listenToProfileChanges(): Flow<Profile?>
-    suspend fun loadProfile(): Profile
+    suspend fun loadProfile(): Profile?
     suspend fun updateProfile(profile: Profile)
 }
