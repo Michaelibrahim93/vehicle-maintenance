@@ -83,4 +83,7 @@ dependencies {
 
     //Compose Image Loader
     implementation(libs.coil.compose)
+
+    //firebase
+    implementation(libs.firebase.performance)
 }

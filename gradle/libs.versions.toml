@@ -7,7 +7,6 @@ targetSdk = "36"
 agp = "8.13.0"
 kotlin = "2.2.10"
 coreKtx = "1.17.0"
-room_version = "2.7.2"
 timber = "5.0.1"
 
 splashScreen = "1.0.1"
@@ -48,6 +47,11 @@ coil = "2.7.0"
 google-services = "4.4.3"
 firebase-bom = "34.2.0"
 firebase-crashlytics = "3.0.6"
+firebase-perf = "2.0.1"
+
+#storage
+room_version = "2.7.2"
+datastore_version = "1.1.7"
 
 #Leak detection
 leakcanaryAndroid = "2.14"
@@ -87,11 +91,17 @@ lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-ndk" }
+firebase-performance = { module = "com.google.firebase:firebase-perf" }
 
 # Room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
+
+#data-store
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore_version" }
+datastore-proto = { group = "androidx.datastore", name = "datastore", version.ref = "datastore_version" }
+
 
 #Timber Logs
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
@@ -129,5 +139,6 @@ junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" 
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf" }
 
 

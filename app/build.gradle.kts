@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.junit5)
     alias(libs.plugins.google.services)
     alias(libs.plugins.crashlytics)
+    alias(libs.plugins.firebase.perf)
 }
 
 android {
@@ -149,6 +150,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics.ndk)
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.performance)
 
     // unit tests
     testImplementation(libs.junit.jupiter)

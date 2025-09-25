@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.crashlytics) apply false
     kotlin("jvm") version libs.versions.kotlin
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.firebase.perf) apply false
 }
 
 tasks.test {
