@@ -6,6 +6,8 @@ import com.mike.core.domain.utils.IoDispatcher
 import com.mike.core.domain.utils.validator.Validator
 import com.mike.core.domain.utils.validator.rules.NotBlankRule
 import com.mike.core.domain.utils.validator.rules.ValidKmInputRule
+import com.mike.core.presentation.viewmodels.InitLoaderImpl
+import com.mike.core.presentation.viewmodels.InitialLoader
 import com.mike.domian.vehicles.repos.VehiclesRepository
 import com.mike.domian.vehicles.usecases.UpdateVehicleUseCase
 import com.mike.resources.R
@@ -34,10 +36,10 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
     private val updateVehicleUseCase: UpdateVehicleUseCase,
     private val vehicleRepository: VehiclesRepository,
     @Assisted private val vehicleId: Long
-) : ViewModel() {
+) : ViewModel(), InitialLoader by InitLoaderImpl() {
     private val _uiState = MutableStateFlow(UpdateVehicleKmUiState())
     val uiState = _uiState.onStart {
-        loadVehicle()
+        loadInitValues()
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -64,6 +66,10 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
         .addRule(UpdateVehicleKmUiState.KEY_INPUT_KM, NotBlankRule(), R.string.required_field)
         .addRule(UpdateVehicleKmUiState.KEY_INPUT_KM, ValidKmInputRule(), R.string.invalid_input)
         .build()
+
+    private fun loadInitValues() = loadInitValues{
+        loadVehicle()
+    }
 
     private fun loadVehicle() = viewModelScope.launch {
         val vehicle = withContext(ioDispatcher) {

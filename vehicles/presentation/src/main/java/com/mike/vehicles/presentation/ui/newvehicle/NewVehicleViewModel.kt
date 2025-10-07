@@ -2,6 +2,8 @@ package com.mike.vehicles.presentation.ui.newvehicle
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Firebase
+import com.google.firebase.perf.performance
 import com.mike.core.domain.utils.IoDispatcher
 import com.mike.core.domain.utils.validator.Validator
 import com.mike.core.domain.utils.validator.rules.NotBlankRule
@@ -50,6 +52,8 @@ class NewVehicleViewModel @Inject constructor(
     private fun validateAndSave(
         state: NewVehicleState = _state.value
     ) = viewModelScope.launch {
+        val trace = Firebase.performance.newTrace("add_vehicle")
+        trace.start()
         val validationResult = validator.validate(state.toValidationMap())
         _state.value = state.updateValidationErrors(validationResult)
         if (validationResult.isEmpty()) {
@@ -60,11 +64,14 @@ class NewVehicleViewModel @Inject constructor(
                     addVehicleUseCase.execute(state.toVehicle())
                 }
                 _actionChannel.send(NewVehicleUiAction.ShowSuccess)
+                trace.putAttribute("is_success", "true")
             } catch (t: Throwable) {
                 _actionChannel.send(NewVehicleUiAction.ShowError(t))
+                trace.putAttribute("is_success", "false")
             }
             _state.value = state.setLoading(false)
         }
+        trace.stop()
     }
 
     private fun buildNewVehicleValidator(): Validator {
