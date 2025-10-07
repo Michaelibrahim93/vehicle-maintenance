@@ -85,5 +85,6 @@ dependencies {
     implementation(libs.coil.compose)
 
     //firebase
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.performance)
 }

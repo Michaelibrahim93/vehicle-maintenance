@@ -59,13 +59,7 @@ fun NewVehiclePartComposable(
         navController = navController,
         uiStateFlow = viewModel.state,
         onUiAction = viewModel.actionFlow,
-        onEvent = { event ->
-            when(event) {
-                is NewVehiclePartEvent.OnBackClick ->
-                    navController.popBackStack()
-                else -> viewModel.onEvent(event)
-            }
-        }
+        onEvent = { event -> newVehiclePartIntentHandler(event, navController, viewModel) }
     )
 }
 

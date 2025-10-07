@@ -51,11 +51,8 @@ fun UpdateVehicleKmScreenComposable(
     UpdateVehicleKmScreen(
         uiState = viewModel.uiState,
         actionFlow = viewModel.actionFlow,
-        onEvent = {event ->
-            when(event) {
-                is UpdateVehicleKmEvent.DismissSheet -> onDismiss()
-                else -> viewModel.onEvent(event)
-            }
+        onEvent = { event ->
+            updateVehicleKmIntentHandler(event, viewModel, onDismiss)
         }
     )
 }

@@ -28,7 +28,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mike.core.domain.utils.DateFormats
-import com.mike.core.presentation.navigation.Route
 import com.mike.core.presentation.utils.compose.DeviceType
 import com.mike.core.presentation.utils.compose.LogCurrentScreen
 import com.mike.core.presentation.utils.compose.OrientationType
@@ -54,15 +53,7 @@ fun VehicleDetailsScreenComposable(
         fVehicleDetailsState = viewModel.fVehicleDetailsState,
         onEvent = { event ->
             Timber.tag("VehicleDetailsScreen").d("event: $event")
-            when(event) {
-                is VehicleDetailsEvents.OnBackClick ->
-                    navController.popBackStack()
-                VehicleDetailsEvents.AddNewPart ->
-                    rootNavController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, null))
-                is VehicleDetailsEvents.RenewPart ->
-                    rootNavController.navigate(route = Route.NewVehiclePart(viewModel.vehicleId, event.part.id))
-                else -> viewModel.onEvent(event)
-            }
+            vehicleDetailsIntentHandler(event, rootNavController, navController, viewModel)
         }
     )
 }

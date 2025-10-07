@@ -6,6 +6,8 @@ import com.mike.core.domain.utils.IoDispatcher
 import com.mike.core.domain.utils.validator.Validator
 import com.mike.core.domain.utils.validator.rules.NotBlankRule
 import com.mike.core.domain.utils.validator.rules.ValidKmInputRule
+import com.mike.core.presentation.viewmodels.InitLoaderImpl
+import com.mike.core.presentation.viewmodels.InitialLoader
 import com.mike.domian.vehicles.repos.VehiclesRepository
 import com.mike.domian.vehicles.usecases.UpdateVehicleUseCase
 import com.mike.resources.R
@@ -26,7 +28,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class UpdateVehicleKmViewModel @AssistedInject constructor(
     @IoDispatcher
@@ -34,10 +35,10 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
     private val updateVehicleUseCase: UpdateVehicleUseCase,
     private val vehicleRepository: VehiclesRepository,
     @Assisted private val vehicleId: Long
-) : ViewModel() {
+) : ViewModel(), InitialLoader by InitLoaderImpl() {
     private val _uiState = MutableStateFlow(UpdateVehicleKmUiState())
     val uiState = _uiState.onStart {
-        loadVehicle()
+        loadInitValues()
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -49,21 +50,14 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
 
     private val validator = buildNewVehicleValidator()
 
-    fun onEvent(event: UpdateVehicleKmEvent) {
-        Timber.d("Event: $event")
-        when(event) {
-            is UpdateVehicleKmEvent.OnKmChange ->
-                _uiState.value = _uiState.value.setKm(event.km)
-
-            is UpdateVehicleKmEvent.OnSaveClick -> validateAndSave()
-            else -> {}
-        }
-    }
-
     private fun buildNewVehicleValidator() = Validator.Builder()
         .addRule(UpdateVehicleKmUiState.KEY_INPUT_KM, NotBlankRule(), R.string.required_field)
         .addRule(UpdateVehicleKmUiState.KEY_INPUT_KM, ValidKmInputRule(), R.string.invalid_input)
         .build()
+
+    private fun loadInitValues() = loadInitValues{
+        loadVehicle()
+    }
 
     private fun loadVehicle() = viewModelScope.launch {
         val vehicle = withContext(ioDispatcher) {
@@ -76,7 +70,7 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
         )
     }
 
-    private fun validateAndSave() = viewModelScope.launch {
+    fun validateAndSave() = viewModelScope.launch {
         val validationResult = validator.validate(_uiState.value.toValidationMap())
         _uiState.value = _uiState.value.setValidationErrors(validationResult)
         if (!validationResult.isEmpty()) return@launch
@@ -98,6 +92,10 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
 
         _uiState.value = _uiState.value.copy(isLoading = false)
 
+    }
+
+    fun onKmChange(km: String) {
+        _uiState.value = _uiState.value.setKm(km)
     }
 
     @AssistedFactory
