@@ -36,20 +36,8 @@ class NewVehicleViewModel @Inject constructor(
 
     private val validator = buildNewVehicleValidator()
 
-    fun onEvent(event: NewVehicleEvent) {
-        when (event) {
-            is NewVehicleEvent.OnVehicleImageChange ->
-                _state.value = _state.value.setVehicleImage(event.image)
-            is NewVehicleEvent.OnVehicleNameChange ->
-                _state.value = _state.value.setVehicleName(event.name)
-            is NewVehicleEvent.OnVehicleKmChange ->
-                _state.value = _state.value.setCurrentKM(event.km)
-            is NewVehicleEvent.OnSaveClick -> validateAndSave()
-            else -> {}
-        }
-    }
 
-    private fun validateAndSave(
+    fun validateAndSave(
         state: NewVehicleState = _state.value
     ) = viewModelScope.launch {
         val trace = Firebase.performance.newTrace("add_vehicle")
@@ -80,5 +68,18 @@ class NewVehicleViewModel @Inject constructor(
             .addRule(NewVehicleState.KEY_CURRENT_KM, NotBlankRule(), R.string.required_field)
             .addRule(NewVehicleState.KEY_CURRENT_KM, ValidKmInputRule(), R.string.invalid_input)
             .build()
+    }
+
+    //setters
+    fun updateVehicleImage(image: String) {
+        _state.value = _state.value.setVehicleImage(image)
+    }
+
+    fun updateVehicleName(name: String) {
+        _state.value = _state.value.setVehicleName(name)
+    }
+
+    fun updateVehicleKm(km: String) {
+        _state.value = _state.value.setCurrentKM(km)
     }
 }

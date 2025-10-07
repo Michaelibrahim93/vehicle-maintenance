@@ -22,6 +22,7 @@ class VehicleDetailsViewModel @Inject constructor(
     partsRepository: VehiclePartsRepository,
     savedStateHandle: SavedStateHandle,
     ) : ViewModel() {
+
     val vehicleId = savedStateHandle.toRoute<Route.VehicleDetails>().vehicleId
     private val vehicleFlow = vehicleRepository.listenToVehicleById(vehicleId)
     private val partsFlow = partsRepository.listenToVehicleParts(vehicleId)
@@ -48,14 +49,8 @@ class VehicleDetailsViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: VehicleDetailsEvents) {
-        Timber.d("event: $event")
-        when(event) {
-            is VehicleDetailsEvents.UpdateVehicleKm ->
-                sfShowUpdateDialog.value = true
-            VehicleDetailsEvents.DismissUpdateKmDialog ->
-                sfShowUpdateDialog.value = false
-            else -> {}
-        }
+
+    fun setShowUpdateDialog(showUpdateDialog: Boolean) {
+        sfShowUpdateDialog.value = showUpdateDialog
     }
 }

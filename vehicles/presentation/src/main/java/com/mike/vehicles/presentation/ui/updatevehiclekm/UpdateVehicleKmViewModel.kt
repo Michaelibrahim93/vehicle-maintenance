@@ -28,7 +28,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class UpdateVehicleKmViewModel @AssistedInject constructor(
     @IoDispatcher
@@ -51,17 +50,6 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
 
     private val validator = buildNewVehicleValidator()
 
-    fun onEvent(event: UpdateVehicleKmEvent) {
-        Timber.d("Event: $event")
-        when(event) {
-            is UpdateVehicleKmEvent.OnKmChange ->
-                _uiState.value = _uiState.value.setKm(event.km)
-
-            is UpdateVehicleKmEvent.OnSaveClick -> validateAndSave()
-            else -> {}
-        }
-    }
-
     private fun buildNewVehicleValidator() = Validator.Builder()
         .addRule(UpdateVehicleKmUiState.KEY_INPUT_KM, NotBlankRule(), R.string.required_field)
         .addRule(UpdateVehicleKmUiState.KEY_INPUT_KM, ValidKmInputRule(), R.string.invalid_input)
@@ -82,7 +70,7 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
         )
     }
 
-    private fun validateAndSave() = viewModelScope.launch {
+    fun validateAndSave() = viewModelScope.launch {
         val validationResult = validator.validate(_uiState.value.toValidationMap())
         _uiState.value = _uiState.value.setValidationErrors(validationResult)
         if (!validationResult.isEmpty()) return@launch
@@ -104,6 +92,10 @@ class UpdateVehicleKmViewModel @AssistedInject constructor(
 
         _uiState.value = _uiState.value.copy(isLoading = false)
 
+    }
+
+    fun onKmChange(km: String) {
+        _uiState.value = _uiState.value.setKm(km)
     }
 
     @AssistedFactory

@@ -4,8 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.google.firebase.Firebase
-import com.google.firebase.perf.performance
 import com.mike.core.domain.utils.IoDispatcher
 import com.mike.core.domain.utils.validator.Validator
 import com.mike.core.domain.utils.validator.rules.NotBlankRule
@@ -23,7 +21,6 @@ import com.mike.domian.vehicles.repos.VehiclesRepository
 import com.mike.domian.vehicles.usecases.AddVehiclePartUseCase
 import com.mike.domian.vehicles.usecases.UpdateVehicleUseCase
 import com.mike.resources.R
-import com.mike.vehicles.presentation.ui.newpart.events.NewVehiclePartEvent
 import com.mike.vehicles.presentation.ui.newpart.events.NewVehiclePartUiAction
 import com.mike.vehicles.presentation.ui.newpart.uistate.NewVehiclePartUiState
 import com.mike.vehicles.presentation.ui.newpart.uistate.*

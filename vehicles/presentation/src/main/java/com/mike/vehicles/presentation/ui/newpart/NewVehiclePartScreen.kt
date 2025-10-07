@@ -59,7 +59,7 @@ fun NewVehiclePartComposable(
         navController = navController,
         uiStateFlow = viewModel.state,
         onUiAction = viewModel.actionFlow,
-        onEvent =
+        onEvent = { event -> newVehiclePartIntentHandler(event, navController, viewModel) }
     )
 }
 

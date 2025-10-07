@@ -2,14 +2,6 @@ package com.mike.vehicles.presentation.ui.newpart
 
 import androidx.navigation.NavController
 import com.mike.vehicles.presentation.ui.newpart.events.NewVehiclePartEvent
-import com.mike.vehicles.presentation.ui.newpart.uistate.NewVehiclePartUiState
-import com.mike.vehicles.presentation.ui.newpart.uistate.updateDeploymentDate
-import com.mike.vehicles.presentation.ui.newpart.uistate.updateDeploymentKm
-import com.mike.vehicles.presentation.ui.newpart.uistate.updateLifeSpanInKm
-import com.mike.vehicles.presentation.ui.newpart.uistate.updateLifeSpanInMonths
-import com.mike.vehicles.presentation.ui.newpart.uistate.updatePartName
-import com.mike.vehicles.presentation.ui.newpart.uistate.updatePrice
-import com.mike.vehicles.presentation.ui.newpart.uistate.updateSupplier
 
 fun newVehiclePartIntentHandler(
     event: NewVehiclePartEvent,

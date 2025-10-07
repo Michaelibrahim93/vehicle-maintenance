@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mike.core.domain.utils.DateFormats
-import com.mike.core.presentation.navigation.Route
 import com.mike.core.presentation.utils.compose.LogCurrentScreen
 import com.mike.core.presentation.utils.stringRes
 import com.mike.domian.vehicles.models.Vehicle
@@ -48,18 +47,7 @@ fun VehicleListComposable(
     VehicleListScreen(
         fState = viewModel.state,
         dateFormat = dateFormat,
-        onEvent = { vehicleListEvent ->
-            when (vehicleListEvent) {
-                is VehicleListEvent.NavigateToVehicleDetails -> {
-                    navController.navigate(Route.VehicleDetails(
-                        vehicleId = vehicleListEvent.vehicle.id ?: 0
-                    ))
-                }
-                is VehicleListEvent.AddNewVehicle -> {
-                    rootNavController.navigate(route = Route.NewVehicle)
-                }
-            }
-        }
+        onEvent = { vehicleListEvent -> vehicleListIntentHandler(vehicleListEvent, rootNavController, navController) }
     )
 }
 

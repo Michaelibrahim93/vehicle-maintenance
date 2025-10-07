@@ -70,12 +70,11 @@ fun NewVehicleComposable(
         fState = viewModel.state,
         onEvent = { event ->
             Timber.tag("NewVehicleScreen").d("event: ${event.javaClass.simpleName}")
-            when(event) {
-                is NewVehicleEvent.OnBackClick -> {
-                    navController.popBackStack()
-                }
-                else -> viewModel.onEvent(event)
-            }
+            newVehicleIntentHandler(
+                event = event,
+                navController = navController,
+                viewModel = viewModel
+            )
         }
     )
 }
