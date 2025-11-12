@@ -16,7 +16,6 @@ dependencyResolutionManagement {
 rootProject.name = "MaintenanceAlarm"
 include(":app")
 include(":core:resources")
-include(":core:resources")
 include(":core:data")
 include(":core:domain")
 include(":core:presentation")

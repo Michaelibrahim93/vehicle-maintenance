@@ -98,6 +98,7 @@ android {
 dependencies {
     //modules
     //core
+    implementation(project(":core:data"))
     implementation(project(":core:resources"))
     implementation(project(":core:domain"))
     implementation(project(":core:presentation"))
