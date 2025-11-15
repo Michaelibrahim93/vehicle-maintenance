@@ -38,11 +38,10 @@ android {
     applicationVariants.all {
         outputs.filterIsInstance<com.android.build.gradle.internal.api.BaseVariantOutputImpl>()
             .forEach { output ->
-                val variant = output
-                val buildTypeName = variant.baseName
+                val buildTypeName = output.baseName
                 val versionName = versionName
                 val versionCode = versionCode
-                val extension = variant.outputFile.extension
+                val extension = output.outputFile.extension
 
                 val newName = "app-${buildTypeName}-v${versionName}(${versionCode}).$extension"
                 output.outputFileName = newName
@@ -174,4 +173,8 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
+
+    // **CRITICAL: The dependency that provides Compose tooling classes**
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest) // Often needed too
 }

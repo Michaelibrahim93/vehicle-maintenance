@@ -1,6 +1,5 @@
 package com.mike.vehicles.presentation.ui.vehicleslist
 
-import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -132,12 +131,7 @@ fun CardContent(
     }
 }
 
-@Preview(
-    name = "Dark Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true,
-    showSystemUi = true
-)
+@Preview
 @Composable
 fun VehicleCardPreview() {
     MaintenanceAlarmTheme {

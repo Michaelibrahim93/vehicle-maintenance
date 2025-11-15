@@ -58,6 +58,7 @@ dependencies {
     implementation(project(":core:resources"))
     implementation(project(":core:domain"))
     implementation(project(":core:presentation"))
+    implementation(project(":profile:domain"))
 
     // Type Safe Navigation
     implementation(libs.navigation.compose)
